@@ -1,1 +1,1 @@
-antlr4.bat -no-listener -visitor .\GrammarB.g4
+antlr4.bat -no-listener -visitor .\BStar.g4

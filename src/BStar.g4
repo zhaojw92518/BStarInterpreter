@@ -1,13 +1,28 @@
-grammar GrammarB;
+grammar BStar;
 
 //parse
 abmachine:		machine | machine_h | machine_l;
-machine:		MACHINE id (include)? (attribute)? (operations)?			END;
-machine_h:		MACHINE id (include)? (attribute)? (declare_operations)?	END;
-machine_l:		MACHINE id (include)? (attribute)? (cdeclare_operations)?	END;
+machine:		MACHINE id (includes)? (attributes)? (operations)?			END;
+machine_h:		MACHINE id (includes)? (attributes)? (declare_operations)?	END;
+machine_l:		MACHINE id (includes)? (attributes)? (cdeclare_operations)?	END;
 
-defines:		(define id ELEMENT)+ ;
+defines:		(define id element)+ ;
+includes:		(include 
+					(
+					string	| 
+					L_ANGLE_BRACKET id SUF R_ANGLE_BRACKET
+					) 
+					SEMICOLON
+				)+	;
+declares:		(function_declare)+	;
+attributes:		ATTRIBUTE (defines)? cv_define	;
+attributes_2:	cv_define						;
+cv_define:		(
+					var_define	SEMICOLON	|
+					cst_define	SEMICOLON
+				)+							;
 
+			
 type:			normal_type									| 
 				set_type									| 
 				id (L_ANGLE_BRACKET type R_ANGLE_BRACKET)? 	;
@@ -31,9 +46,72 @@ normal_type:	SHORT_TYPE                      |
 
 set_type:		SET_TYPE L_ANGLE_BRACKET type R_ANGLE_BRACKET (at_str)?	;
 tuple_type:		STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE		;
+enum_type:		ENUM_TYPE L_BRACKET	(
+									id (ASSIGNMENT unary_e)?
+							 (COMMA id (ASSIGNMENT unary_e)?)*
+									)*
+						  R_BRACKET										;
+
 point_id:		MUL point_id | id | L_BRACKET point_id R_BRACKET		;
 addr_id:		ADDR addr_id | id | L_BRACKET addr_id R_BRACKET			;
 
+var_define:		TYPEDEF	point_id (ASSIGNMENT element)? 
+				 (COMMA point_id (ASSIGNMENT element)?)*		|
+				TYPEDEF	enum_type	id							|
+				TYPEDEF	type		point_id					|
+				TYPEDEF	tuple_type	point_id					;
+cst_define:		CONST	type	point_id ASSIGNMENT element
+						(COMMA	point_id ASSIGNMENT element)*	;
+invariant:		INVARIANT	pro_e	SEMICOLON	;
+operations:		OPERATIONS	(function_define)+	;
+declare_operations:
+				OPERATIONS	declares			;
+robust:			ROBUST		(PRECONDITION pro_e POSTCONDITION pro_e)+	;
+function:		FUNCTION	(PRECONDITION pro_e POSTCONDITION pro_e)+	;
+cfunction_declare:
+				function_declare robust function	;
+cdeclare_operations:
+				OPERATIONS	(cfunction_declare)+	;
+function_define:
+				type	point_id L_BRACKET para_define_list R_BRACKET 
+				L_BRACE com_statement R_BRACE		;
+function_declare:
+				type	point_id L_BRACKET para_define_list R_BRACKET	;
+para_define_list:
+				(type point_id (COMMA type point_id)*)?					;
+function_call:	id	L_BRACKET para_value_list R_BRACKET (append_paras)?	;
+para_value_list:
+				(element (COMMA element))?			;
+append_paras:	AT id (COMMA id)* AT				;
+com_statement:	(attributes_2)? (invariant)? (statement)*				;
+statement:		SEMICOLON							|
+				element_take	SEMICOLON			|
+				function_call	SEMICOLON			|
+				assign_stat		SEMICOLON			|
+				return_stat		SEMICOLON			|
+				while_stat							|
+				if_stat								|
+				L_BRACKET (statement)* R_BRACKET	|
+				statement_at						;
+
+element_take:	id (point id)*	
+				(
+					point 
+					L_ANGLE_BRACKET 
+							   (id | integer) belong element
+						(COMMA (id | integer) belong element)*
+					R_ANGLE_BRACKET
+				)?									;
+assign_stat:	point_id ASSIGNMENT element			|
+				point_id (point id | ADDRGET id)+
+					ASSIGNMENT element				;
+return_stat:	RETURN (element)?					;
+while_stat:		WHILE L_BRACKET pro_e R_BRACKET statement	;
+if_stat:		IF	  L_BRACKET pro_e R_BRACKET statement 
+					(ELSE statement)?						;
+
+define:			DEFINE	;
+include:		INCLUDE	;
 point:			POINT 	;
 belong: 		BELONG 	;
 addr_get:		ADDRGET ;
@@ -41,21 +119,22 @@ nil:			NIL 	;
 id:             ID      ;
 string: 		STRING 	;
 at_str:			AT_STR	;
-true: 			TRUE 	;
-false: 			FALSE 	;
+true_str:		TRUE 	;
+false_str: 		FALSE 	;
 integer: 		INTEGER ;
 real: 			REAL 	;
-char: 			CHAR 	;
+char_str: 		CHAR 	;
+statement_at:	AT_STR	;
 
 term:
 (			
 	nil 														|
 	string 														| 
-	true 														| 
-	false 														| 
+	true_str 													| 
+	false_str 													| 
 	integer 													| 
 	real 														| 
-	char 														| 
+	char_str 													| 
 	L_BRACE element (COMMA element)* R_BRACE 					| 
 	L_ANGLE_BRACKET element (COMMA element)* R_ANGLE_BRACKET 	| 
 	function_call 												| 
@@ -106,6 +185,16 @@ condition_term:		mse	(
 id_list:	id (COMMA id)*						|
 			L_BRACKET id (COMMA id)* R_BRACKET	;	
 
+quan_e:     EXIST   id_list     L_BRACKET pro_e     R_BRACKET   |
+            FORALL  id_list     L_BRACKET imp_pro_e R_BRACKET   ;
+pro_term_e: quan_e          |
+            condition_term  ;
+and_pro_e:  pro_term_e  (CONJUNCTION	pro_term_e	)*	;
+or_pro_e:   and_pro_e   (DISJUNCTION	and_pro_e	)*	;
+imp_pro_e:	or_pro_e	 IMPLICATION	or_pro_e		;
+pro_e:		or_pro_e	(IMPLICATION	or_pro_e	)*	;
+element:	pro_e										;
+
 //lex
 MACHINE: 			'MACHINE'		;
 INVARIANT:			'INVARIANT'		;
@@ -115,6 +204,9 @@ END:				'END'			;
 INCLUDE:			'INCLUDE'		;
 FUNCTION:			'FUNCTION'		;
 ROBUST:				'ROBUST'		;
+
+PRECONDITION:		'Precondition'	;
+POSTCONDITION:		'Postcondition'	;
 
 //type
 SHORT_TYPE:			'short'			;
@@ -189,15 +281,19 @@ ASSIGNMENT:			'='		;
 ADDRGET:			'->'	;
 ADDR:				'&'		;
 
-CHAR:		'\''	(~['\"','\\'] | '\\' ['n','t','b','r','f','\\','\'','\"'])	'\''			;
-STRING:		'\"'	(~['\"','\\'] | '\\' ['n','t','b','r','f','\\','\'','\"'])* '\"'			;
-AT_STR:		'@'		(~['\"','\\'] | '\\' ['n','t','b','r','f','\\','\'','\"'])* '@'				;	
+CHAR:		'\''	(~['\"','\\'] | 
+			'\\' ['n','t','b','r','f','\\','\'','\"'])	'\''	;
+STRING:		'\"'	(~['\"','\\'] | 
+			'\\' ['n','t','b','r','f','\\','\'','\"'])* '\"'	;
+AT_STR:		'@'		(~['\"','\\'] | 
+			'\\' ['n','t','b','r','f','\\','\'','\"'])* '@'		;	
 INTEGER:	(NO_ZERO_NUM(NUM)*) | '0'	;
 REAL: 		INTEGER ('.'NUM(NUM)*)?		;
 ID:			LETTER(CHARACTER)*			;
 
 WS :		[ \t\r\n]+ -> skip ;
-COMMENT:	'\\*' (~['\"','\\', '\n', '\r'] | '\\' ['n','t','b','r','f','\\','\'','\"'])* '*\\'	;
+COMMENT:	'\\*' (~['\"','\\', '\n', '\r'] | 
+			'\\' ['n','t','b','r','f','\\','\'','\"'])* '*\\'	;
 
 
 // fragments 
