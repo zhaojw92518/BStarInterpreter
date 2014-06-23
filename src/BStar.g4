@@ -1,46 +1,48 @@
 grammar GrammarB;
 
 //parse
-abstact_machine:	machine | machine_h | machine_l;
-machine:	MACHINE id (include)? (attribute)? (operations)? END 			;
-machine_h:	MACHINE id (include)? (attribute)? (declare_operations)? END 	;
-machine_l:	MACHINE id (include)? (attribute)? (cdeclare_operations)? END	;
+abmachine:		machine | machine_h | machine_l;
+machine:		MACHINE id (include)? (attribute)? (operations)?			END;
+machine_h:		MACHINE id (include)? (attribute)? (declare_operations)?	END;
+machine_l:		MACHINE id (include)? (attribute)? (cdeclare_operations)?	END;
 
-defines:	(define id ELEMENT)+
+defines:		(define id ELEMENT)+ ;
 
-type:			normal_type | set_type | id (L_ANGLE_BRACKET type R_ANGLE_BRACKET)? 	;
-normal_type:	SHORT_TYPE						|
-				UNSIGNED SHORT_TYPE				|
-				INT_TYPE						|
-				UNSIGNED INT_TYPE				|
-				LONG_TYPE 						|
-				UNSIGNED LONG_TYPE				|
-				LONG_TYPE LONG_TYPE				|
-				UNSIGNED LONG_TYPE LONG_TYPE	|
-				CHAR_TYPE						|
-				UNSIGNED CHAR_TYPE				|
-				FLOAT_TYPE						|
-				UNSIGNED FLOAT_TYPE				|
-				DOUBLE_TYPE						|
-				UNSIGNED DOUBLE_TYPE			|
-				STRING_TYPE						|
-				PROPOSITION_TYPE				|
-				VOID 							;
-//lack at symbol
-set_type:		SET_TYPE L_ANGLE_BRACKET type R_ANGLE_BRACKET 		;
+type:			normal_type									| 
+				set_type									| 
+				id (L_ANGLE_BRACKET type R_ANGLE_BRACKET)? 	;
+normal_type:	SHORT_TYPE                      |
+                UNSIGNED SHORT_TYPE             |
+                INT_TYPE                        |
+                UNSIGNED INT_TYPE               |
+                LONG_TYPE                       |
+                UNSIGNED LONG_TYPE				|
+                LONG_TYPE LONG_TYPE				|
+                UNSIGNED LONG_TYPE LONG_TYPE    |
+                CHAR_TYPE                       |
+                UNSIGNED CHAR_TYPE				|
+                FLOAT_TYPE                      |
+                UNSIGNED FLOAT_TYPE				|
+                DOUBLE_TYPE                     |
+                UNSIGNED DOUBLE_TYPE            |
+                STRING_TYPE                     |
+                PROPOSITION_TYPE				|
+                VOID							;
 
-tuple_type:		STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE 	;
-point_id:		MUL point_id | id | L_BRACKET point_id R_BRACKET 	;
-addr_id:		ADDR addr_id | id | L_BRACKET addr_id R_BRACKET 	;
+set_type:		SET_TYPE L_ANGLE_BRACKET type R_ANGLE_BRACKET (at_str)?	;
+tuple_type:		STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE		;
+point_id:		MUL point_id | id | L_BRACKET point_id R_BRACKET		;
+addr_id:		ADDR addr_id | id | L_BRACKET addr_id R_BRACKET			;
 
 point:			POINT 	;
 belong: 		BELONG 	;
 addr_get:		ADDRGET ;
 nil:			NIL 	;
-id:				ID 		;
+id:             ID      ;
 string: 		STRING 	;
+at_str:			AT_STR	;
 true: 			TRUE 	;
-false: 			false 	;
+false: 			FALSE 	;
 integer: 		INTEGER ;
 real: 			REAL 	;
 char: 			CHAR 	;
@@ -61,11 +63,48 @@ term:
 	L_BRACKET element R_BRACKET 								| 
 )
 (
-	point L_ANGLE_BRACKET (id | integer) belong element (COMMA (id | integer) belong element)* R_ANGLE_BRACKET 	|
-	point id 																									|
+	point	L_ANGLE_BRACKET 
+			(id | integer) belong element 
+			(COMMA (id | integer) belong element)* 
+			R_ANGLE_BRACKET										|
+	point id													|
 	addr_get id
-)*
+)*                                                              ;
 
+one_e:		NOT		one_e		|
+			MUL		one_e		|
+			ADDR	one_e		|
+			term				;
+
+unary_e:	(ADD | SUB) term	|
+			one_e				;
+
+mse_0:		unary_e				;
+mse_1:		mse_0 (
+				MUL		mse_0	|
+				DIV		mse_0	|
+				MOD		mse_0	|
+				INTER	mse_0	|
+				UNION	mse_0	
+				  )*			;
+mse:		mse_1 (
+				ADD		mse_1	|
+				SUB		mse_1	|
+				DIFFER	mse_1
+				  )*			;
+condition_term:		mse	(
+						L_ANGLE_BRACKET	mse	|
+						ELES			mse	|
+						R_ANGLE_BRACKET	mse	|
+						EGRE			mse	|
+						NOTBELONG		mse	|
+						BELONG			mse	|
+						EQU				mse	|
+						UEQU			mse
+						)?					;
+
+id_list:	id (COMMA id)*						|
+			L_BRACKET id (COMMA id)* R_BRACKET	;	
 
 //lex
 MACHINE: 			'MACHINE'		;
@@ -142,21 +181,23 @@ UEQU:				'!='	;
 SEPERATOR:			'|'		;
 BELONG:				':'		;
 NOTBELONG:			'!:'	;
-INTERSECTION:		'/-\\'	;
+INTER:				'/-\\'	;
 UNION:				'\\-/'	;
-DIFFERENCE:			'--'	;
+DIFFER:				'--'	;
 
 ASSIGNMENT:			'='		;
 ADDRGET:			'->'	;
 ADDR:				'&'		;
 
-CHAR:		'\''CHARACTER'\''			;
-STRING:		'"'(CHARACTER)*'"'			;
+CHAR:		'\''	(~['\"','\\'] | '\\' ['n','t','b','r','f','\\','\'','\"'])	'\''			;
+STRING:		'\"'	(~['\"','\\'] | '\\' ['n','t','b','r','f','\\','\'','\"'])* '\"'			;
+AT_STR:		'@'		(~['\"','\\'] | '\\' ['n','t','b','r','f','\\','\'','\"'])* '@'				;	
 INTEGER:	(NO_ZERO_NUM(NUM)*) | '0'	;
 REAL: 		INTEGER ('.'NUM(NUM)*)?		;
-ID:			LETTER(LETTER|NUM)*			;
+ID:			LETTER(CHARACTER)*			;
 
-WS : [ \t\r\n]+ -> skip ;
+WS :		[ \t\r\n]+ -> skip ;
+COMMENT:	'\\*' (~['\"','\\', '\n', '\r'] | '\\' ['n','t','b','r','f','\\','\'','\"'])* '*\\'	;
 
 
 // fragments 
