@@ -55,7 +55,7 @@ enum_type:		ENUM_TYPE L_BRACKET	(
 point_id:		MUL point_id | id | L_BRACKET point_id R_BRACKET		;
 addr_id:		ADDR addr_id | id | L_BRACKET addr_id R_BRACKET			;
 
-var_define:		TYPEDEF	point_id (ASSIGNMENT element)? 
+var_define:		type	point_id (ASSIGNMENT element)? 
 				 (COMMA point_id (ASSIGNMENT element)?)*		|
 				TYPEDEF	enum_type	id							|
 				TYPEDEF	type		point_id					|
@@ -81,20 +81,20 @@ para_define_list:
 				(type point_id (COMMA type point_id)*)?					;
 function_call:	id	L_BRACKET para_value_list R_BRACKET (append_paras)?	;
 para_value_list:
-				(element (COMMA element))?			;
+				(element (COMMA element)*)?			;
 append_paras:	AT id (COMMA id)* AT				;
 com_statement:	(attributes_2)? (invariant)? (statement)*				;
 statement:		SEMICOLON							|
+				assign_stat		SEMICOLON			|
 				element_take	SEMICOLON			|
 				function_call	SEMICOLON			|
-				assign_stat		SEMICOLON			|
 				return_stat		SEMICOLON			|
 				while_stat							|
 				if_stat								|
-				L_BRACKET (statement)* R_BRACKET	|
+				L_BRACE (statement)* R_BRACE	|
 				statement_at						;
 
-element_take:	id (point id)*	
+element_take:	id (POINT id)*	
 				(
 					point 
 					L_ANGLE_BRACKET 
@@ -103,7 +103,7 @@ element_take:	id (point id)*
 					R_ANGLE_BRACKET
 				)?									;
 assign_stat:	point_id ASSIGNMENT element			|
-				point_id (point id | ADDRGET id)+
+				point_id (POINT id | ADDRGET id)+
 					ASSIGNMENT element				;
 return_stat:	RETURN (element)?					;
 while_stat:		WHILE L_BRACKET pro_e R_BRACKET statement	;
@@ -142,12 +142,12 @@ term:
 	L_BRACKET element R_BRACKET 								| 
 )
 (
-	point	L_ANGLE_BRACKET 
+	POINT	L_ANGLE_BRACKET 
 			(id | integer) belong element 
 			(COMMA (id | integer) belong element)* 
 			R_ANGLE_BRACKET										|
-	point id													|
-	addr_get id
+	POINT id													|
+	ADDRGET id
 )*                                                              ;
 
 one_e:		NOT		one_e		|
@@ -198,7 +198,7 @@ element:	pro_e										;
 //lex
 MACHINE: 			'MACHINE'		;
 INVARIANT:			'INVARIANT'		;
-ATTRIBUTE:			'ATTRIBUTE'		;
+ATTRIBUTE:			'ATTRIBUTES'		;
 OPERATIONS:			'OPERATIONS'	;
 END:				'END'			;
 INCLUDE:			'INCLUDE'		;
@@ -246,7 +246,6 @@ COMMA:				','		;
 POINT:				'.'		;
 AT:					'@'		;
 SEMICOLON:			';'		;
-ASSIGN_SYMBOL:		'='		;
 L_BRACKET:			'('		;
 R_BRACKET:			')'		;
 L_BRACE:			'{'		;
@@ -291,9 +290,9 @@ INTEGER:	(NO_ZERO_NUM(NUM)*) | '0'	;
 REAL: 		INTEGER ('.'NUM(NUM)*)?		;
 ID:			LETTER(CHARACTER)*			;
 
-WS :		[ \t\r\n]+ -> skip ;
-COMMENT:	'\\*' (~['\"','\\', '\n', '\r'] | 
-			'\\' ['n','t','b','r','f','\\','\'','\"'])* '*\\'	;
+WS :		[ \t\r\n]+ -> skip	;
+COMMENT:	'/*' (~["*"])* '*' (~['/'] (~['*'])* '*')* '/'		-> skip	;
+COMMENT_2:	'//' (~['\n','\r'])* ('\n' | '\r' | '\r\n')			-> skip	;
 
 
 // fragments 

@@ -8,42 +8,17 @@ ATTRIBUTES
 	typedef int a;
 
 	NUMBER_OF_PROCESSES_TYPE Current_Dormant_Processes_num;
-	NUMBER_OF_PROCESSES_TYPE Current_Ready_Processes_num;
-	NUMBER_OF_PROCESSES_TYPE Current_Running_Processes_num;
-	NUMBER_OF_PROCESSES_TYPE Current_Waiting_Processes_num;
-
-	NUMBER_OF_PROCESSES_TYPE Current_Partition_Processes_num;
 	
 	APEX_INTEGER Current_Parition_Buffers_num;
-	APEX_INTEGER Current_Parition_BBoards_num;
-	APEX_INTEGER Current_Partition_Semaphore_num;
-	APEX_INTEGER Current_Partition_Events_num;
 	//APEX_INTEGER Current_Partition_Events_num;
-	APEX_INTEGER Current_Partition_SPort_num;
-	APEX_INTEGER Current_Partition_QPort_num;
 
 	set<PROCESS_TYPE> Dormant_Processes_set;
-	set<PROCESS_TYPE> Ready_Processes_set;
-	set<PROCESS_TYPE> Running_Processes_set;
-	set<PROCESS_TYPE> Waiting_Processes_set;
-
-	set<PROCESS_TYPE> Current_partition_process_set;
-
-	set<BUFFER_TYPE> Current_partition_buffers_set;
-	set<BLACKBOARD_TYPE> Current_partition_bboards_set;
-	set<SEMAPHORE_TYPE> Current_partition_semaphore_set;
-	//set<EVENT_TYPE> Current_partition_event_set;
-	set<SAMPLING_PORT_TYPE> Current_partition_sampling_port_set;
-	set<QUEUING_PORT_TYPE> Current_partition_queuing_port_set;
-
-	set<TIMER_TYPE> Current_Partition_Timer;
-	
-	
+		
 OPERATIONS
 
 
 void Partition_init() {
-	Current_Partition_status.OPERATING_MODE=WARM_START;
+	status.OPERATING_MODE=WARM_START;
 }
 
 /* 	       GET_PARTITION_STATUS                */
@@ -55,12 +30,7 @@ void Partition_init() {
 		/*out*/ RETURN_CODE_TYPE *RETURN_CODE )
 	{
   		(*PARTITION_STATUS).PERIOD = Current_Partition_status.PERIOD;
-  		(*PARTITION_STATUS).DURATION = Current_Partition_status.DURATION;
-  		(*PARTITION_STATUS).IDENTIFIER = Current_Partition_status.IDENTIFIER;
-  		(*PARTITION_STATUS).LOCK_LEVEL = Current_Partition_status.LOCK_LEVEL;
-		(*PARTITION_STATUS).OPERATING_MODE = Current_Partition_status.OPERATING_MODE;
-		(*PARTITION_STATUS).START_CONDITION = 
-										Current_Partition_status.START_CONDITION;
+
       	*RETURN_CODE = NO_ERROR;
       	return;
 	}
@@ -134,7 +104,7 @@ void Partition_init() {
 					&& Pro.STATUS.ATTRS.PERIOD != INFINITE_TIME_VALUE
 					&& Pro != DELAYED)
      			{
-       				Pro.RELEASE_POINT  = the partition��s next periodic processing start;
+       				Pro.RELEASE_POINT  = the partitions next periodic processing start;
      			}
      			if((Pro.STATUS.PROCESS_STATE == READY 
 					|| Pro.STATUS.PROCESS_STATE == RUNNING
@@ -142,7 +112,7 @@ void Partition_init() {
 					&& Pro.STATUS.ATTRS.PERIOD != INFINITE_TIME_VALUE
 					&& Pro == DELAYED)
      			{
-       				Pro.RELEASE_POINT = the partition��s next periodic processing start
+       				Pro.RELEASE_POINT = the partitions next periodic processing start
 										+ DELAY_TIME;
      			}
      			*/

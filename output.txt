@@ -1,0 +1,3268 @@
+
+(
+ abmachine 
+ (
+  machine MACHINE 
+  (
+   id PartitionManagement
+  )
+   
+  (
+   includes 
+   (
+    include INCLUDE
+   )
+    
+   (
+    string "ModularManagement.bs"
+   )
+    ;
+  )
+   
+  (
+   attributes ATTRIBUTES 
+   (
+    cv_define 
+    (
+     var_define 
+     (
+      type 
+      (
+       id PARTITION_STATUS_TYPE
+      )
+      
+     )
+      
+     (
+      point_id 
+      (
+       id Current_Partition_status
+      )
+      
+     )
+     
+    )
+     ; 
+    (
+     var_define typedef 
+     (
+      type 
+      (
+       normal_type int
+      )
+      
+     )
+      
+     (
+      point_id 
+      (
+       id a
+      )
+      
+     )
+     
+    )
+     ; 
+    (
+     var_define 
+     (
+      type 
+      (
+       id NUMBER_OF_PROCESSES_TYPE
+      )
+      
+     )
+      
+     (
+      point_id 
+      (
+       id Current_Dormant_Processes_num
+      )
+      
+     )
+     
+    )
+     ; 
+    (
+     var_define 
+     (
+      type 
+      (
+       id APEX_INTEGER
+      )
+      
+     )
+      
+     (
+      point_id 
+      (
+       id Current_Parition_Buffers_num
+      )
+      
+     )
+     
+    )
+     ; 
+    (
+     var_define 
+     (
+      type 
+      (
+       set_type set < 
+       (
+        type 
+        (
+         id PROCESS_TYPE
+        )
+        
+       )
+        >
+      )
+      
+     )
+      
+     (
+      point_id 
+      (
+       id Dormant_Processes_set
+      )
+      
+     )
+     
+    )
+     ;
+   )
+   
+  )
+   
+  (
+   operations OPERATIONS 
+   (
+    function_define 
+    (
+     type 
+     (
+      normal_type void
+     )
+     
+    )
+     
+    (
+     point_id 
+     (
+      id Partition_init
+     )
+     
+    )
+     
+    (
+      para_define_list 
+    )
+     { 
+    (
+     com_statement 
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+         id status
+        )
+        
+       )
+        . 
+       (
+        id OPERATING_MODE
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id WARM_START
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+     
+    )
+     }
+   )
+    
+   (
+    function_define 
+    (
+     type 
+     (
+      normal_type void
+     )
+     
+    )
+     
+    (
+     point_id 
+     (
+      id GET_PARTITION_STATUS
+     )
+     
+    )
+     
+    (
+      
+     (
+      para_define_list 
+      (
+       type 
+       (
+        id PARTITION_STATUS_TYPE
+       )
+       
+      )
+       
+      (
+       point_id * 
+       (
+        point_id 
+        (
+         id PARTITION_STATUS
+        )
+        
+       )
+       
+      )
+       , 
+      (
+       type 
+       (
+        id RETURN_CODE_TYPE
+       )
+       
+      )
+       
+      (
+       point_id * 
+       (
+        point_id 
+        (
+         id RETURN_CODE
+        )
+        
+       )
+       
+      )
+      
+     )
+      
+    )
+     { 
+    (
+     com_statement 
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+          
+         (
+          point_id * 
+          (
+           point_id 
+           (
+            id PARTITION_STATUS
+           )
+           
+          )
+          
+         )
+          
+        )
+        
+       )
+        . 
+       (
+        id PERIOD
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    . 
+                   (
+                    id PERIOD
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id * 
+        (
+         point_id 
+         (
+          id RETURN_CODE
+         )
+         
+        )
+        
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id NO_ERROR
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       return_stat return 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e term
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+     
+    )
+     }
+   )
+    
+   (
+    function_define 
+    (
+     type 
+     (
+      normal_type void
+     )
+     
+    )
+     
+    (
+     point_id 
+     (
+      id SET_PARTITION_MODE
+     )
+     
+    )
+     
+    (
+      
+     (
+      para_define_list 
+      (
+       type 
+       (
+        id OPERATING_MODE_TYPE
+       )
+       
+      )
+       
+      (
+       point_id 
+       (
+        id OPERATING_MODE
+       )
+       
+      )
+       , 
+      (
+       type 
+       (
+        id RETURN_CODE_TYPE
+       )
+       
+      )
+       
+      (
+       point_id * 
+       (
+        point_id 
+        (
+         id RETURN_CODE
+        )
+        
+       )
+       
+      )
+      
+     )
+      
+    )
+     { 
+    (
+     com_statement 
+     (
+      attributes_2 
+      (
+       cv_define 
+       (
+        var_define 
+        (
+         type 
+         (
+          id NUMBER_OF_PROCESSES_TYPE
+         )
+         
+        )
+         
+        (
+         point_id 
+         (
+          id TEMP_PRO_NUM
+         )
+         
+        )
+         = 
+        (
+         element 
+         (
+          pro_e 
+          (
+           or_pro_e 
+           (
+            and_pro_e 
+            (
+             pro_term_e 
+             (
+              condition_term 
+              (
+               mse 
+               (
+                mse_1 
+                (
+                 mse_0 
+                 (
+                  unary_e 
+                  (
+                   one_e 
+                   (
+                    term 
+                    (
+                     integer 0
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+        ;
+      )
+      
+     )
+      
+     (
+      statement 
+      (
+       if_stat if 
+       (
+         
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              != 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id IDLE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            && 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              != 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id COLD_START
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            && 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              != 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id WARM_START
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            && 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              != 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id NORMAL
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+         
+       )
+        
+       (
+        statement { 
+        (
+         statement 
+         (
+          assign_stat 
+          (
+           point_id * 
+           (
+            point_id 
+            (
+             id RETURN_CODE
+            )
+            
+           )
+           
+          )
+           = 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e 
+                     (
+                      term 
+                      (
+                       id INVALID_PARAM
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         
+        (
+         statement 
+         (
+          return_stat return 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e term
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         }
+       )
+       
+      )
+      
+     )
+      
+     (
+      statement 
+      (
+       if_stat if 
+       (
+         
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id NORMAL
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            && 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    . 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id NORMAL
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+         
+       )
+        
+       (
+        statement { 
+        (
+         statement 
+         (
+          assign_stat 
+          (
+           point_id * 
+           (
+            point_id 
+            (
+             id RETURN_CODE
+            )
+            
+           )
+           
+          )
+           = 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e 
+                     (
+                      term 
+                      (
+                       id NO_ACTION
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         
+        (
+         statement 
+         (
+          return_stat return 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e term
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         }
+       )
+       
+      )
+      
+     )
+      
+     (
+      statement 
+      (
+       if_stat if 
+       (
+         
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id WARM_START
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            && 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    . 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id COLD_START
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+         
+       )
+        
+       (
+        statement { 
+        (
+         statement 
+         (
+          assign_stat 
+          (
+           point_id * 
+           (
+            point_id 
+            (
+             id RETURN_CODE
+            )
+            
+           )
+           
+          )
+           = 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e 
+                     (
+                      term 
+                      (
+                       id INVALID_MODE
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         
+        (
+         statement 
+         (
+          return_stat return 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e term
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         }
+       )
+       
+      )
+      
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+         id Current_Partition_status
+        )
+        
+       )
+        . 
+       (
+        id OPERATING_MODE
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       if_stat if 
+       (
+         
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id IDLE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+         
+       )
+        
+       (
+        statement { 
+        (
+         statement 
+         (
+          function_call 
+          (
+           id _Shut_Down_Current_Partition
+          )
+           
+          (
+            
+           (
+            para_value_list 
+            (
+             element 
+             (
+              pro_e 
+              (
+               or_pro_e 
+               (
+                and_pro_e 
+                (
+                 pro_term_e 
+                 (
+                  condition_term 
+                  (
+                   mse 
+                   (
+                    mse_1 
+                    (
+                     mse_0 
+                     (
+                      unary_e 
+                      (
+                       one_e 
+                       (
+                        term 
+                        (
+                         id Current_Partition_status
+                        )
+                         . 
+                        (
+                         id IDENTIFIER
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            
+          )
+          
+         )
+          ;
+        )
+         }
+       )
+       
+      )
+      
+     )
+      
+     (
+      statement 
+      (
+       if_stat if 
+       (
+         
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id WARM_START
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+           || 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id COLD_START
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+         
+       )
+        
+       (
+        statement { 
+        (
+         statement 
+         (
+          function_call 
+          (
+           id _Inhibit_Process_Scheduling
+          )
+           
+          (
+            
+           (
+            para_value_list 
+            (
+             element 
+             (
+              pro_e 
+              (
+               or_pro_e 
+               (
+                and_pro_e 
+                (
+                 pro_term_e 
+                 (
+                  condition_term 
+                  (
+                   mse 
+                   (
+                    mse_1 
+                    (
+                     mse_0 
+                     (
+                      unary_e 
+                      (
+                       one_e 
+                       (
+                        term 
+                        (
+                         id Current_Partition_status
+                        )
+                         . 
+                        (
+                         id IDENTIFIER
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            
+          )
+          
+         )
+          ;
+        )
+         
+        (
+         statement 
+         (
+          function_call 
+          (
+           id _Switch_Back_Initialization_Mode
+          )
+           
+          (
+            
+           (
+            para_value_list 
+            (
+             element 
+             (
+              pro_e 
+              (
+               or_pro_e 
+               (
+                and_pro_e 
+                (
+                 pro_term_e 
+                 (
+                  condition_term 
+                  (
+                   mse 
+                   (
+                    mse_1 
+                    (
+                     mse_0 
+                     (
+                      unary_e 
+                      (
+                       one_e 
+                       (
+                        term 
+                        (
+                         id Current_Partition_status
+                        )
+                         . 
+                        (
+                         id IDENTIFIER
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            
+          )
+          
+         )
+          ;
+        )
+         }
+       )
+       
+      )
+      
+     )
+      
+     (
+      statement 
+      (
+       if_stat if 
+       (
+         
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id OPERATING_MODE
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+              == 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id NORMAL
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+         
+       )
+        
+       (
+        statement { 
+        (
+         statement 
+         (
+          assign_stat 
+          (
+           point_id 
+           (
+            id TEMP_PRO_NUM
+           )
+           
+          )
+           = 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e 
+                     (
+                      term 
+                      (
+                       id Current_Partition_Processes_num
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         
+        (
+         statement 
+         (
+          while_stat while 
+          (
+            
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e 
+                     (
+                      term 
+                      (
+                       id Pro
+                      )
+                       . < 
+                      (
+                       id ID
+                      )
+                       
+                      (
+                       belong :
+                      )
+                       
+                      (
+                       element 
+                       (
+                        pro_e 
+                        (
+                         or_pro_e 
+                         (
+                          and_pro_e 
+                          (
+                           pro_term_e 
+                           (
+                            condition_term 
+                            (
+                             mse 
+                             (
+                              mse_1 
+                              (
+                               mse_0 
+                               (
+                                unary_e 
+                                (
+                                 one_e 
+                                 (
+                                  term 
+                                  (
+                                   id TEMP_PRO_NUM
+                                  )
+                                  
+                                 )
+                                 
+                                )
+                                
+                               )
+                               
+                              )
+                              
+                             )
+                             
+                            )
+                            
+                           )
+                           
+                          )
+                          
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                       >
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                 : 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e 
+                     (
+                      term 
+                      (
+                       id Current_partition_process_set
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+            
+          )
+           
+          (
+           statement { 
+           (
+            statement 
+            (
+             if_stat if 
+             (
+               
+              (
+               pro_e 
+               (
+                or_pro_e 
+                (
+                 and_pro_e 
+                 (
+                  pro_term_e 
+                  (
+                   condition_term 
+                   (
+                    mse 
+                    (
+                     mse_1 
+                     (
+                      mse_0 
+                      (
+                       unary_e 
+                       (
+                        one_e 
+                        (
+                         term 
+                         (
+                           
+                          (
+                           element 
+                           (
+                            pro_e 
+                            (
+                             or_pro_e 
+                             (
+                              and_pro_e 
+                              (
+                               pro_term_e 
+                               (
+                                condition_term 
+                                (
+                                 mse 
+                                 (
+                                  mse_1 
+                                  (
+                                   mse_0 
+                                   (
+                                    unary_e 
+                                    (
+                                     one_e 
+                                     (
+                                      term 
+                                      (
+                                       id Pro
+                                      )
+                                       -> 
+                                      (
+                                       id PROCESS_STATE
+                                      )
+                                      
+                                     )
+                                     
+                                    )
+                                    
+                                   )
+                                   
+                                  )
+                                  
+                                 )
+                                 
+                                )
+                                 == 
+                                (
+                                 mse 
+                                 (
+                                  mse_1 
+                                  (
+                                   mse_0 
+                                   (
+                                    unary_e 
+                                    (
+                                     one_e 
+                                     (
+                                      term 
+                                      (
+                                       id READY
+                                      )
+                                      
+                                     )
+                                     
+                                    )
+                                    
+                                   )
+                                   
+                                  )
+                                  
+                                 )
+                                 
+                                )
+                                
+                               )
+                               
+                              )
+                              
+                             )
+                              || 
+                             (
+                              and_pro_e 
+                              (
+                               pro_term_e 
+                               (
+                                condition_term 
+                                (
+                                 mse 
+                                 (
+                                  mse_1 
+                                  (
+                                   mse_0 
+                                   (
+                                    unary_e 
+                                    (
+                                     one_e 
+                                     (
+                                      term 
+                                      (
+                                       id Pro
+                                      )
+                                       -> 
+                                      (
+                                       id PROCESS_STATE
+                                      )
+                                      
+                                     )
+                                     
+                                    )
+                                    
+                                   )
+                                   
+                                  )
+                                  
+                                 )
+                                 
+                                )
+                                 == 
+                                (
+                                 mse 
+                                 (
+                                  mse_1 
+                                  (
+                                   mse_0 
+                                   (
+                                    unary_e 
+                                    (
+                                     one_e 
+                                     (
+                                      term 
+                                      (
+                                       id RUNNING
+                                      )
+                                      
+                                     )
+                                     
+                                    )
+                                    
+                                   )
+                                   
+                                  )
+                                  
+                                 )
+                                 
+                                )
+                                
+                               )
+                               
+                              )
+                              
+                             )
+                             
+                            )
+                            
+                           )
+                           
+                          )
+                           
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                  && 
+                 (
+                  pro_term_e 
+                  (
+                   condition_term 
+                   (
+                    mse 
+                    (
+                     mse_1 
+                     (
+                      mse_0 
+                      (
+                       unary_e 
+                       (
+                        one_e 
+                        (
+                         term 
+                         (
+                          id Pro
+                         )
+                          -> 
+                         (
+                          id PERIOD
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                    == 
+                   (
+                    mse 
+                    (
+                     mse_1 
+                     (
+                      mse_0 
+                      (
+                       unary_e 
+                       (
+                        one_e 
+                        (
+                         term 
+                         (
+                          id INFINITE_TIME_VALUE
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+               
+             )
+              
+             (
+              statement { 
+              (
+               statement 
+               (
+                assign_stat 
+                (
+                 point_id 
+                 (
+                  id Pro
+                 )
+                 
+                )
+                 -> 
+                (
+                 id STATUS
+                )
+                 . 
+                (
+                 id PROCESS_STATE
+                )
+                 = 
+                (
+                 element 
+                 (
+                  pro_e 
+                  (
+                   or_pro_e 
+                   (
+                    and_pro_e 
+                    (
+                     pro_term_e 
+                     (
+                      condition_term 
+                      (
+                       mse 
+                       (
+                        mse_1 
+                        (
+                         mse_0 
+                         (
+                          unary_e 
+                          (
+                           one_e 
+                           (
+                            term 
+                            (
+                             id READY
+                            )
+                            
+                           )
+                           
+                          )
+                          
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+                ;
+              )
+               }
+             )
+             
+            )
+            
+           )
+            
+           (
+            statement 
+            (
+             if_stat if 
+             (
+               
+              (
+               pro_e 
+               (
+                or_pro_e 
+                (
+                 and_pro_e 
+                 (
+                  pro_term_e 
+                  (
+                   condition_term 
+                   (
+                    mse 
+                    (
+                     mse_1 
+                     (
+                      mse_0 
+                      (
+                       unary_e 
+                       (
+                        one_e 
+                        (
+                         term 
+                         (
+                          id Pro
+                         )
+                          -> 
+                         (
+                          id STATUS
+                         )
+                          . 
+                         (
+                          id PROCESS_STATE
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                    != 
+                   (
+                    mse 
+                    (
+                     mse_1 
+                     (
+                      mse_0 
+                      (
+                       unary_e 
+                       (
+                        one_e 
+                        (
+                         term 
+                         (
+                          id DORMANT
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+               
+             )
+              
+             (
+              statement { }
+             )
+             
+            )
+            
+           )
+            
+           (
+            statement 
+            (
+             assign_stat 
+             (
+              point_id 
+              (
+               id TEMP_PRO_NUM
+              )
+              
+             )
+              = 
+             (
+              element 
+              (
+               pro_e 
+               (
+                or_pro_e 
+                (
+                 and_pro_e 
+                 (
+                  pro_term_e 
+                  (
+                   condition_term 
+                   (
+                    mse 
+                    (
+                     mse_1 
+                     (
+                      mse_0 
+                      (
+                       unary_e 
+                       (
+                        one_e 
+                        (
+                         term 
+                         (
+                          id TEMP_PRO_NUM
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                     - 
+                    (
+                     mse_1 
+                     (
+                      mse_0 
+                      (
+                       unary_e 
+                       (
+                        one_e 
+                        (
+                         term 
+                         (
+                          integer 1
+                         )
+                         
+                        )
+                        
+                       )
+                       
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+             ;
+           )
+            }
+          )
+          
+         )
+         
+        )
+         
+        (
+         statement 
+         (
+          assign_stat 
+          (
+           point_id 
+           (
+            id Current_Partition_status
+           )
+           
+          )
+           . 
+          (
+           id LOCK_LEVEL
+          )
+           = 
+          (
+           element 
+           (
+            pro_e 
+            (
+             or_pro_e 
+             (
+              and_pro_e 
+              (
+               pro_term_e 
+               (
+                condition_term 
+                (
+                 mse 
+                 (
+                  mse_1 
+                  (
+                   mse_0 
+                   (
+                    unary_e 
+                    (
+                     one_e 
+                     (
+                      term 
+                      (
+                       integer 0
+                      )
+                      
+                     )
+                     
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+          ;
+        )
+         }
+       )
+       
+      )
+      
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id * 
+        (
+         point_id 
+         (
+          id RETURN_CODE
+         )
+         
+        )
+        
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id NO_ERROR
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       return_stat return 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e term
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+     
+    )
+     }
+   )
+   
+  )
+   END
+ )
+ 
+)
