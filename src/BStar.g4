@@ -1,27 +1,74 @@
 grammar BStar;
 
 //parse
-abmachine:		machine | machine_h | machine_l;
-machine:		MACHINE id (includes)? (attributes)? (operations)?			END;
-machine_h:		MACHINE id (includes)? (attributes)? (declare_operations)?	END;
-machine_l:		MACHINE id (includes)? (attributes)? (cdeclare_operations)?	END;
+abmachine:		
+	machine | machine_h | machine_l;
 
-defines:		(define id element)+ ;
-includes:		(include 
-					(
-					string	| 
-					L_ANGLE_BRACKET id SUF R_ANGLE_BRACKET
-					) 
-					SEMICOLON
-				)+	;
-declares:		(function_declare)+	;
-attributes:		ATTRIBUTE (defines)? cv_define	;
-attributes_2:	cv_define						;
-cv_define:		(
-					var_define	SEMICOLON	|
-					cst_define	SEMICOLON
-				)+							;
+includes:		
+	(include 
+		(
+			string	| 
+			L_ANGLE_BRACKET id SUF R_ANGLE_BRACKET
+		) 
+		SEMICOLON
+	)+	;
 
+attributes:		
+	ATTRIBUTE (defines)? cv_define	;
+
+cv_define:		
+	(
+		var_define	SEMICOLON	|
+		cst_define	SEMICOLON
+	)+	;
+
+var_define:		
+	type	point_id (ASSIGNMENT element)? 
+	 (COMMA point_id (ASSIGNMENT element)?)*		|
+	TYPEDEF	enum_type	id							|
+	TYPEDEF	type		point_id					|
+	TYPEDEF	struct_type	point_id					;
+
+cst_define:		
+	CONST	type	point_id ASSIGNMENT element
+			(COMMA	point_id ASSIGNMENT element)*	;
+
+//machine
+machine:		
+	MACHINE id (includes)? (attributes)? (operations)?	END	;
+
+operations:		
+	OPERATIONS	(function_define)+	;
+
+function_define:
+	type point_id L_BRACKET para_define_list R_BRACKET 
+	L_BRACE com_statement R_BRACE	;
+
+//machine_h
+machine_h:		
+	MACHINE id (includes)? (attributes)? (declare_operations)?	END	;
+
+declare_operations:	
+	OPERATIONS	declares	;
+
+declares:		
+	(function_declare)+		;
+
+function_declare:
+	type	point_id L_BRACKET para_define_list R_BRACKET	;
+
+//machine_l
+machine_l:		
+	MACHINE id (includes)? (attributes)? (cdeclare_operations)?	END;
+
+cdeclare_operations:
+	OPERATIONS	(cfunction_declare)+	;
+
+cfunction_declare:
+	function_declare robust function	;
+
+defines:		
+	(define id element)+ ;
 			
 type:			normal_type									| 
 				set_type									| 
@@ -45,7 +92,7 @@ normal_type:	SHORT_TYPE                      |
                 VOID							;
 
 set_type:		SET_TYPE L_ANGLE_BRACKET type R_ANGLE_BRACKET (at_str)?	;
-tuple_type:		STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE		;
+struct_type:		STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE		;
 enum_type:		ENUM_TYPE L_BRACKET	(
 									id (ASSIGNMENT unary_e)?
 							 (COMMA id (ASSIGNMENT unary_e)?)*
@@ -55,35 +102,20 @@ enum_type:		ENUM_TYPE L_BRACKET	(
 point_id:		MUL point_id | id | L_BRACKET point_id R_BRACKET		;
 addr_id:		ADDR addr_id | id | L_BRACKET addr_id R_BRACKET			;
 
-var_define:		type	point_id (ASSIGNMENT element)? 
-				 (COMMA point_id (ASSIGNMENT element)?)*		|
-				TYPEDEF	enum_type	id							|
-				TYPEDEF	type		point_id					|
-				TYPEDEF	tuple_type	point_id					;
-cst_define:		CONST	type	point_id ASSIGNMENT element
-						(COMMA	point_id ASSIGNMENT element)*	;
-invariant:		INVARIANT	pro_e	SEMICOLON	;
-operations:		OPERATIONS	(function_define)+	;
-declare_operations:
-				OPERATIONS	declares			;
 robust:			ROBUST		(PRECONDITION pro_e POSTCONDITION pro_e)+	;
 function:		FUNCTION	(PRECONDITION pro_e POSTCONDITION pro_e)+	;
-cfunction_declare:
-				function_declare robust function	;
-cdeclare_operations:
-				OPERATIONS	(cfunction_declare)+	;
-function_define:
-				type	point_id L_BRACKET para_define_list R_BRACKET 
-				L_BRACE com_statement R_BRACE		;
-function_declare:
-				type	point_id L_BRACKET para_define_list R_BRACKET	;
+
 para_define_list:
 				(type point_id (COMMA type point_id)*)?					;
 function_call:	id	L_BRACKET para_value_list R_BRACKET (append_paras)?	;
 para_value_list:
 				(element (COMMA element)*)?			;
 append_paras:	AT id (COMMA id)* AT				;
+
+attributes_2:	cv_define							;
 com_statement:	(attributes_2)? (invariant)? (statement)*				;
+invariant:		INVARIANT	pro_e	SEMICOLON	;
+
 statement:		SEMICOLON							|
 				assign_stat		SEMICOLON			|
 				element_take	SEMICOLON			|

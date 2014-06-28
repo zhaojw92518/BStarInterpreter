@@ -186,6 +186,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAddr_get(@NotNull BStarParser.Addr_getContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#struct_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStruct_type(@NotNull BStarParser.Struct_typeContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#function_call}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -219,13 +226,6 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWhile_stat(@NotNull BStarParser.While_statContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link BStarParser#tuple_type}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTuple_type(@NotNull BStarParser.Tuple_typeContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#at_str}.

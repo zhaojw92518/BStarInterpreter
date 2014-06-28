@@ -1,23 +1,13 @@
-// Generated from .\BStar.g4 by ANTLR 4.1
 import org.antlr.v4.runtime.misc.NotNull;
-import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
-/**
- * This class provides an empty implementation of {@link BStarVisitor},
- * which can be extended to create a visitor which only needs to handle a subset
- * of the available methods.
- *
- * @param <T> The return type of the visit operation. Use {@link Void} for
- * operations with no return type.
- */
-public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements BStarVisitor<T> {
+public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	/**
 	 * {@inheritDoc}
 	 * <p/>
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitBelong(@NotNull BStarParser.BelongContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitBelong(@NotNull BStarParser.BelongContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -25,7 +15,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitType(@NotNull BStarParser.TypeContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitType(@NotNull BStarParser.TypeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -33,7 +23,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAnd_pro_e(@NotNull BStarParser.And_pro_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAnd_pro_e(@NotNull BStarParser.And_pro_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -41,7 +31,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitFunction(@NotNull BStarParser.FunctionContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitFunction(@NotNull BStarParser.FunctionContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -49,7 +39,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitPara_define_list(@NotNull BStarParser.Para_define_listContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPara_define_list(@NotNull BStarParser.Para_define_listContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -57,7 +47,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitInvariant(@NotNull BStarParser.InvariantContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitInvariant(@NotNull BStarParser.InvariantContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -65,7 +55,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitQuan_e(@NotNull BStarParser.Quan_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitQuan_e(@NotNull BStarParser.Quan_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -73,7 +63,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAbmachine(@NotNull BStarParser.AbmachineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAbmachine(@NotNull BStarParser.AbmachineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -81,7 +71,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitCom_statement(@NotNull BStarParser.Com_statementContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCom_statement(@NotNull BStarParser.Com_statementContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -89,7 +79,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitMachine_h(@NotNull BStarParser.Machine_hContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitMachine_h(@NotNull BStarParser.Machine_hContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -97,7 +87,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitMachine_l(@NotNull BStarParser.Machine_lContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitMachine_l(@NotNull BStarParser.Machine_lContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -105,7 +95,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitChar_str(@NotNull BStarParser.Char_strContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitChar_str(@NotNull BStarParser.Char_strContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -113,7 +103,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitElement(@NotNull BStarParser.ElementContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitElement(@NotNull BStarParser.ElementContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -121,7 +111,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitEnum_type(@NotNull BStarParser.Enum_typeContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitEnum_type(@NotNull BStarParser.Enum_typeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -129,7 +119,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitPro_e(@NotNull BStarParser.Pro_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPro_e(@NotNull BStarParser.Pro_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -137,7 +127,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitCondition_term(@NotNull BStarParser.Condition_termContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCondition_term(@NotNull BStarParser.Condition_termContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -145,7 +135,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitCst_define(@NotNull BStarParser.Cst_defineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCst_define(@NotNull BStarParser.Cst_defineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -153,7 +143,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitFunction_define(@NotNull BStarParser.Function_defineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitFunction_define(@NotNull BStarParser.Function_defineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -161,7 +151,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitMachine(@NotNull BStarParser.MachineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitMachine(@NotNull BStarParser.MachineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -169,7 +159,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitOne_e(@NotNull BStarParser.One_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitOne_e(@NotNull BStarParser.One_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -177,7 +167,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitId_list(@NotNull BStarParser.Id_listContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitId_list(@NotNull BStarParser.Id_listContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -185,7 +175,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitInclude(@NotNull BStarParser.IncludeContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitInclude(@NotNull BStarParser.IncludeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -193,7 +183,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitStatement(@NotNull BStarParser.StatementContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitStatement(@NotNull BStarParser.StatementContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -201,7 +191,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitDefines(@NotNull BStarParser.DefinesContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitDefines(@NotNull BStarParser.DefinesContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -209,7 +199,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAddr_get(@NotNull BStarParser.Addr_getContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAddr_get(@NotNull BStarParser.Addr_getContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -217,7 +207,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitStruct_type(@NotNull BStarParser.Struct_typeContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitStruct_type(@NotNull BStarParser.Struct_typeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -225,7 +215,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitFunction_call(@NotNull BStarParser.Function_callContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitFunction_call(@NotNull BStarParser.Function_callContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -233,7 +223,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAppend_paras(@NotNull BStarParser.Append_parasContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAppend_paras(@NotNull BStarParser.Append_parasContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -241,7 +231,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitSet_type(@NotNull BStarParser.Set_typeContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitSet_type(@NotNull BStarParser.Set_typeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -249,7 +239,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitCdeclare_operations(@NotNull BStarParser.Cdeclare_operationsContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCdeclare_operations(@NotNull BStarParser.Cdeclare_operationsContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -257,7 +247,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitWhile_stat(@NotNull BStarParser.While_statContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitWhile_stat(@NotNull BStarParser.While_statContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -265,7 +255,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAt_str(@NotNull BStarParser.At_strContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAt_str(@NotNull BStarParser.At_strContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -273,7 +263,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitPara_value_list(@NotNull BStarParser.Para_value_listContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPara_value_list(@NotNull BStarParser.Para_value_listContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -281,7 +271,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitIncludes(@NotNull BStarParser.IncludesContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitIncludes(@NotNull BStarParser.IncludesContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -289,7 +279,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitPro_term_e(@NotNull BStarParser.Pro_term_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPro_term_e(@NotNull BStarParser.Pro_term_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -297,7 +287,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitId(@NotNull BStarParser.IdContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitId(@NotNull BStarParser.IdContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -305,7 +295,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitReal(@NotNull BStarParser.RealContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitReal(@NotNull BStarParser.RealContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -313,7 +303,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitMse_1(@NotNull BStarParser.Mse_1Context ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitMse_1(@NotNull BStarParser.Mse_1Context ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -321,7 +311,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitMse_0(@NotNull BStarParser.Mse_0Context ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitMse_0(@NotNull BStarParser.Mse_0Context ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -329,7 +319,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitVar_define(@NotNull BStarParser.Var_defineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitVar_define(@NotNull BStarParser.Var_defineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -337,7 +327,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitReturn_stat(@NotNull BStarParser.Return_statContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitReturn_stat(@NotNull BStarParser.Return_statContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -345,7 +335,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitImp_pro_e(@NotNull BStarParser.Imp_pro_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitImp_pro_e(@NotNull BStarParser.Imp_pro_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -353,7 +343,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitMse(@NotNull BStarParser.MseContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitMse(@NotNull BStarParser.MseContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -361,7 +351,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitDeclare_operations(@NotNull BStarParser.Declare_operationsContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitDeclare_operations(@NotNull BStarParser.Declare_operationsContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -369,7 +359,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitNormal_type(@NotNull BStarParser.Normal_typeContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitNormal_type(@NotNull BStarParser.Normal_typeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -377,7 +367,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitUnary_e(@NotNull BStarParser.Unary_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitUnary_e(@NotNull BStarParser.Unary_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -385,7 +375,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitDefine(@NotNull BStarParser.DefineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitDefine(@NotNull BStarParser.DefineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -393,7 +383,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitRobust(@NotNull BStarParser.RobustContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitRobust(@NotNull BStarParser.RobustContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -401,7 +391,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitDeclares(@NotNull BStarParser.DeclaresContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitDeclares(@NotNull BStarParser.DeclaresContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -409,7 +399,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitFalse_str(@NotNull BStarParser.False_strContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitFalse_str(@NotNull BStarParser.False_strContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -417,7 +407,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitInteger(@NotNull BStarParser.IntegerContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitInteger(@NotNull BStarParser.IntegerContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -425,7 +415,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitStatement_at(@NotNull BStarParser.Statement_atContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitStatement_at(@NotNull BStarParser.Statement_atContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -433,7 +423,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAddr_id(@NotNull BStarParser.Addr_idContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAddr_id(@NotNull BStarParser.Addr_idContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -441,7 +431,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAttributes_2(@NotNull BStarParser.Attributes_2Context ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAttributes_2(@NotNull BStarParser.Attributes_2Context ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -449,7 +439,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitCv_define(@NotNull BStarParser.Cv_defineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCv_define(@NotNull BStarParser.Cv_defineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -457,7 +447,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitElement_take(@NotNull BStarParser.Element_takeContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitElement_take(@NotNull BStarParser.Element_takeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -465,7 +455,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAssign_stat(@NotNull BStarParser.Assign_statContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAssign_stat(@NotNull BStarParser.Assign_statContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -473,7 +463,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitPoint(@NotNull BStarParser.PointContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPoint(@NotNull BStarParser.PointContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -481,7 +471,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitTerm(@NotNull BStarParser.TermContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitTerm(@NotNull BStarParser.TermContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -489,7 +479,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitCfunction_declare(@NotNull BStarParser.Cfunction_declareContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCfunction_declare(@NotNull BStarParser.Cfunction_declareContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -497,7 +487,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitTrue_str(@NotNull BStarParser.True_strContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitTrue_str(@NotNull BStarParser.True_strContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -505,7 +495,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitString(@NotNull BStarParser.StringContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitString(@NotNull BStarParser.StringContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -513,7 +503,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitOr_pro_e(@NotNull BStarParser.Or_pro_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitOr_pro_e(@NotNull BStarParser.Or_pro_eContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -521,7 +511,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitFunction_declare(@NotNull BStarParser.Function_declareContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitFunction_declare(@NotNull BStarParser.Function_declareContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -529,7 +519,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitOperations(@NotNull BStarParser.OperationsContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitOperations(@NotNull BStarParser.OperationsContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -537,7 +527,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAttributes(@NotNull BStarParser.AttributesContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAttributes(@NotNull BStarParser.AttributesContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -545,7 +535,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitPoint_id(@NotNull BStarParser.Point_idContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPoint_id(@NotNull BStarParser.Point_idContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -553,7 +543,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitIf_stat(@NotNull BStarParser.If_statContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitIf_stat(@NotNull BStarParser.If_statContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -561,5 +551,5 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitNil(@NotNull BStarParser.NilContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitNil(@NotNull BStarParser.NilContext ctx) { return visitChildren(ctx); }
 }

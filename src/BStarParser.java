@@ -44,7 +44,7 @@ public class BStarParser extends Parser {
 		RULE_abmachine = 0, RULE_machine = 1, RULE_machine_h = 2, RULE_machine_l = 3, 
 		RULE_defines = 4, RULE_includes = 5, RULE_declares = 6, RULE_attributes = 7, 
 		RULE_attributes_2 = 8, RULE_cv_define = 9, RULE_type = 10, RULE_normal_type = 11, 
-		RULE_set_type = 12, RULE_tuple_type = 13, RULE_enum_type = 14, RULE_point_id = 15, 
+		RULE_set_type = 12, RULE_struct_type = 13, RULE_enum_type = 14, RULE_point_id = 15, 
 		RULE_addr_id = 16, RULE_var_define = 17, RULE_cst_define = 18, RULE_invariant = 19, 
 		RULE_operations = 20, RULE_declare_operations = 21, RULE_robust = 22, 
 		RULE_function = 23, RULE_cfunction_declare = 24, RULE_cdeclare_operations = 25, 
@@ -62,7 +62,7 @@ public class BStarParser extends Parser {
 	public static final String[] ruleNames = {
 		"abmachine", "machine", "machine_h", "machine_l", "defines", "includes", 
 		"declares", "attributes", "attributes_2", "cv_define", "type", "normal_type", 
-		"set_type", "tuple_type", "enum_type", "point_id", "addr_id", "var_define", 
+		"set_type", "struct_type", "enum_type", "point_id", "addr_id", "var_define", 
 		"cst_define", "invariant", "operations", "declare_operations", "robust", 
 		"function", "cfunction_declare", "cdeclare_operations", "function_define", 
 		"function_declare", "para_define_list", "function_call", "para_value_list", 
@@ -1069,7 +1069,7 @@ public class BStarParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Tuple_typeContext extends ParserRuleContext {
+	public static class Struct_typeContext extends ParserRuleContext {
 		public TerminalNode STRUCT() { return getToken(BStarParser.STRUCT, 0); }
 		public List<TerminalNode> SEMICOLON() { return getTokens(BStarParser.SEMICOLON); }
 		public TerminalNode SEMICOLON(int i) {
@@ -1089,20 +1089,20 @@ public class BStarParser extends Parser {
 			return getRuleContexts(Point_idContext.class);
 		}
 		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
-		public Tuple_typeContext(ParserRuleContext parent, int invokingState) {
+		public Struct_typeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_tuple_type; }
+		@Override public int getRuleIndex() { return RULE_struct_type; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof BStarVisitor ) return ((BStarVisitor<? extends T>)visitor).visitTuple_type(this);
+			if ( visitor instanceof BStarVisitor ) return ((BStarVisitor<? extends T>)visitor).visitStruct_type(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Tuple_typeContext tuple_type() throws RecognitionException {
-		Tuple_typeContext _localctx = new Tuple_typeContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_tuple_type);
+	public final Struct_typeContext struct_type() throws RecognitionException {
+		Struct_typeContext _localctx = new Struct_typeContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_struct_type);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1368,28 +1368,18 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Var_defineContext extends ParserRuleContext {
-		public List<ElementContext> element() {
-			return getRuleContexts(ElementContext.class);
+		public Struct_typeContext struct_type() {
+			return getRuleContext(Struct_typeContext.class,0);
 		}
+		public TerminalNode TYPEDEF() { return getToken(BStarParser.TYPEDEF, 0); }
 		public IdContext id() {
 			return getRuleContext(IdContext.class,0);
 		}
+		public List<ElementContext> element() {
+			return getRuleContexts(ElementContext.class);
+		}
 		public Enum_typeContext enum_type() {
 			return getRuleContext(Enum_typeContext.class,0);
-		}
-		public List<Point_idContext> point_id() {
-			return getRuleContexts(Point_idContext.class);
-		}
-		public Point_idContext point_id(int i) {
-			return getRuleContext(Point_idContext.class,i);
-		}
-		public List<TerminalNode> ASSIGNMENT() { return getTokens(BStarParser.ASSIGNMENT); }
-		public TerminalNode COMMA(int i) {
-			return getToken(BStarParser.COMMA, i);
-		}
-		public TerminalNode TYPEDEF() { return getToken(BStarParser.TYPEDEF, 0); }
-		public Tuple_typeContext tuple_type() {
-			return getRuleContext(Tuple_typeContext.class,0);
 		}
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
@@ -1398,8 +1388,18 @@ public class BStarParser extends Parser {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
+		public Point_idContext point_id(int i) {
+			return getRuleContext(Point_idContext.class,i);
+		}
+		public List<Point_idContext> point_id() {
+			return getRuleContexts(Point_idContext.class);
+		}
 		public TerminalNode ASSIGNMENT(int i) {
 			return getToken(BStarParser.ASSIGNMENT, i);
+		}
+		public List<TerminalNode> ASSIGNMENT() { return getTokens(BStarParser.ASSIGNMENT); }
+		public TerminalNode COMMA(int i) {
+			return getToken(BStarParser.COMMA, i);
 		}
 		public Var_defineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1481,7 +1481,7 @@ public class BStarParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(355); match(TYPEDEF);
-				setState(356); tuple_type();
+				setState(356); struct_type();
 				setState(357); point_id();
 				}
 				break;
