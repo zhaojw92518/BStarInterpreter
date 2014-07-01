@@ -1,8 +1,10 @@
 grammar BStar;
 
 //parse
-abmachine:		
-	machine | machine_h | machine_l;
+abmachine:
+	MACHINE id (includes)? (ATTRIBUTE (defines)? cv_define)? (code_text)? END; 
+code_text:
+	operations | declare_operations | cdeclare_operations ; 		
 
 includes:		
 	(include 
@@ -34,9 +36,6 @@ cst_define:
 			(COMMA	point_id ASSIGNMENT element)*	;
 
 //machine
-machine:		
-	MACHINE id (includes)? (attributes)? (operations)?	END	;
-
 operations:		
 	OPERATIONS	(function_define)+	;
 
@@ -45,9 +44,6 @@ function_define:
 	L_BRACE com_statement R_BRACE	;
 
 //machine_h
-machine_h:		
-	MACHINE id (includes)? (attributes)? (declare_operations)?	END	;
-
 declare_operations:	
 	OPERATIONS	declares	;
 
@@ -58,9 +54,6 @@ function_declare:
 	type	point_id L_BRACKET para_define_list R_BRACKET	;
 
 //machine_l
-machine_l:		
-	MACHINE id (includes)? (attributes)? (cdeclare_operations)?	END;
-
 cdeclare_operations:
 	OPERATIONS	(cfunction_declare)+	;
 

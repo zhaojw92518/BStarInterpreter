@@ -19,6 +19,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitBelong(@NotNull BStarParser.BelongContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#code_text}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCode_text(@NotNull BStarParser.Code_textContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -75,20 +82,6 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitCom_statement(@NotNull BStarParser.Com_statementContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link BStarParser#machine_h}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMachine_h(@NotNull BStarParser.Machine_hContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link BStarParser#machine_l}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMachine_l(@NotNull BStarParser.Machine_lContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link BStarParser#char_str}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -136,13 +129,6 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunction_define(@NotNull BStarParser.Function_defineContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link BStarParser#machine}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMachine(@NotNull BStarParser.MachineContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#one_e}.
@@ -383,18 +369,18 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAddr_id(@NotNull BStarParser.Addr_idContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link BStarParser#attributes_2}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAttributes_2(@NotNull BStarParser.Attributes_2Context ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link BStarParser#cv_define}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCv_define(@NotNull BStarParser.Cv_defineContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#attributes_2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttributes_2(@NotNull BStarParser.Attributes_2Context ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#element_take}.
@@ -460,18 +446,18 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitFunction_declare(@NotNull BStarParser.Function_declareContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link BStarParser#operations}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOperations(@NotNull BStarParser.OperationsContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link BStarParser#attributes}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAttributes(@NotNull BStarParser.AttributesContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#operations}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperations(@NotNull BStarParser.OperationsContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#point_id}.

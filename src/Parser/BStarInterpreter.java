@@ -11,6 +11,9 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import Context.CFileMgr;
+import Global.CGlobalDef;
+
 
 public class BStarInterpreter {
 	public static void write_ln(OutputStream in_stream) throws IOException {
@@ -20,6 +23,7 @@ public class BStarInterpreter {
 
 	public static void main(String[] args) {
 		File file = new File("./PartitionManagement.bs");
+		CFileMgr.set_base_dic(file);
 		InputStream in = null;
 		try {
 			in = new FileInputStream(file);

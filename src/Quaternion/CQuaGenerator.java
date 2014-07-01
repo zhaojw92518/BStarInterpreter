@@ -3,75 +3,6 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 import Parser.BStarBaseVisitor;
 import Parser.BStarParser;
-import Parser.BStarParser.AbmachineContext;
-import Parser.BStarParser.Addr_getContext;
-import Parser.BStarParser.Addr_idContext;
-import Parser.BStarParser.And_pro_eContext;
-import Parser.BStarParser.Append_parasContext;
-import Parser.BStarParser.Assign_statContext;
-import Parser.BStarParser.At_strContext;
-import Parser.BStarParser.AttributesContext;
-import Parser.BStarParser.Attributes_2Context;
-import Parser.BStarParser.BelongContext;
-import Parser.BStarParser.Cdeclare_operationsContext;
-import Parser.BStarParser.Cfunction_declareContext;
-import Parser.BStarParser.Char_strContext;
-import Parser.BStarParser.Com_statementContext;
-import Parser.BStarParser.Condition_termContext;
-import Parser.BStarParser.Cst_defineContext;
-import Parser.BStarParser.Cv_defineContext;
-import Parser.BStarParser.Declare_operationsContext;
-import Parser.BStarParser.DeclaresContext;
-import Parser.BStarParser.DefineContext;
-import Parser.BStarParser.DefinesContext;
-import Parser.BStarParser.ElementContext;
-import Parser.BStarParser.Element_takeContext;
-import Parser.BStarParser.Enum_typeContext;
-import Parser.BStarParser.False_strContext;
-import Parser.BStarParser.FunctionContext;
-import Parser.BStarParser.Function_callContext;
-import Parser.BStarParser.Function_declareContext;
-import Parser.BStarParser.Function_defineContext;
-import Parser.BStarParser.IdContext;
-import Parser.BStarParser.Id_listContext;
-import Parser.BStarParser.If_statContext;
-import Parser.BStarParser.Imp_pro_eContext;
-import Parser.BStarParser.IncludeContext;
-import Parser.BStarParser.IncludesContext;
-import Parser.BStarParser.IntegerContext;
-import Parser.BStarParser.InvariantContext;
-import Parser.BStarParser.MachineContext;
-import Parser.BStarParser.Machine_hContext;
-import Parser.BStarParser.Machine_lContext;
-import Parser.BStarParser.MseContext;
-import Parser.BStarParser.Mse_0Context;
-import Parser.BStarParser.Mse_1Context;
-import Parser.BStarParser.NilContext;
-import Parser.BStarParser.Normal_typeContext;
-import Parser.BStarParser.One_eContext;
-import Parser.BStarParser.OperationsContext;
-import Parser.BStarParser.Or_pro_eContext;
-import Parser.BStarParser.Para_define_listContext;
-import Parser.BStarParser.Para_value_listContext;
-import Parser.BStarParser.PointContext;
-import Parser.BStarParser.Point_idContext;
-import Parser.BStarParser.Pro_eContext;
-import Parser.BStarParser.Pro_term_eContext;
-import Parser.BStarParser.Quan_eContext;
-import Parser.BStarParser.RealContext;
-import Parser.BStarParser.Return_statContext;
-import Parser.BStarParser.RobustContext;
-import Parser.BStarParser.Set_typeContext;
-import Parser.BStarParser.StatementContext;
-import Parser.BStarParser.Statement_atContext;
-import Parser.BStarParser.StringContext;
-import Parser.BStarParser.Struct_typeContext;
-import Parser.BStarParser.TermContext;
-import Parser.BStarParser.True_strContext;
-import Parser.BStarParser.TypeContext;
-import Parser.BStarParser.Unary_eContext;
-import Parser.BStarParser.Var_defineContext;
-import Parser.BStarParser.While_statContext;
 
 public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	/**
@@ -81,6 +12,14 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public CQuaData visitBelong(@NotNull BStarParser.BelongContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public CQuaData visitCode_text(@NotNull BStarParser.Code_textContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -152,22 +91,6 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitMachine_h(@NotNull BStarParser.Machine_hContext ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
-	@Override public CQuaData visitMachine_l(@NotNull BStarParser.Machine_lContext ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public CQuaData visitChar_str(@NotNull BStarParser.Char_strContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -217,14 +140,6 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public CQuaData visitFunction_define(@NotNull BStarParser.Function_defineContext ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
-	@Override public CQuaData visitMachine(@NotNull BStarParser.MachineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -504,7 +419,7 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitAttributes_2(@NotNull BStarParser.Attributes_2Context ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCv_define(@NotNull BStarParser.Cv_defineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -512,7 +427,7 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitCv_define(@NotNull BStarParser.Cv_defineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAttributes_2(@NotNull BStarParser.Attributes_2Context ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -592,7 +507,7 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitOperations(@NotNull BStarParser.OperationsContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAttributes(@NotNull BStarParser.AttributesContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -600,7 +515,7 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitAttributes(@NotNull BStarParser.AttributesContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitOperations(@NotNull BStarParser.OperationsContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
