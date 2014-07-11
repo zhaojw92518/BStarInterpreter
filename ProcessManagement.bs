@@ -1,0 +1,93 @@
+MACHINE ProcessManagement
+
+INCLUDE "ModularManagement.bs";
+INCLUDE "PartitionManagement.bs";
+INCLUDE "System.bs";
+
+ATTRIBUTES
+	PROCESS_TYPE Current_Process;
+	PROCESS_TYPE Previous_Process;
+	PROCESS_TYPE Error_Handler_Preempted_Process;
+	SYSTEM_TIME_TYPE MAX_PROCESS_PERIOD;
+	int Current_partition_processes_num;
+
+OPERATIONS
+
+	
+/* 	       GET_PROCESS_ID                */
+/* 	       2014-4-14 zhaoxq V1.0        */
+	
+	void GET_PROCESS_ID (
+		/*in */ PROCESS_NAME_TYPE PROCESS_NAME,
+		/*out*/ PROCESS_ID_TYPE *PROCESS_ID,
+		/*out*/ RETURN_CODE_TYPE *RETURN_CODE )
+	{
+ 		if((~(Pro.<NAME:PROCESS_NAME> : Current_partition_process_set)))
+		{	
+			*RETURN_CODE = INVALID_CONFIG;
+			return;
+		}
+
+		*PROCESS_ID = Pro.ID;
+		*RETURN_CODE = NO_ERROR;
+		return;
+	}
+
+
+	void STOP (
+		/*in */ PROCESS_ID_TYPE PROCESS_ID,
+		/*out*/ RETURN_CODE_TYPE *RETURN_CODE )
+	{
+  		
+		if((~(Pro.<ID:PROCESS_ID> : Current_partition_process_set))
+  			|| PROCESS_ID == Current_Process.ID)
+    	{	
+    		*RETURN_CODE = INVALID_PARAM;
+    		return;
+		}
+  		if(Pro.STATUS.PROCESS_STATE == DORMANT)
+    	{	
+    		*RETURN_CODE = NO_ACTION;
+    		return;
+		}
+
+  		if(Pro.STATUS.PROCESS_STATE == READY){
+  			Ready_Processes_set = Ready_Processes_set -- {Pro};
+  		}
+  		else if(Pro.STATUS.PROCESS_STATE == RUNNING){
+  			
+  			Running_Processes_set = Running_Processes_set -- {Pro};
+  		}
+  		else if(Pro.STATUS.PROCESS_STATE == WAITING){
+  			
+  			Waiting_Processes_set = Waiting_Processes_set -- {Pro};
+  		}
+  			
+  		Pro.STATUS.PROCESS_STATE = DORMANT;
+  	
+  		Dormant_Processes_set = Dormant_Processes_set \-/ {Pro};
+  		
+  		if(Current_Process.ID == ERROR_HANDLER_PROCESS_ID
+			&& PROCESS_ID == Error_Handler_Preempted_Process.ID)
+			Current_Partition_status.LOCK_LEVEL = 0;
+		/*
+		if(PROCESS_ID is waiting in a WaitingQueue){
+   			WaitingQueue = WaitingQueue -- {PROCESS_ID};
+   		}
+   		*/ 
+   			
+		if((Timer.<ID:PROCESS_ID> : Current_Partition_Timer))
+    		_STOP_TIME_COUNTER(PROCESS_ID);
+		*RETURN_CODE = NO_ERROR;
+		return;
+	}
+	
+
+/* 	       END OF OPERATIONS                  */
+
+END
+
+
+
+
+

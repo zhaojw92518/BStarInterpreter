@@ -1,0 +1,14 @@
+MACHINE System
+
+OPERATIONS
+
+void _Ask_For_Process_Scheduling()
+{
+}
+
+int _Current_System_Clock()
+{
+}
+
+
+END

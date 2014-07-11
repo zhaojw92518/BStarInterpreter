@@ -86,11 +86,11 @@ normal_type:	SHORT_TYPE                      |
 
 set_type:		SET_TYPE L_ANGLE_BRACKET type R_ANGLE_BRACKET (at_str)?	;
 struct_type:		STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE		;
-enum_type:		ENUM_TYPE L_BRACKET	(
+enum_type:		ENUM_TYPE L_BRACE	(
 									id (ASSIGNMENT unary_e)?
 							 (COMMA id (ASSIGNMENT unary_e)?)*
 									)*
-						  R_BRACKET										;
+						  R_BRACE										;
 
 point_id:		MUL point_id | id | L_BRACKET point_id R_BRACKET		;
 addr_id:		ADDR addr_id | id | L_BRACKET addr_id R_BRACKET			;

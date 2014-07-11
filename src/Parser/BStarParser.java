@@ -1476,15 +1476,15 @@ public class BStarParser extends Parser {
 		public Unary_eContext unary_e(int i) {
 			return getRuleContext(Unary_eContext.class,i);
 		}
-		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
 		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
+		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
 		public IdContext id(int i) {
 			return getRuleContext(IdContext.class,i);
 		}
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public TerminalNode ASSIGNMENT(int i) {
 			return getToken(BStarParser.ASSIGNMENT, i);
 		}
+		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
 		public TerminalNode ENUM_TYPE() { return getToken(BStarParser.ENUM_TYPE, 0); }
 		public List<TerminalNode> ASSIGNMENT() { return getTokens(BStarParser.ASSIGNMENT); }
 		public TerminalNode COMMA(int i) {
@@ -1509,7 +1509,7 @@ public class BStarParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(339); match(ENUM_TYPE);
-			setState(340); match(L_BRACKET);
+			setState(340); match(L_BRACE);
 			setState(359);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1555,7 +1555,7 @@ public class BStarParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(362); match(R_BRACKET);
+			setState(362); match(R_BRACE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -4652,14 +4652,14 @@ public class BStarParser extends Parser {
 		"\u014d\7+\2\2\u014d\u014f\3\2\2\2\u014e\u014a\3\2\2\2\u014f\u0152\3\2"+
 		"\2\2\u0150\u014e\3\2\2\2\u0150\u0151\3\2\2\2\u0151\u0153\3\2\2\2\u0152"+
 		"\u0150\3\2\2\2\u0153\u0154\7/\2\2\u0154\'\3\2\2\2\u0155\u0156\7\30\2\2"+
-		"\u0156\u0169\7,\2\2\u0157\u015a\5X-\2\u0158\u0159\7F\2\2\u0159\u015b\5"+
+		"\u0156\u0169\7.\2\2\u0157\u015a\5X-\2\u0158\u0159\7F\2\2\u0159\u015b\5"+
 		"n8\2\u015a\u0158\3\2\2\2\u015a\u015b\3\2\2\2\u015b\u0164\3\2\2\2\u015c"+
 		"\u015d\7(\2\2\u015d\u0160\5X-\2\u015e\u015f\7F\2\2\u015f\u0161\5n8\2\u0160"+
 		"\u015e\3\2\2\2\u0160\u0161\3\2\2\2\u0161\u0163\3\2\2\2\u0162\u015c\3\2"+
 		"\2\2\u0163\u0166\3\2\2\2\u0164\u0162\3\2\2\2\u0164\u0165\3\2\2\2\u0165"+
 		"\u0168\3\2\2\2\u0166\u0164\3\2\2\2\u0167\u0157\3\2\2\2\u0168\u016b\3\2"+
 		"\2\2\u0169\u0167\3\2\2\2\u0169\u016a\3\2\2\2\u016a\u016c\3\2\2\2\u016b"+
-		"\u0169\3\2\2\2\u016c\u016d\7-\2\2\u016d)\3\2\2\2\u016e\u016f\7\64\2\2"+
+		"\u0169\3\2\2\2\u016c\u016d\7/\2\2\u016d)\3\2\2\2\u016e\u016f\7\64\2\2"+
 		"\u016f\u0176\5*\26\2\u0170\u0176\5X-\2\u0171\u0172\7,\2\2\u0172\u0173"+
 		"\5*\26\2\u0173\u0174\7-\2\2\u0174\u0176\3\2\2\2\u0175\u016e\3\2\2\2\u0175"+
 		"\u0170\3\2\2\2\u0175\u0171\3\2\2\2\u0176+\3\2\2\2\u0177\u0178\7H\2\2\u0178"+

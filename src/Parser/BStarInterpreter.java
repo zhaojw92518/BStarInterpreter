@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import Context.CFileMgr;
 import Global.CGlobalDef;
+import PreProcessor.CPreProcessor;
 
 
 public class BStarInterpreter {
@@ -20,8 +21,8 @@ public class BStarInterpreter {
 		in_stream.write('\n');
 		//in_stream.write('\r');
 	}
-
-	public static void main(String[] args) {
+	
+	public static void test_01(){
 		File file = new File("./PartitionManagement.bs");
 		CFileMgr.set_base_dic(file);
 		InputStream in = null;
@@ -88,5 +89,21 @@ public class BStarInterpreter {
 			return;
 		}
 	}
-
+	
+	public static void test_02(){
+		CPreProcessor preprocessor = new CPreProcessor();
+		try {
+			File file = new File("./ProcessManagement.bs");
+			CFileMgr.set_base_dic(file);
+			preprocessor.test_run("./ProcessManagement.bs");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		test_02();
+	}
 }
