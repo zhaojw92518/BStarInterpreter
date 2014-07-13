@@ -3,30 +3,55 @@ package PreProcessor;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
-
-
+import Global.CGlobalDef;
 import Parser.BStarBaseVisitor;
 import Parser.BStarParser;
 
 public class CPreProcrVisitor extends BStarBaseVisitor<String>{
 	public LinkedList<String> includes_list = new LinkedList<>();
-	public LinkedHashMap<String, String> defines_map = new LinkedHashMap<>();
+	private LinkedHashMap<String, String> defines_map = new LinkedHashMap<>();
+	
+	private int 	cv_define_start 	= -1, 
+					cv_define_end 		= -1, 
+					code_text_start 	= -1, 
+					code_text_end 		= -1;
+	
 	
 	private String def_str_replace(String in_str){
 		String return_result = in_str;
 		List<String> key_list = new LinkedList<>(defines_map.keySet());
-		for(int i = key_list.size() - 1; i >=0; i++){
-			return_result = return_result.replaceAll(
+		for(int i = key_list.size() - 1; i >=0; --i){
+			String temp_regex = 
 					"(?<=(\\A|\\W+))" 	+ 
-					return_result		+
-					"(?=(\\z|\\W+))", 
+					key_list.get(i)		+
+					"(?=(\\z|\\W+))";
+			return_result = return_result.replaceAll(
+					temp_regex,
 					defines_map.get(key_list.get(i))
 					);
 		}
 		return return_result;
+	}
+	
+	public String get_cv_define_str(String entire_code_str){
+		return def_str_replace(entire_code_str.substring(cv_define_start, cv_define_end));
+	}
+	
+	public String get_code_text_str(String entire_code_str){
+		return def_str_replace(entire_code_str.substring(code_text_start, code_text_end));
+	}
+	
+	//For debug
+	public void print_defines_map(){
+		for(Map.Entry<String, String> cur_entry: defines_map.entrySet()){
+			CGlobalDef.cout_end(cur_entry.getKey() + " " + cur_entry.getValue());
+		}
 	}
 	
 	@Override public String visitAbmachine(@NotNull BStarParser.AbmachineContext ctx) {
@@ -35,6 +60,14 @@ public class CPreProcrVisitor extends BStarBaseVisitor<String>{
 		}
 		if(ctx.defines() != null){
 			visitDefines(ctx.defines());
+		}
+		if(ctx.cv_define() != null){
+			cv_define_start = ctx.cv_define().start.getStartIndex();
+			cv_define_end = ctx.cv_define().stop.getStopIndex() + 1;
+		}
+		if(ctx.code_text() != null){
+			code_text_start = ctx.code_text().start.getStartIndex();
+			code_text_end = ctx.code_text().stop.getStopIndex() + 1;
 		}
 		return null; 
 	}

@@ -93,9 +93,9 @@ public class BStarInterpreter {
 	public static void test_02(){
 		CPreProcessor preprocessor = new CPreProcessor();
 		try {
-			File file = new File("./ProcessManagement.bs");
+			File file = new File("./Test01.bs");
 			CFileMgr.set_base_dic(file);
-			preprocessor.test_run("./ProcessManagement.bs");
+			preprocessor.test_run("./Test01.bs");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

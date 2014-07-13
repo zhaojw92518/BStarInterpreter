@@ -1,0 +1,16 @@
+MACHINE Test
+INCLUDE "inc/Test02.bs";
+ATTRIBUTES
+	#define PI 3.1415926
+	#define ONE_CIR 2 * PI
+	#define HALF_CIR PI
+	#define DEG_PI 180
+
+	int global_int;
+	const int pi = HALF_CIR;
+OPERATIONS
+	double deg_to_reg(double in_value)
+	{
+		return in_value / DEG_PI * HALF_CIR;
+	}
+END
