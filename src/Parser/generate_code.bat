@@ -1,1 +1,0 @@
-antlr4.bat -no-listener -visitor .\BStar.g4
