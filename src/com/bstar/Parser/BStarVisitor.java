@@ -12,6 +12,13 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#single_cv_define}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSingle_cv_define(@NotNull BStarParser.Single_cv_defineContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#belong}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -108,6 +115,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPro_e(@NotNull BStarParser.Pro_eContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#single_var_define}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSingle_var_define(@NotNull BStarParser.Single_var_defineContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#condition_term}.
@@ -327,18 +341,18 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitDefine(@NotNull BStarParser.DefineContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link BStarParser#robust}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRobust(@NotNull BStarParser.RobustContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link BStarParser#declares}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDeclares(@NotNull BStarParser.DeclaresContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#robust}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRobust(@NotNull BStarParser.RobustContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#false_str}.

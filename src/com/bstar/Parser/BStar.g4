@@ -20,16 +20,22 @@ attributes:
 
 cv_define:		
 	(
-		var_define	SEMICOLON	|
-		cst_define	SEMICOLON
+		single_cv_define
 	)+	;
 
+single_cv_define:
+	var_define	SEMICOLON	|
+	cst_define	SEMICOLON	;
+
+single_var_define:
+	point_id (ASSIGNMENT element)?		;
+
 var_define:		
-	type	point_id (ASSIGNMENT element)? 
-	 (COMMA point_id (ASSIGNMENT element)?)*		|
-	TYPEDEF	enum_type	id							|
-	TYPEDEF	type		point_id					|
-	TYPEDEF	struct_type	point_id					;
+	type	single_var_define 
+	 (COMMA single_var_define )*		|
+	TYPEDEF	enum_type	id				|
+	TYPEDEF	type		point_id		|
+	TYPEDEF	struct_type	point_id		;
 
 cst_define:		
 	CONST	type	point_id ASSIGNMENT element
@@ -85,7 +91,7 @@ normal_type:	SHORT_TYPE                      |
                 VOID							;
 
 set_type:		SET_TYPE L_ANGLE_BRACKET type R_ANGLE_BRACKET (at_str)?	;
-struct_type:		STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE		;
+struct_type:	STRUCT L_BRACE (type point_id SEMICOLON)* R_BRACE		;
 enum_type:		ENUM_TYPE L_BRACE	(
 									id (ASSIGNMENT unary_e)?
 							 (COMMA id (ASSIGNMENT unary_e)?)*

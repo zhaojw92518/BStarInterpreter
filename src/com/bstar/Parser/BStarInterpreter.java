@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Map;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -13,7 +14,10 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import com.bstar.Context.CFileMgr;
 import com.bstar.Global.CGlobalDef;
+import com.bstar.PreProcessor.CPreProcResult;
 import com.bstar.PreProcessor.CPreProcessor;
+import com.bstar.Quaternion.CQuaFactory;
+import com.bstar.Quaternion.CQuaGenerator;
 
 
 public class BStarInterpreter {
@@ -91,11 +95,30 @@ public class BStarInterpreter {
 	}
 	
 	public static void test_02(){
-		CPreProcessor preprocessor = new CPreProcessor();
 		try {
+			CQuaFactory.init_factory();
+			CPreProcessor preprocessor = new CPreProcessor();
 			File file = new File("./Test01.bs");
 			CFileMgr.set_base_dic(file);
 			preprocessor.test_run("./Test01.bs");
+			CQuaGenerator qua_generator = new CQuaGenerator();
+			for(Map.Entry<String, CPreProcResult> cur_entry: preprocessor.get_results().entrySet()){
+				ANTLRInputStream input = new ANTLRInputStream(cur_entry.getValue().cv_define_str);
+				BStarLexer lexer = new BStarLexer(input);
+				CommonTokenStream tokens = new CommonTokenStream(lexer);
+			    BStarParser parser = new BStarParser(tokens);
+			    qua_generator.visit(parser.cv_define());
+			    qua_generator.print_quas();
+			    qua_generator.init();
+			    
+			    input = new ANTLRInputStream(cur_entry.getValue().code_text_str);
+				lexer = new BStarLexer(input);
+				tokens = new CommonTokenStream(lexer);
+			    parser = new BStarParser(tokens);
+			    qua_generator.visit(parser.code_text());
+			    qua_generator.print_quas();
+			    qua_generator.init();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -7,5 +7,7 @@ public enum QuaDataType {
 	REAL,
 	CHAR,
 	TUPLE,
-	SET;
+	SET,
+	TYPE,
+	ID;
 }

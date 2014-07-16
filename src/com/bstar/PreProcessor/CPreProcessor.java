@@ -17,6 +17,7 @@ import com.bstar.Parser.BStarLexer;
 import com.bstar.Parser.BStarParser;
 
 public class CPreProcessor {
+	private String root_file_name = null;
 	private TreeMap<String, CPreProcResult> include_map = new TreeMap<>();
 	
 	private String get_file_str(File in_file) throws IOException{
@@ -25,8 +26,8 @@ public class CPreProcessor {
 			StringBuffer fileData = new StringBuffer();
 	        BufferedReader reader = new BufferedReader(new FileReader(in_file));
 	        char[] buf = new char[1024];
-	        int numRead=0;
-	        while((numRead=reader.read(buf)) != -1){
+	        int numRead = 0;
+	        while((numRead = reader.read(buf)) != -1){
 	            String readData = String.valueOf(buf, 0, numRead);
 	            fileData.append(readData);
 	        }
@@ -59,7 +60,7 @@ public class CPreProcessor {
 			CPreProcrVisitor visitor = new CPreProcrVisitor();
 			visitor.visit(parse_tree);
 			//Debug
-			//visitor.print_defines_map();
+			visitor.print_defines_map();
 			//Debug end
 			include_map.put(in_file.getCanonicalPath(), 
 					new CPreProcResult(
@@ -73,7 +74,9 @@ public class CPreProcessor {
 	}
 	
 	public void test_run(String in_str) throws IOException{
-		include_file(new File(in_str));
+		File root_file = new File(in_str);
+		root_file_name = root_file.getCanonicalPath();
+		include_file(root_file);
 		for(Map.Entry<String, CPreProcResult> cur_entry: include_map.entrySet()){
 			CGlobalDef.cout_dividing_line();
 			CGlobalDef.cout_end(cur_entry.getKey());
@@ -81,5 +84,9 @@ public class CPreProcessor {
 			CGlobalDef.cout_end(cur_entry.getValue().code_text_str);
 			CGlobalDef.cout_dividing_line();
 		}
+	}
+	
+	public TreeMap<String, CPreProcResult> get_results(){
+		return include_map;
 	}
 }

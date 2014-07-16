@@ -1,11 +1,17 @@
 package com.bstar.Quaternion;
 
-public class CQuaternion {
+
+public abstract class CQuaternion {
+	public static final int NORMAL = 0;
 	public QuaType type = null;
 	public CQuaData data_0 = null, data_1 = null, data_2 = null;
 	
-	public void run(){
+	public CQuaternion(){
 		
+	}
+	
+	public int run(){
+		return NORMAL;
 	}
 	
 	public QuaType get_type(){
@@ -41,10 +47,18 @@ public class CQuaternion {
 	}
 	
 	public String to_table_str(){
-		String return_result = get_single_table_str(type.toString());
-		get_data_str(data_0);
-		get_data_str(data_1);
-		get_data_str(data_2);
+		String return_result = "|" + get_single_table_str(type.toString());
+		return_result += "|";
+		return_result += get_data_str(data_0);
+		return_result += "|";
+		return_result += get_data_str(data_1);
+		return_result += "|";
+		return_result += get_data_str(data_2);
+		return_result += "|";
 		return return_result;
+	}
+	
+	public CQuaternion dup(){
+		return null;
 	}
 }

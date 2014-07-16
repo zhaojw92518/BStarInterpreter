@@ -18,6 +18,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitSingle_cv_define(@NotNull BStarParser.Single_cv_defineContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitBelong(@NotNull BStarParser.BelongContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -123,6 +131,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitPro_e(@NotNull BStarParser.Pro_eContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitSingle_var_define(@NotNull BStarParser.Single_var_defineContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -378,7 +394,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitRobust(@NotNull BStarParser.RobustContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeclares(@NotNull BStarParser.DeclaresContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -386,7 +402,7 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitDeclares(@NotNull BStarParser.DeclaresContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRobust(@NotNull BStarParser.RobustContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
