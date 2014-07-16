@@ -10,6 +10,29 @@ public class CQuaData {
 	public double value_data = 0.0;
 	public LinkedList<CQuaData> list_data = null;
 	
+	public CQuaData(){
+		
+	}
+	
+	public CQuaData(CQuaData in_data){
+		type = in_data.type;
+		if(in_data.str_data_0 != null){
+			str_data_0 = new String(in_data.str_data_0);
+		}
+		if(in_data.str_data_1 != null){
+			str_data_1 = new String(in_data.str_data_1);
+		}
+		if(in_data.templet_type != null){
+			templet_type = new CQuaData(in_data.templet_type);
+		}
+		value_data = in_data.value_data;
+		if(in_data.list_data != null){
+			for(CQuaData cur_data: in_data.list_data){
+				add_list_data(cur_data);
+			}
+		}
+	}
+	
 	public void add_list_data(CQuaData in_data){
 		if(list_data == null){
 			list_data = new LinkedList<>();

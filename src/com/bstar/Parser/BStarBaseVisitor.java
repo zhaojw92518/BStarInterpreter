@@ -18,6 +18,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitCondition_term_latter(@NotNull BStarParser.Condition_term_latterContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitSingle_cv_define(@NotNull BStarParser.Single_cv_defineContext ctx) { return visitChildren(ctx); }
 
 	/**

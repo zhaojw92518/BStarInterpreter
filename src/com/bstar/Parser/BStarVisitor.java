@@ -12,6 +12,13 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#condition_term_latter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondition_term_latter(@NotNull BStarParser.Condition_term_latterContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#single_cv_define}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

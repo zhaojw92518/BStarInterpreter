@@ -15,4 +15,8 @@ public class CCstDef extends CQuaternion {
 	public CCstDef(){
 		type = QuaType.CST_DEFINE;
 	}
+	
+	public CQuaternion dup(){
+		return new CCstDef();
+	}
 }

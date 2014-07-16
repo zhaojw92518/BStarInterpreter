@@ -202,16 +202,18 @@ mse:		mse_1 (
 				SUB		mse_1	|
 				DIFFER	mse_1
 				  )*			;
-condition_term:		mse	(
-						L_ANGLE_BRACKET	mse	|
-						ELES			mse	|
-						R_ANGLE_BRACKET	mse	|
-						EGRE			mse	|
-						NOTBELONG		mse	|
-						BELONG			mse	|
-						EQU				mse	|
-						UEQU			mse
-						)?					;
+condition_term:		
+	mse	( condition_term_latter	)?	;
+
+condition_term_latter:
+	L_ANGLE_BRACKET	mse	|
+	ELES			mse	|
+	R_ANGLE_BRACKET	mse	|
+	EGRE			mse	|
+	NOTBELONG		mse	|
+	BELONG			mse	|
+	EQU				mse	|
+	UEQU			mse	;
 
 id_list:	id (COMMA id)*						|
 			L_BRACKET id (COMMA id)* R_BRACKET	;	

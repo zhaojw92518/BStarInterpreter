@@ -31,7 +31,7 @@ public abstract class CQuaternion {
 		}
 		else{
 			return_result = in_str;
-			return_result += blank_str.substring(0, table_width - in_str.length() - 1);
+			return_result += blank_str.substring(0, table_width - in_str.length());
 		}
 		return return_result;
 	}
