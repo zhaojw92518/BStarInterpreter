@@ -22,6 +22,13 @@ public enum QuaType {
 	RETURN,
 	FUNC_CALL,
 	
+	MATH_ADD,
+	MATH_SUB,
 	MATH_MUL,
-	MATH_DIV;
+	MATH_DIV,
+	MATH_MOD,
+	
+	SET_DIFFER,
+	SET_INTER,
+	SET_UNION;
 }

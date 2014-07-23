@@ -8,20 +8,30 @@ import com.bstar.Parser.BStarBaseVisitor;
 import com.bstar.Parser.BStarParser;
 
 public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
+	private Integer temp_count = new Integer(0);
 	private LinkedList<CQuaternion> quas = new LinkedList<>();
 	private void add_qua(CQuaternion in_qua){
 		quas.add(in_qua);
+	}
+	
+	private CQuaData get_temp_id(){
+		CQuaData return_result = new CQuaData();
+		return_result.type = QuaDataType.ID;
+		return_result.str_data_0 = "@" + temp_count.toString();
+		return return_result;
 	}
 	
 	public void init(){
 		quas.clear();
 	}
 	
+	//Debug
 	public void print_quas(){
 		for(CQuaternion cur_qua: quas){
 			CGlobalDef.cout_end(cur_qua.to_table_str());
 		}
 	}
+	//Debug end
 	
 	/**
 	 * {@inheritDoc}
@@ -354,21 +364,12 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public CQuaData visitReal(@NotNull BStarParser.RealContext ctx) { return visitChildren(ctx); }
+	
+	@Override public CQuaData visitMse_1(@NotNull BStarParser.Mse_1Context ctx) {
+		CQuaData return_result = visitMse_0(ctx.mse_0());
+		return return_result; 
+	}
 
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
-	@Override public CQuaData visitMse_1(@NotNull BStarParser.Mse_1Context ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public CQuaData visitMse_0(@NotNull BStarParser.Mse_0Context ctx) { return visitChildren(ctx); }
 	
 	@Override public CQuaData visitVar_define(@NotNull BStarParser.Var_defineContext ctx) { 
@@ -416,15 +417,26 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 */
 	@Override public CQuaData visitImp_pro_e(@NotNull BStarParser.Imp_pro_eContext ctx) { return visitChildren(ctx); }
 
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public CQuaData visitMse(@NotNull BStarParser.MseContext ctx) { 
-		CQuaData return_result = visitMse_1(ctx.mse_1(0));
-		
+		CQuaData return_result = visitMse_1(ctx.mse_1());
+		if(ctx.mse_latter() != null && !ctx.mse_latter().isEmpty()){
+			CQuaData compute_result = get_temp_id();
+			add_qua(CQuaFactory.create_qua(
+					ctx.mse_latter(0).start.getType(),
+					return_result,
+					visitMse_1(ctx.mse_latter(0).mse_1()), 
+					compute_result)
+					);
+			for(int i = 1; i < ctx.mse_latter().size(); ++i){
+				add_qua(CQuaFactory.create_qua(
+						ctx.mse_latter(i).start.getType(),
+						compute_result,
+						visitMse_1(ctx.mse_latter(i).mse_1()), 
+						compute_result)
+						);
+			}
+			return_result = compute_result;
+		}
 		return return_result; 
 	}
 

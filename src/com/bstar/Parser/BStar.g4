@@ -190,18 +190,23 @@ unary_e:	(ADD | SUB) term	|
 			one_e				;
 
 mse_0:		unary_e				;
-mse_1:		mse_0 (
-				MUL		mse_0	|
-				DIV		mse_0	|
-				MOD		mse_0	|
-				INTER	mse_0	|
-				UNION	mse_0	
-				  )*			;
-mse:		mse_1 (
-				ADD		mse_1	|
-				SUB		mse_1	|
-				DIFFER	mse_1
-				  )*			;
+
+mse_1_latter:
+	MUL		mse_0	|
+	DIV		mse_0	|
+	MOD		mse_0	|
+	INTER	mse_0	|
+	UNION	mse_0	;	
+mse_1:		
+	mse_0 ( mse_1_latter )*	;
+
+mse_latter:
+	ADD		mse_1	|
+	SUB		mse_1	|
+	DIFFER	mse_1	;
+mse:		
+	mse_1 ( mse_latter )*	;
+
 condition_term:		
 	mse	( condition_term_latter	)?	;
 

@@ -54,6 +54,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAnd_pro_e(@NotNull BStarParser.And_pro_eContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#mse_1_latter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMse_1_latter(@NotNull BStarParser.Mse_1_latterContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -122,6 +129,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPro_e(@NotNull BStarParser.Pro_eContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#mse_latter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMse_latter(@NotNull BStarParser.Mse_latterContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#single_var_define}.

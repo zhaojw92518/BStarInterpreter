@@ -2,6 +2,7 @@ package com.bstar.Quaternion;
 
 import java.util.TreeMap;
 
+import com.bstar.Parser.BStarParser;
 import com.bstar.Quaternion.Quas.CFuncAttr;
 import com.bstar.Quaternion.Quas.CFuncAttrEnd;
 import com.bstar.Quaternion.Quas.CFuncCall;
@@ -15,10 +16,19 @@ import com.bstar.Quaternion.Quas.CVarDef;
 import com.bstar.Quaternion.Quas.CMathDiv;
 import com.bstar.Quaternion.Quas.CMathMul;
 import com.bstar.Quaternion.Quas.CReturn;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class CQuaFactory {
-	public static TreeMap<QuaType, CQuaternion> qua_map = new TreeMap<>();
+	private static TreeMap<QuaType, CQuaternion> qua_map = new TreeMap<>();
+	private static TreeMap<Integer, QuaType> token_to_qua = new TreeMap<>();
+	
 	public static void init_factory(){
+		token_to_qua.put(BStarParser.ADD, QuaType.MATH_ADD);
+		token_to_qua.put(BStarParser.SUB, QuaType.MATH_SUB);
+		token_to_qua.put(BStarParser.MUL, QuaType.MATH_MUL);
+		token_to_qua.put(BStarParser.DIV, QuaType.MATH_DIV);
+		token_to_qua.put(BStarParser.MOD, QuaType.MATH_MOD);
+		
 		qua_map.put(QuaType.GLO_ATTR, 			new CGloAttr());
 		qua_map.put(QuaType.GLO_ATTR_END, 		new CGloAttrEnd());
 		qua_map.put(QuaType.FUNC_ATTR, 			new CFuncAttr());
@@ -32,6 +42,10 @@ public class CQuaFactory {
 		qua_map.put(QuaType.FUNC_CALL, 			new CFuncCall());
 		qua_map.put(QuaType.MATH_MUL, 			new CMathMul());
 		qua_map.put(QuaType.MATH_DIV, 			new CMathDiv());
+	}
+	
+	public static CQuaternion create_qua(int in_type, CQuaData in_data_0, CQuaData in_data_1, CQuaData in_data_2){
+		return create_qua(token_to_qua.get(new Integer(in_type)), in_data_0, in_data_1, in_data_2);
 	}
 	
 	public static CQuaternion create_qua(QuaType in_type){

@@ -66,6 +66,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitMse_1_latter(@NotNull BStarParser.Mse_1_latterContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitFunction(@NotNull BStarParser.FunctionContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -139,6 +147,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitPro_e(@NotNull BStarParser.Pro_eContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitMse_latter(@NotNull BStarParser.Mse_latterContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
