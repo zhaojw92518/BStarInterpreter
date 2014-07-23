@@ -27,6 +27,9 @@ public enum QuaType {
 	MATH_MUL,
 	MATH_DIV,
 	MATH_MOD,
+	MATH_REV,
+	
+	BOOL_NOT,
 	
 	SET_DIFFER,
 	SET_INTER,

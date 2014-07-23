@@ -206,12 +206,6 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 */
 	@Override public CQuaData visitFunction_define(@NotNull BStarParser.Function_defineContext ctx) { return visitChildren(ctx); }
 
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public CQuaData visitOne_e(@NotNull BStarParser.One_eContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -367,10 +361,29 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	
 	@Override public CQuaData visitMse_1(@NotNull BStarParser.Mse_1Context ctx) {
 		CQuaData return_result = visitMse_0(ctx.mse_0());
+		if(ctx.mse_1_latter() != null && !ctx.mse_1_latter().isEmpty()){
+			CQuaData compute_result = get_temp_id();
+			add_qua(CQuaFactory.create_qua(
+					ctx.mse_1_latter(0).start.getType(), 
+					return_result, 
+					visitMse_0(ctx.mse_1_latter(0).mse_0()), 
+					compute_result));
+			for(int i = 1; i < ctx.mse_1_latter().size(); i++){
+				add_qua(CQuaFactory.create_qua(
+						ctx.mse_1_latter(i).start.getType(),
+						compute_result,
+						visitMse_0(ctx.mse_1_latter(i).mse_0()),
+						compute_result
+						));
+			}
+			return_result = compute_result;
+		}
 		return return_result; 
 	}
 
-	@Override public CQuaData visitMse_0(@NotNull BStarParser.Mse_0Context ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitMse_0(@NotNull BStarParser.Mse_0Context ctx) { 
+		return visitUnary_e(ctx.unary_e()); 
+	}
 	
 	@Override public CQuaData visitVar_define(@NotNull BStarParser.Var_defineContext ctx) { 
 		if(ctx.start.getType() != BStarParser.TYPEDEF){
@@ -461,13 +474,26 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 		return return_result; 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
-	@Override public CQuaData visitUnary_e(@NotNull BStarParser.Unary_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitUnary_e(@NotNull BStarParser.Unary_eContext ctx) { 
+		CQuaData return_result = null;
+		if(ctx.one_e() != null){
+			return_result = visitOne_e(ctx.one_e());
+		}
+		else if(ctx.term() != null){
+			int cur_type = ctx.start.getType();
+			if(cur_type == BStarParser.ADD){
+				return_result = visitTerm(ctx.term());
+			}
+			else if(cur_type == BStarParser.SUB){
+				return_result = get_temp_id();
+				add_qua(CQuaFactory.create_qua(
+						QuaType.MATH_REV, 
+						visitTerm(ctx.term()), 
+						return_result));
+			}
+		}
+		return return_result;
+	}
 
 	/**
 	 * {@inheritDoc}

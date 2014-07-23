@@ -1,7 +1,8 @@
 package com.bstar.Quaternion;
 
+import com.bstar.Quaternion.Quas.IDup;
 
-public abstract class CQuaternion {
+public abstract class CQuaternion implements IDup{
 	public static final int NORMAL = 0;
 	public QuaType type = null;
 	public CQuaData data_0 = null, data_1 = null, data_2 = null;
@@ -58,7 +59,7 @@ public abstract class CQuaternion {
 		return return_result;
 	}
 	
-	public CQuaternion dup(){
+	/*public CQuaternion dup(){
 		return null;
-	}
+	}*/
 }
