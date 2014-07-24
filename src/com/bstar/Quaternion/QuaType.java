@@ -22,6 +22,9 @@ public enum QuaType {
 	RETURN,
 	FUNC_CALL,
 	
+	ADDRESS_OF,
+	CONTENT_OF,
+	
 	MATH_ADD,
 	MATH_SUB,
 	MATH_MUL,

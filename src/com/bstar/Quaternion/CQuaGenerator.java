@@ -1,9 +1,13 @@
 package com.bstar.Quaternion;
+
+
 import java.util.LinkedList;
+import java.util.List;
 
 import org.antlr.v4.runtime.misc.NotNull;
 
 import com.bstar.Global.CGlobalDef;
+import com.bstar.Global.CMath;
 import com.bstar.Parser.BStarBaseVisitor;
 import com.bstar.Parser.BStarParser;
 
@@ -206,7 +210,20 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 */
 	@Override public CQuaData visitFunction_define(@NotNull BStarParser.Function_defineContext ctx) { return visitChildren(ctx); }
 
-	@Override public CQuaData visitOne_e(@NotNull BStarParser.One_eContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitOne_e(@NotNull BStarParser.One_eContext ctx) { 
+		CQuaData return_result = null;
+		if(ctx.term() != null){
+			return_result = visitTerm(ctx.term());
+		}
+		else{
+			return_result = get_temp_id();
+			add_qua(CQuaFactory.create_qua(
+					ctx.start.getType(), 
+					visitOne_e(ctx.one_e()), 
+					return_result));
+		}
+		return return_result; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -601,14 +618,73 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public CQuaData visitPoint(@NotNull BStarParser.PointContext ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
-	@Override public CQuaData visitTerm(@NotNull BStarParser.TermContext ctx) { return visitChildren(ctx); }
+	
+	@Override public CQuaData visitTerm(@NotNull BStarParser.TermContext ctx) { 
+		CQuaData term_former = new CQuaData();
+		if(ctx.nil() != null){
+			term_former.type = QuaDataType.INTEGER;
+			term_former.value_data = 0.0;
+		}
+		else if(ctx.string() != null){
+			term_former.type = QuaDataType.STRING;
+			String temp_str = ctx.string().getText();
+			term_former.str_data_0 = temp_str.substring(1, temp_str.length() - 1);
+		}
+		else if(ctx.true_str() != null){
+			term_former.type = QuaDataType.INTEGER;
+			term_former.value_data = 1.0;
+		}
+		else if(ctx.false_str() != null){
+			term_former.type = QuaDataType.INTEGER;
+			term_former.value_data = 0.0;
+		}
+		else if(ctx.integer() != null){
+			term_former.type = QuaDataType.INTEGER;
+			term_former.value_data = CMath.str_to_double(ctx.integer().getText());
+		}
+		else if(ctx.real() != null){
+			term_former.type = QuaDataType.REAL;
+			term_former.value_data = CMath.str_to_double(ctx.real().getText());
+		}
+		else if(ctx.char_str() != null){
+			term_former.type = QuaDataType.CHAR;
+			term_former.value_data = ctx.char_str().getText().charAt(1);
+		}
+		else if(ctx.term_set() != null){
+			term_former.type = QuaDataType.SET;
+			visitMulti_term(ctx.term_set().element(), term_former);
+		}
+		else if(ctx.term_tuple() != null){
+			term_former.type = QuaDataType.TUPLE;
+			visitMulti_term(ctx.term_tuple().element(), term_former);
+		}
+		else if(ctx.function_call() != null){
+			term_former = visitFunction_call(ctx.function_call());
+		}
+		else if(ctx.id() != null){
+			term_former.type = QuaDataType.ID;
+			term_former.str_data_0 = ctx.id().getText();
+		}
+		else if(ctx.element() != null){
+			term_former = visitElement(ctx.element());
+		}
+		
+		CQuaData return_result = null;
+		
+		if(ctx.term_latter() != null && !ctx.term_latter().isEmpty()){
+			
+		}
+		else{
+			return_result = term_former;
+		}
+		return return_result; 
+	}
+	
+	public void visitMulti_term(List<BStarParser.ElementContext> element_list, CQuaData in_data){
+		for (BStarParser.ElementContext cur_element : element_list) {
+			in_data.add_list_data(visitElement(cur_element));
+		}
+	}
 
 	/**
 	 * {@inheritDoc}

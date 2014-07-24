@@ -3,7 +3,9 @@ package com.bstar.Quaternion;
 import java.util.TreeMap;
 
 import com.bstar.Parser.BStarParser;
+import com.bstar.Quaternion.Quas.CAddressOf;
 import com.bstar.Quaternion.Quas.CBoolNot;
+import com.bstar.Quaternion.Quas.CContentOf;
 import com.bstar.Quaternion.Quas.CFuncAttr;
 import com.bstar.Quaternion.Quas.CFuncAttrEnd;
 import com.bstar.Quaternion.Quas.CFuncCall;
@@ -33,6 +35,10 @@ public class CQuaFactory {
 		token_to_qua.put(BStarParser.DIV, QuaType.MATH_DIV);
 		token_to_qua.put(BStarParser.MOD, QuaType.MATH_MOD);
 		
+		token_to_qua.put(BStarParser.NOT, QuaType.BOOL_NOT);
+		token_to_qua.put(BStarParser.ADDR, QuaType.ADDRESS_OF);
+		token_to_qua.put(BStarParser.MUL, QuaType.CONTENT_OF);
+		
 		qua_map.put(QuaType.GLO_ATTR, 			new CGloAttr());
 		qua_map.put(QuaType.GLO_ATTR_END, 		new CGloAttrEnd());
 		qua_map.put(QuaType.FUNC_ATTR, 			new CFuncAttr());
@@ -51,10 +57,16 @@ public class CQuaFactory {
 		qua_map.put(QuaType.MATH_MOD, 			new CMathMod());
 		qua_map.put(QuaType.MATH_REV, 			new CMathRev());
 		qua_map.put(QuaType.BOOL_NOT, 			new CBoolNot());
+		qua_map.put(QuaType.ADDRESS_OF, 		new CAddressOf());
+		qua_map.put(QuaType.CONTENT_OF, 		new CContentOf());
 	}
 	
 	public static CQuaternion create_qua(int in_type, CQuaData in_data_0, CQuaData in_data_1, CQuaData in_data_2){
 		return create_qua(token_to_qua.get(new Integer(in_type)), in_data_0, in_data_1, in_data_2);
+	}
+	
+	public static CQuaternion create_qua(int in_type, CQuaData in_data_0, CQuaData in_data_1){
+		return create_qua(token_to_qua.get(new Integer(in_type)), in_data_0, in_data_1);
 	}
 	
 	public static CQuaternion create_qua(QuaType in_type){
