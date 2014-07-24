@@ -157,29 +157,41 @@ real: 			REAL 	;
 char_str: 		CHAR 	;
 statement_at:	AT_STR	;
 
-term:
-(			
-	nil 														|
-	string 														| 
-	true_str 													| 
-	false_str 													| 
-	integer 													| 
-	real 														| 
-	char_str 													| 
-	L_BRACE element (COMMA element)* R_BRACE 					| 
-	L_ANGLE_BRACKET element (COMMA element)* R_ANGLE_BRACKET 	| 
-	function_call 												| 
-	id 															| 
-	L_BRACKET element R_BRACKET 								| 
-)
-(
+term_latter:
 	POINT	L_ANGLE_BRACKET 
 			(id | integer) belong element 
 			(COMMA (id | integer) belong element)* 
 			R_ANGLE_BRACKET										|
 	POINT id													|
-	ADDRGET id
-)*                                                              ;
+	ADDRGET id													;
+
+term_element_comma:
+	COMMA element	;
+
+term_set:
+	L_BRACE element (COMMA element)* R_BRACE	;	
+
+term_tuple:
+	L_ANGLE_BRACKET element (COMMA element)* R_ANGLE_BRACKET	;
+
+term:
+(			
+	nil								|
+	string							| 
+	true_str						| 
+	false_str						| 
+	integer							| 
+	real							|	 
+	char_str						| 
+	term_set						| 
+	term_tuple						| 
+	function_call					| 
+	id								| 
+	L_BRACKET element R_BRACKET		| 
+)
+(
+	term_latter
+)*                                  ;
 
 one_e:		NOT		one_e		|
 			MUL		one_e		|

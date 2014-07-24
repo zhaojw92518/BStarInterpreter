@@ -243,6 +243,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitCdeclare_operations(@NotNull BStarParser.Cdeclare_operationsContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#term_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm_set(@NotNull BStarParser.Term_setContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#while_stat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -262,6 +269,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPara_value_list(@NotNull BStarParser.Para_value_listContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#term_element_comma}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm_element_comma(@NotNull BStarParser.Term_element_commaContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#includes}.
@@ -395,6 +409,20 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatement_at(@NotNull BStarParser.Statement_atContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#term_tuple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm_tuple(@NotNull BStarParser.Term_tupleContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#term_latter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm_latter(@NotNull BStarParser.Term_latterContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#addr_id}.
