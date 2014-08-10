@@ -7,13 +7,19 @@ ATTRIBUTES
 	#define DEG_PI 180
 
 	int global_int;
+	
+	typedef struct {
+		int id;
+		double value; 
+	}data_pair;
+	
 	const int pi = HALF_CIR;
 OPERATIONS
 	double deg_to_reg(double in_value)
 	{
 		double return_result;
 		return_result = in_value / DEG_PI;
-		return_result = returen_result * HALF_CIR;
+		return_result = return_result * HALF_CIR;
 		return return_result;
 	}
 	

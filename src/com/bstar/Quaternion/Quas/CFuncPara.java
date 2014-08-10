@@ -5,6 +5,8 @@ import com.bstar.Quaternion.CQuaternion;
 import com.bstar.Quaternion.QuaType;
 
 public class CFuncPara extends CQuaternion {
+	//data_0: name
+	//data_1: type
 	public CFuncPara(CQuaData in_para) {
 		type = QuaType.FUNC_PARA;
 		data_0 = in_para;

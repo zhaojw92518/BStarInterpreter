@@ -27,7 +27,7 @@ public class BStarInterpreter {
 	}
 	
 	public static void test_01(){
-		File file = new File("./PartitionManagement.bs");
+		File file = new File("./PartitionManagement_2.bs");
 		CFileMgr.set_base_dic(file);
 		InputStream in = null;
 		try {
@@ -115,7 +115,9 @@ public class BStarInterpreter {
 				lexer = new BStarLexer(input);
 				tokens = new CommonTokenStream(lexer);
 			    parser = new BStarParser(tokens);
-			    qua_generator.visit(parser.code_text());
+			    ParseTree code_text_tree = parser.code_text();
+			    //CGlobalDef.cout_end(code_text_tree.toStringTree(parser));
+			    qua_generator.visit(code_text_tree);
 			    qua_generator.print_quas();
 			    qua_generator.init();
 			}
@@ -126,7 +128,7 @@ public class BStarInterpreter {
 	}
 	
 	public static void main(String[] args) {
-		
+		//test_01();
 		test_02();
 	}
 }

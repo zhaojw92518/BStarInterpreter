@@ -36,5 +36,15 @@ public enum QuaType {
 	
 	SET_DIFFER,
 	SET_INTER,
-	SET_UNION;
+	SET_UNION,
+	
+	GET_ADDR,
+	SET_ADDR,
+	
+	ASSIGN,
+	CALL_PARA,
+	GET_RETURN
+	;
+	
+	
 }

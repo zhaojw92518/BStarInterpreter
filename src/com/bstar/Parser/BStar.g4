@@ -122,7 +122,7 @@ statement:		SEMICOLON							|
 				return_stat		SEMICOLON			|
 				while_stat							|
 				if_stat								|
-				L_BRACE (statement)* R_BRACE	|
+				L_BRACE (statement)* R_BRACE		|
 				statement_at						;
 
 element_take:	id (POINT id)*	

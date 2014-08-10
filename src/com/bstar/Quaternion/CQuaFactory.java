@@ -4,7 +4,9 @@ import java.util.TreeMap;
 
 import com.bstar.Parser.BStarParser;
 import com.bstar.Quaternion.Quas.CAddressOf;
+import com.bstar.Quaternion.Quas.CAssign;
 import com.bstar.Quaternion.Quas.CBoolNot;
+import com.bstar.Quaternion.Quas.CCallPara;
 import com.bstar.Quaternion.Quas.CContentOf;
 import com.bstar.Quaternion.Quas.CFuncAttr;
 import com.bstar.Quaternion.Quas.CFuncAttrEnd;
@@ -13,12 +15,15 @@ import com.bstar.Quaternion.Quas.CFuncDef;
 import com.bstar.Quaternion.Quas.CFuncDefEnd;
 import com.bstar.Quaternion.Quas.CFuncPara;
 import com.bstar.Quaternion.Quas.CCstDef;
+import com.bstar.Quaternion.Quas.CGetAddr;
+import com.bstar.Quaternion.Quas.CGetReturn;
 import com.bstar.Quaternion.Quas.CGloAttr;
 import com.bstar.Quaternion.Quas.CGloAttrEnd;
 import com.bstar.Quaternion.Quas.CMathAdd;
 import com.bstar.Quaternion.Quas.CMathMod;
 import com.bstar.Quaternion.Quas.CMathRev;
 import com.bstar.Quaternion.Quas.CMathSub;
+import com.bstar.Quaternion.Quas.CSetAddr;
 import com.bstar.Quaternion.Quas.CVarDef;
 import com.bstar.Quaternion.Quas.CMathDiv;
 import com.bstar.Quaternion.Quas.CMathMul;
@@ -37,7 +42,8 @@ public class CQuaFactory {
 		
 		token_to_qua.put(BStarParser.NOT, QuaType.BOOL_NOT);
 		token_to_qua.put(BStarParser.ADDR, QuaType.ADDRESS_OF);
-		token_to_qua.put(BStarParser.MUL, QuaType.CONTENT_OF);
+		//防止乘法运算与指针取值的冲突
+		//token_to_qua.put(BStarParser.MUL, QuaType.CONTENT_OF);
 		
 		qua_map.put(QuaType.GLO_ATTR, 			new CGloAttr());
 		qua_map.put(QuaType.GLO_ATTR_END, 		new CGloAttrEnd());
@@ -59,6 +65,11 @@ public class CQuaFactory {
 		qua_map.put(QuaType.BOOL_NOT, 			new CBoolNot());
 		qua_map.put(QuaType.ADDRESS_OF, 		new CAddressOf());
 		qua_map.put(QuaType.CONTENT_OF, 		new CContentOf());
+		qua_map.put(QuaType.GET_ADDR, 			new CGetAddr());
+		qua_map.put(QuaType.SET_ADDR, 			new CSetAddr());
+		qua_map.put(QuaType.ASSIGN, 			new CAssign());
+		qua_map.put(QuaType.CALL_PARA, 			new CCallPara());
+		qua_map.put(QuaType.GET_RETURN, 		new CGetReturn());
 	}
 	
 	public static CQuaternion create_qua(int in_type, CQuaData in_data_0, CQuaData in_data_1, CQuaData in_data_2){

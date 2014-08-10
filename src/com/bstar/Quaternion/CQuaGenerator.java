@@ -18,10 +18,15 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 		quas.add(in_qua);
 	}
 	
+	private void reset_temp_count(){
+		temp_count = 0;
+	}
+	
 	private CQuaData get_temp_id(){
 		CQuaData return_result = new CQuaData();
 		return_result.type = QuaDataType.ID;
 		return_result.str_data_0 = "@" + temp_count.toString();
+		temp_count++;
 		return return_result;
 	}
 	
@@ -51,7 +56,18 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitCode_text(@NotNull BStarParser.Code_textContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCode_text(@NotNull BStarParser.Code_textContext ctx) { 
+		if(ctx.operations() != null){
+			visitOperations(ctx.operations());
+		}
+		else if(ctx.declare_operations() != null){
+			visitDeclare_operations(ctx.declare_operations());
+		}
+		else if(ctx.cdeclare_operations() != null){
+			visitCdeclare_operations(ctx.cdeclare_operations());
+		}
+		return null; 
+	}
 
 	@Override public CQuaData visitType(@NotNull BStarParser.TypeContext ctx) {
 		CQuaData return_result = new CQuaData();
@@ -93,7 +109,17 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitPara_define_list(@NotNull BStarParser.Para_define_listContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPara_define_list(@NotNull BStarParser.Para_define_listContext ctx) { 
+		if(ctx.point_id() != null){
+			for(int i = 0; i < ctx.point_id().size(); ++i){
+				add_qua(CQuaFactory.create_qua(
+						QuaType.FUNC_PARA, 
+						visitPoint_id(ctx.point_id(i)), 
+						visitType(ctx.type(i))));
+			}
+		}
+		return null; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -117,15 +143,24 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitAbmachine(@NotNull BStarParser.AbmachineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAbmachine(@NotNull BStarParser.AbmachineContext ctx) { 
+		return visitChildren(ctx); 
+	}
 
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
-	@Override public CQuaData visitCom_statement(@NotNull BStarParser.Com_statementContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitCom_statement(@NotNull BStarParser.Com_statementContext ctx) { 
+		if(ctx.attributes_2() != null){
+			visitAttributes_2(ctx.attributes_2());
+		}
+		if(ctx.invariant() != null){
+			visitInvariant(ctx.invariant());
+		}
+		if(ctx.statement() != null){
+			for(BStarParser.StatementContext cur_state: ctx.statement()){
+				visitStatement(cur_state);
+			}
+		}
+		return null; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -190,12 +225,13 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 					 temp_type = new CQuaData(cur_type);
 			temp_type.value_data = cur_id.value_data;
 			cur_id.value_data = 0.0;
+			CQuaData element_result = visitElement(ctx.element(i));
 			add_qua(
 				CQuaFactory.create_qua(
 						QuaType.CST_DEFINE, 
 						cur_id, 
 						temp_type, 
-						visitElement(ctx.element(i))
+						element_result
 						)
 				);
 		}
@@ -208,12 +244,30 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitFunction_define(@NotNull BStarParser.Function_defineContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitFunction_define(@NotNull BStarParser.Function_defineContext ctx) { 
+		reset_temp_count();
+		add_qua(CQuaFactory.create_qua(
+				QuaType.FUNC_DEFINE, 
+				visitPoint_id(ctx.point_id()), 
+				visitType(ctx.type())));
+		visitPara_define_list(ctx.para_define_list());
+		visitCom_statement(ctx.com_statement());
+		add_qua(CQuaFactory.create_qua(QuaType.FUNC_DEFINE_END));
+		return null; 
+	}
 
 	@Override public CQuaData visitOne_e(@NotNull BStarParser.One_eContext ctx) { 
 		CQuaData return_result = null;
 		if(ctx.term() != null){
 			return_result = visitTerm(ctx.term());
+		}
+		else if(ctx.start.getType() == BStarParser.MUL){
+			//防止乘法运算与指针取值的冲突
+			return_result = get_temp_id();
+			add_qua(CQuaFactory.create_qua(
+					QuaType.CONTENT_OF, 
+					visitOne_e(ctx.one_e()), 
+					return_result));
 		}
 		else{
 			return_result = get_temp_id();
@@ -225,12 +279,6 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 		return return_result; 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public CQuaData visitId_list(@NotNull BStarParser.Id_listContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -279,7 +327,11 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitFunction_call(@NotNull BStarParser.Function_callContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitFunction_call(@NotNull BStarParser.Function_callContext ctx) { 
+		visitPara_value_list(ctx.para_value_list());
+		add_qua(CQuaFactory.create_qua(QuaType.FUNC_CALL, visitId(ctx.id())));
+		return null; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -333,7 +385,12 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitPara_value_list(@NotNull BStarParser.Para_value_listContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitPara_value_list(@NotNull BStarParser.Para_value_listContext ctx) { 
+		for(BStarParser.ElementContext cur_element: ctx.element()){
+			add_qua(CQuaFactory.create_qua(QuaType.CALL_PARA, visitElement(cur_element)));
+		}
+		return null; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -366,7 +423,12 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitId(@NotNull BStarParser.IdContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitId(@NotNull BStarParser.IdContext ctx) { 
+		CQuaData return_result = new CQuaData();
+		return_result.type = QuaDataType.ID;
+		return_result.str_data_0 = ctx.getText();
+		return return_result; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -437,7 +499,15 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitReturn_stat(@NotNull BStarParser.Return_statContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitReturn_stat(@NotNull BStarParser.Return_statContext ctx) { 
+		if(ctx.element() != null){
+			add_qua(CQuaFactory.create_qua(QuaType.RETURN, visitElement(ctx.element())));
+		}
+		else{
+			add_qua(CQuaFactory.create_qua(QuaType.RETURN));
+		}
+		return null; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -609,7 +679,18 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitAssign_stat(@NotNull BStarParser.Assign_statContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitAssign_stat(@NotNull BStarParser.Assign_statContext ctx) { 
+		if(ctx.id() != null && !ctx.id().isEmpty()){
+			
+		}
+		else{
+			add_qua(CQuaFactory.create_qua(
+					QuaType.ASSIGN, 
+					visitPoint_id(ctx.point_id()), 
+					visitElement(ctx.element())));
+		}
+		return null; 
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -659,7 +740,9 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 			visitMulti_term(ctx.term_tuple().element(), term_former);
 		}
 		else if(ctx.function_call() != null){
-			term_former = visitFunction_call(ctx.function_call());
+			visitFunction_call(ctx.function_call());
+			term_former = get_temp_id();
+			add_qua(CQuaFactory.create_qua(QuaType.GET_RETURN, term_former));
 		}
 		else if(ctx.id() != null){
 			term_former.type = QuaDataType.ID;
@@ -744,7 +827,12 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public CQuaData visitOperations(@NotNull BStarParser.OperationsContext ctx) { return visitChildren(ctx); }
+	@Override public CQuaData visitOperations(@NotNull BStarParser.OperationsContext ctx) { 
+		for(BStarParser.Function_defineContext cur_func: ctx.function_define()){
+			visitFunction_define(cur_func);
+		}
+		return null; 
+	}
 
 	@Override public CQuaData visitPoint_id(@NotNull BStarParser.Point_idContext ctx) { 
 		CQuaData return_result = null;

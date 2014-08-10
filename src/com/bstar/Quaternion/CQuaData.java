@@ -1,6 +1,9 @@
 package com.bstar.Quaternion;
 import java.util.LinkedList;
 
+import com.bstar.Global.CGlobalDef;
+import com.bstar.Global.CMath;
+
 
 public class CQuaData {
 	public QuaDataType type = QuaDataType.INIT;
@@ -50,6 +53,9 @@ public class CQuaData {
 		}
 		else if(type == QuaDataType.ID){
 			return_result = str_data_0;
+		}
+		else if(type == QuaDataType.REAL || type == QuaDataType.INTEGER){
+			return_result = CMath.double_to_str(value_data);
 		}
 		else{
 			return_result = new String();

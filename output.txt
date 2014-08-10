@@ -1,38 +1,38 @@
 
 (
- abmachine 
+ abmachine MACHINE 
  (
-  machine MACHINE 
+  id PartitionManagement
+ )
+  
+ (
+  includes 
   (
-   id PartitionManagement
+   include INCLUDE
   )
    
   (
-   includes 
-   (
-    include INCLUDE
-   )
-    
-   (
-    string "ModularManagement.bs"
-   )
-    ;
+   string "ModularManagement.bs"
   )
-   
+   ;
+ )
+  ATTRIBUTES 
+ (
+  cv_define 
   (
-   attributes ATTRIBUTES 
+   single_cv_define 
    (
-    cv_define 
+    var_define 
     (
-     var_define 
+     type 
      (
-      type 
-      (
-       id PARTITION_STATUS_TYPE
-      )
-      
+      id PARTITION_STATUS_TYPE
      )
-      
+     
+    )
+     
+    (
+     single_var_define 
      (
       point_id 
       (
@@ -42,37 +42,49 @@
      )
      
     )
-     ; 
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define typedef 
     (
-     var_define typedef 
+     type 
      (
-      type 
-      (
-       normal_type int
-      )
-      
-     )
-      
-     (
-      point_id 
-      (
-       id a
-      )
-      
+      normal_type int
      )
      
     )
-     ; 
+     
     (
-     var_define 
+     point_id 
      (
-      type 
-      (
-       id NUMBER_OF_PROCESSES_TYPE
-      )
-      
+      id a
      )
-      
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id NUMBER_OF_PROCESSES_TYPE
+     )
+     
+    )
+     
+    (
+     single_var_define 
      (
       point_id 
       (
@@ -82,17 +94,137 @@
      )
      
     )
-     ; 
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
     (
-     var_define 
+     type 
      (
-      type 
+      id NUMBER_OF_PROCESSES_TYPE
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
       (
-       id APEX_INTEGER
+       id Current_Ready_Processes_num
       )
       
      )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id NUMBER_OF_PROCESSES_TYPE
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Running_Processes_num
+      )
       
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id NUMBER_OF_PROCESSES_TYPE
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Waiting_Processes_num
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id NUMBER_OF_PROCESSES_TYPE
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Partition_Processes_num
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id APEX_INTEGER
+     )
+     
+    )
+     
+    (
+     single_var_define 
      (
       point_id 
       (
@@ -102,25 +234,173 @@
      )
      
     )
-     ; 
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
     (
-     var_define 
+     type 
      (
-      type 
+      id APEX_INTEGER
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
       (
-       set_type set < 
-       (
-        type 
-        (
-         id PROCESS_TYPE
-        )
-        
-       )
-        >
+       id Current_Parition_BBoards_num
       )
       
      )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id APEX_INTEGER
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Partition_Semaphore_num
+      )
       
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id APEX_INTEGER
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Partition_Events_num
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id APEX_INTEGER
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Partition_SPort_num
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      id APEX_INTEGER
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Partition_QPort_num
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id PROCESS_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
      (
       point_id 
       (
@@ -130,11 +410,375 @@
      )
      
     )
-     ;
+    
    )
-   
+    ;
   )
    
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id PROCESS_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Ready_Processes_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id PROCESS_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Running_Processes_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id PROCESS_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Waiting_Processes_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id PROCESS_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_partition_process_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id BUFFER_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_partition_buffers_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id BLACKBOARD_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_partition_bboards_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id SEMAPHORE_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_partition_semaphore_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id SAMPLING_PORT_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_partition_sampling_port_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id QUEUING_PORT_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_partition_queuing_port_set
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+   
+  (
+   single_cv_define 
+   (
+    var_define 
+    (
+     type 
+     (
+      set_type set < 
+      (
+       type 
+       (
+        id TIMER_TYPE
+       )
+       
+      )
+       >
+     )
+     
+    )
+     
+    (
+     single_var_define 
+     (
+      point_id 
+      (
+       id Current_Partition_Timer
+      )
+      
+     )
+     
+    )
+    
+   )
+    ;
+  )
+  
+ )
+  
+ (
+  code_text 
   (
    operations OPERATIONS 
    (
@@ -168,7 +812,7 @@
        (
         point_id 
         (
-         id status
+         id Current_Partition_status
         )
         
        )
@@ -360,9 +1004,473 @@
                    (
                     id Current_Partition_status
                    )
-                    . 
+                    
                    (
-                    id PERIOD
+                    term_latter . 
+                    (
+                     id PERIOD
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+          
+         (
+          point_id * 
+          (
+           point_id 
+           (
+            id PARTITION_STATUS
+           )
+           
+          )
+          
+         )
+          
+        )
+        
+       )
+        . 
+       (
+        id DURATION
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    
+                   (
+                    term_latter . 
+                    (
+                     id DURATION
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+          
+         (
+          point_id * 
+          (
+           point_id 
+           (
+            id PARTITION_STATUS
+           )
+           
+          )
+          
+         )
+          
+        )
+        
+       )
+        . 
+       (
+        id IDENTIFIER
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    
+                   (
+                    term_latter . 
+                    (
+                     id IDENTIFIER
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+          
+         (
+          point_id * 
+          (
+           point_id 
+           (
+            id PARTITION_STATUS
+           )
+           
+          )
+          
+         )
+          
+        )
+        
+       )
+        . 
+       (
+        id LOCK_LEVEL
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    
+                   (
+                    term_latter . 
+                    (
+                     id LOCK_LEVEL
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+          
+         (
+          point_id * 
+          (
+           point_id 
+           (
+            id PARTITION_STATUS
+           )
+           
+          )
+          
+         )
+          
+        )
+        
+       )
+        . 
+       (
+        id OPERATING_MODE
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    
+                   (
+                    term_latter . 
+                    (
+                     id OPERATING_MODE
+                    )
+                    
+                   )
+                   
+                  )
+                  
+                 )
+                 
+                )
+                
+               )
+               
+              )
+              
+             )
+             
+            )
+            
+           )
+           
+          )
+          
+         )
+         
+        )
+        
+       )
+       
+      )
+       ;
+     )
+      
+     (
+      statement 
+      (
+       assign_stat 
+       (
+        point_id 
+        (
+          
+         (
+          point_id * 
+          (
+           point_id 
+           (
+            id PARTITION_STATUS
+           )
+           
+          )
+          
+         )
+          
+        )
+        
+       )
+        . 
+       (
+        id START_CONDITION
+       )
+        = 
+       (
+        element 
+        (
+         pro_e 
+         (
+          or_pro_e 
+          (
+           and_pro_e 
+           (
+            pro_term_e 
+            (
+             condition_term 
+             (
+              mse 
+              (
+               mse_1 
+               (
+                mse_0 
+                (
+                 unary_e 
+                 (
+                  one_e 
+                  (
+                   term 
+                   (
+                    id Current_Partition_status
+                   )
+                    
+                   (
+                    term_latter . 
+                    (
+                     id START_CONDITION
+                    )
+                    
                    )
                    
                   )
@@ -590,49 +1698,57 @@
       (
        cv_define 
        (
-        var_define 
+        single_cv_define 
         (
-         type 
+         var_define 
          (
-          id NUMBER_OF_PROCESSES_TYPE
-         )
-         
-        )
-         
-        (
-         point_id 
-         (
-          id TEMP_PRO_NUM
-         )
-         
-        )
-         = 
-        (
-         element 
-         (
-          pro_e 
+          type 
           (
-           or_pro_e 
+           id NUMBER_OF_PROCESSES_TYPE
+          )
+          
+         )
+          
+         (
+          single_var_define 
+          (
+           point_id 
            (
-            and_pro_e 
+            id TEMP_PRO_NUM
+           )
+           
+          )
+           = 
+          (
+           element 
+           (
+            pro_e 
             (
-             pro_term_e 
+             or_pro_e 
              (
-              condition_term 
+              and_pro_e 
               (
-               mse 
+               pro_term_e 
                (
-                mse_1 
+                condition_term 
                 (
-                 mse_0 
+                 mse 
                  (
-                  unary_e 
+                  mse_1 
                   (
-                   one_e 
+                   mse_0 
                    (
-                    term 
+                    unary_e 
                     (
-                     integer 0
+                     one_e 
+                     (
+                      term 
+                      (
+                       integer 0
+                      )
+                      
+                     )
+                     
                     )
                     
                    )
@@ -658,9 +1774,9 @@
          )
          
         )
-        
+         ;
        )
-        ;
+       
       )
       
      )
@@ -708,21 +1824,25 @@
               )
               
              )
-              != 
+              
              (
-              mse 
+              condition_term_latter != 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id IDLE
+                    term 
+                    (
+                     id IDLE
+                    )
+                    
                    )
                    
                   )
@@ -772,21 +1892,25 @@
               )
               
              )
-              != 
+              
              (
-              mse 
+              condition_term_latter != 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id COLD_START
+                    term 
+                    (
+                     id COLD_START
+                    )
+                    
                    )
                    
                   )
@@ -836,21 +1960,25 @@
               )
               
              )
-              != 
+              
              (
-              mse 
+              condition_term_latter != 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id WARM_START
+                    term 
+                    (
+                     id WARM_START
+                    )
+                    
                    )
                    
                   )
@@ -900,21 +2028,25 @@
               )
               
              )
-              != 
+              
              (
-              mse 
+              condition_term_latter != 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id NORMAL
+                    term 
+                    (
+                     id NORMAL
+                    )
+                    
                    )
                    
                   )
@@ -1116,21 +2248,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id NORMAL
+                    term 
+                    (
+                     id NORMAL
+                    )
+                    
                    )
                    
                   )
@@ -1168,9 +2304,13 @@
                    (
                     id Current_Partition_status
                    )
-                    . 
+                    
                    (
-                    id OPERATING_MODE
+                    term_latter . 
+                    (
+                     id OPERATING_MODE
+                    )
+                    
                    )
                    
                   )
@@ -1184,21 +2324,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id NORMAL
+                    term 
+                    (
+                     id NORMAL
+                    )
+                    
                    )
                    
                   )
@@ -1400,21 +2544,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id WARM_START
+                    term 
+                    (
+                     id WARM_START
+                    )
+                    
                    )
                    
                   )
@@ -1452,9 +2600,13 @@
                    (
                     id Current_Partition_status
                    )
-                    . 
+                    
                    (
-                    id OPERATING_MODE
+                    term_latter . 
+                    (
+                     id OPERATING_MODE
+                    )
+                    
                    )
                    
                   )
@@ -1468,21 +2620,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id COLD_START
+                    term 
+                    (
+                     id COLD_START
+                    )
+                    
                    )
                    
                   )
@@ -1756,21 +2912,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id IDLE
+                    term 
+                    (
+                     id IDLE
+                    )
+                    
                    )
                    
                   )
@@ -1838,9 +2998,13 @@
                         (
                          id Current_Partition_status
                         )
-                         . 
+                         
                         (
-                         id IDENTIFIER
+                         term_latter . 
+                         (
+                          id IDENTIFIER
+                         )
+                         
                         )
                         
                        )
@@ -1924,21 +3088,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id WARM_START
+                    term 
+                    (
+                     id WARM_START
+                    )
+                    
                    )
                    
                   )
@@ -1992,21 +3160,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id COLD_START
+                    term 
+                    (
+                     id COLD_START
+                    )
+                    
                    )
                    
                   )
@@ -2074,9 +3246,13 @@
                         (
                          id Current_Partition_status
                         )
-                         . 
+                         
                         (
-                         id IDENTIFIER
+                         term_latter . 
+                         (
+                          id IDENTIFIER
+                         )
+                         
                         )
                         
                        )
@@ -2150,9 +3326,13 @@
                         (
                          id Current_Partition_status
                         )
-                         . 
+                         
                         (
-                         id IDENTIFIER
+                         term_latter . 
+                         (
+                          id IDENTIFIER
+                         )
+                         
                         )
                         
                        )
@@ -2236,21 +3416,25 @@
               )
               
              )
-              == 
+              
              (
-              mse 
+              condition_term_latter == 
               (
-               mse_1 
+               mse 
                (
-                mse_0 
+                mse_1 
                 (
-                 unary_e 
+                 mse_0 
                  (
-                  one_e 
+                  unary_e 
                   (
-                   term 
+                   one_e 
                    (
-                    id NORMAL
+                    term 
+                    (
+                     id NORMAL
+                    )
+                    
                    )
                    
                   )
@@ -2378,41 +3562,45 @@
                       (
                        id Pro
                       )
-                       . < 
-                      (
-                       id ID
-                      )
                        
                       (
-                       belong :
-                      )
-                       
-                      (
-                       element 
+                       term_latter . < 
                        (
-                        pro_e 
+                        id ID
+                       )
+                        
+                       (
+                        belong :
+                       )
+                        
+                       (
+                        element 
                         (
-                         or_pro_e 
+                         pro_e 
                          (
-                          and_pro_e 
+                          or_pro_e 
                           (
-                           pro_term_e 
+                           and_pro_e 
                            (
-                            condition_term 
+                            pro_term_e 
                             (
-                             mse 
+                             condition_term 
                              (
-                              mse_1 
+                              mse 
                               (
-                               mse_0 
+                               mse_1 
                                (
-                                unary_e 
+                                mse_0 
                                 (
-                                 one_e 
+                                 unary_e 
                                  (
-                                  term 
+                                  one_e 
                                   (
-                                   id TEMP_PRO_NUM
+                                   term 
+                                   (
+                                    id TEMP_PRO_NUM
+                                   )
+                                   
                                   )
                                   
                                  )
@@ -2436,9 +3624,9 @@
                         )
                         
                        )
-                       
+                        >
                       )
-                       >
+                      
                      )
                      
                     )
@@ -2450,21 +3638,25 @@
                  )
                  
                 )
-                 : 
+                 
                 (
-                 mse 
+                 condition_term_latter : 
                  (
-                  mse_1 
+                  mse 
                   (
-                   mse_0 
+                   mse_1 
                    (
-                    unary_e 
+                    mse_0 
                     (
-                     one_e 
+                     unary_e 
                      (
-                      term 
+                      one_e 
                       (
-                       id Current_partition_process_set
+                       term 
+                       (
+                        id Current_partition_process_set
+                       )
+                       
                       )
                       
                      )
@@ -2550,9 +3742,13 @@
                                       (
                                        id Pro
                                       )
-                                       -> 
+                                       
                                       (
-                                       id PROCESS_STATE
+                                       term_latter -> 
+                                       (
+                                        id PROCESS_STATE
+                                       )
+                                       
                                       )
                                       
                                      )
@@ -2566,21 +3762,25 @@
                                  )
                                  
                                 )
-                                 == 
+                                 
                                 (
-                                 mse 
+                                 condition_term_latter == 
                                  (
-                                  mse_1 
+                                  mse 
                                   (
-                                   mse_0 
+                                   mse_1 
                                    (
-                                    unary_e 
+                                    mse_0 
                                     (
-                                     one_e 
+                                     unary_e 
                                      (
-                                      term 
+                                      one_e 
                                       (
-                                       id READY
+                                       term 
+                                       (
+                                        id READY
+                                       )
+                                       
                                       )
                                       
                                      )
@@ -2622,9 +3822,13 @@
                                       (
                                        id Pro
                                       )
-                                       -> 
+                                       
                                       (
-                                       id PROCESS_STATE
+                                       term_latter -> 
+                                       (
+                                        id PROCESS_STATE
+                                       )
+                                       
                                       )
                                       
                                      )
@@ -2638,21 +3842,25 @@
                                  )
                                  
                                 )
-                                 == 
+                                 
                                 (
-                                 mse 
+                                 condition_term_latter == 
                                  (
-                                  mse_1 
+                                  mse 
                                   (
-                                   mse_0 
+                                   mse_1 
                                    (
-                                    unary_e 
+                                    mse_0 
                                     (
-                                     one_e 
+                                     unary_e 
                                      (
-                                      term 
+                                      one_e 
                                       (
-                                       id RUNNING
+                                       term 
+                                       (
+                                        id RUNNING
+                                       )
+                                       
                                       )
                                       
                                      )
@@ -2716,9 +3924,13 @@
                          (
                           id Pro
                          )
-                          -> 
+                          
                          (
-                          id PERIOD
+                          term_latter -> 
+                          (
+                           id PERIOD
+                          )
+                          
                          )
                          
                         )
@@ -2732,21 +3944,25 @@
                     )
                     
                    )
-                    == 
+                    
                    (
-                    mse 
+                    condition_term_latter == 
                     (
-                     mse_1 
+                     mse 
                      (
-                      mse_0 
+                      mse_1 
                       (
-                       unary_e 
+                       mse_0 
                        (
-                        one_e 
+                        unary_e 
                         (
-                         term 
+                         one_e 
                          (
-                          id INFINITE_TIME_VALUE
+                          term 
+                          (
+                           id INFINITE_TIME_VALUE
+                          )
+                          
                          )
                          
                         )
@@ -2888,13 +4104,21 @@
                          (
                           id Pro
                          )
-                          -> 
+                          
                          (
-                          id STATUS
+                          term_latter -> 
+                          (
+                           id STATUS
+                          )
+                          
                          )
-                          . 
+                          
                          (
-                          id PROCESS_STATE
+                          term_latter . 
+                          (
+                           id PROCESS_STATE
+                          )
+                          
                          )
                          
                         )
@@ -2908,21 +4132,25 @@
                     )
                     
                    )
-                    != 
+                    
                    (
-                    mse 
+                    condition_term_latter != 
                     (
-                     mse_1 
+                     mse 
                      (
-                      mse_0 
+                      mse_1 
                       (
-                       unary_e 
+                       mse_0 
                        (
-                        one_e 
+                        unary_e 
                         (
-                         term 
+                         one_e 
                          (
-                          id DORMANT
+                          term 
+                          (
+                           id DORMANT
+                          )
+                          
                          )
                          
                         )
@@ -3006,19 +4234,23 @@
                      )
                      
                     )
-                     - 
+                     
                     (
-                     mse_1 
+                     mse_latter - 
                      (
-                      mse_0 
+                      mse_1 
                       (
-                       unary_e 
+                       mse_0 
                        (
-                        one_e 
+                        unary_e 
                         (
-                         term 
+                         one_e 
                          (
-                          integer 1
+                          term 
+                          (
+                           integer 1
+                          )
+                          
                          )
                          
                         )
@@ -3262,7 +4494,7 @@
    )
    
   )
-   END
+  
  )
- 
+  END
 )
