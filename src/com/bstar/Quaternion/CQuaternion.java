@@ -1,18 +1,17 @@
 package com.bstar.Quaternion;
 
-import com.bstar.Quaternion.Quas.IDup;
+import com.bstar.Global.CGlobalDef;
+import com.bstar.Quaternion.Interfaces.IDup;
+import com.bstar.Quaternion.Interfaces.IRun;
+import com.bstar.Quaternion.Interfaces.IScane;
 
-public abstract class CQuaternion implements IDup{
-	public static final int NORMAL = 0, ERROR = 1;
+public abstract class CQuaternion implements IDup, IScane, IRun{
+	
 	public QuaType type = null;
 	public CQuaData data_0 = null, data_1 = null, data_2 = null;
 	
 	public CQuaternion(){
 		
-	}
-	
-	public int run(){
-		return NORMAL;
 	}
 	
 	public QuaType get_type(){

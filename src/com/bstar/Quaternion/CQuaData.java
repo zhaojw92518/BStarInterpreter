@@ -1,6 +1,8 @@
 package com.bstar.Quaternion;
 import java.util.LinkedList;
 
+import com.bstar.Context.CDataEntity;
+import com.bstar.Context.CLangVM;
 import com.bstar.Global.CGlobalDef;
 import com.bstar.Global.CMath;
 
@@ -54,11 +56,23 @@ public class CQuaData {
 		else if(type == QuaDataType.ID){
 			return_result = str_data_0;
 		}
-		else if(type == QuaDataType.REAL || type == QuaDataType.INTEGER){
+		else if(type == QuaDataType.DOUBLE || type == QuaDataType.INT){
 			return_result = CMath.double_to_str(value_data);
 		}
 		else{
 			return_result = new String();
+		}
+		return return_result;
+	}
+	
+	public CDataEntity to_data_entity(){
+		CDataEntity return_result = null;
+		if(type.is_value_type()){
+			return_result = new CDataEntity(type.type_to_str());
+			return_result.value_data = value_data;
+		}
+		else if(type == QuaDataType.ID){
+			return_result = CLangVM.get_data(str_data_0);
 		}
 		return return_result;
 	}

@@ -1,5 +1,6 @@
 package com.bstar.Quaternion.Quas;
 
+import com.bstar.Global.CGlobalDef;
 import com.bstar.Quaternion.CQuaData;
 import com.bstar.Quaternion.CQuaternion;
 import com.bstar.Quaternion.QuaType;
@@ -20,4 +21,10 @@ public class CMathAdd extends CBinaryComp {
 	public CQuaternion dup(){
 		return new CMathAdd();
 	}
+	
+	@Override
+	public int scane(int in_index) {
+		return CGlobalDef.NORMAL;
+	}
+	
 }

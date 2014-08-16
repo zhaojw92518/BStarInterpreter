@@ -1,10 +1,14 @@
 package com.bstar.Context;
 
+import java.util.Map;
 import java.util.TreeMap;
+
+import com.bstar.Global.CGlobalDef;
 
 public class CSymbolTable {
 	private String func_name = null;
 	private TreeMap<String, CDataEntity> symbol_map = new TreeMap<>();
+	private int cur_index = CGlobalDef.ERROR_INDEX;
 	
 	public CSymbolTable(){
 		
@@ -33,4 +37,20 @@ public class CSymbolTable {
 	public void set_func_name(String in_name){
 		func_name = in_name;
 	}
+	
+	public void set_cur_index(int in_index){
+		cur_index = in_index;
+	}
+	
+	public int get_cur_index(){
+		return cur_index;
+	}
+	
+	//debug
+	public void print_all(){
+		for(Map.Entry<String, CDataEntity> cur_entry: symbol_map.entrySet()){
+			CGlobalDef.cout_end(cur_entry.getKey() + "   " + cur_entry.getValue().type);
+		}
+	}
+	//debug end
 }

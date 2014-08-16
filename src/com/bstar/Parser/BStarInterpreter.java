@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import com.bstar.Context.CFileMgr;
+import com.bstar.Context.CLangVM;
 import com.bstar.Global.CGlobalDef;
 import com.bstar.PreProcessor.CPreProcResult;
 import com.bstar.PreProcessor.CPreProcessor;
@@ -30,6 +31,7 @@ public class BStarInterpreter {
 		File file = new File("./PartitionManagement_2.bs");
 		CFileMgr.set_base_dic(file);
 		InputStream in = null;
+		
 		try {
 			in = new FileInputStream(file);
 			ANTLRInputStream input = new ANTLRInputStream(in);
@@ -96,6 +98,8 @@ public class BStarInterpreter {
 	
 	public static void test_02(){
 		try {
+			CGlobalDef.init_font();
+			CGlobalDef.start_debug_console();
 			CQuaFactory.init_factory();
 			CPreProcessor preprocessor = new CPreProcessor();
 			File file = new File("./Test01.bs");
@@ -109,6 +113,7 @@ public class BStarInterpreter {
 			    BStarParser parser = new BStarParser(tokens);
 			    qua_generator.visit(parser.cv_define());
 			    qua_generator.print_quas();
+			    qua_generator.scane_quas();
 			    qua_generator.init();
 			    
 			    input = new ANTLRInputStream(cur_entry.getValue().code_text_str);
@@ -119,6 +124,12 @@ public class BStarInterpreter {
 			    //CGlobalDef.cout_end(code_text_tree.toStringTree(parser));
 			    qua_generator.visit(code_text_tree);
 			    qua_generator.print_quas();
+			    qua_generator.scane_quas();
+			    CLangVM.init();
+			    CLangVM.print_func_table();
+			    CLangVM.print_global_symbol();
+			    CLangVM.set_quas(qua_generator.get_quas());
+			    CLangVM.run();
 			    qua_generator.init();
 			}
 		} catch (IOException e) {

@@ -2,6 +2,7 @@ package com.bstar.Quaternion;
 
 import java.util.TreeMap;
 
+import com.bstar.Global.CGlobalDef;
 import com.bstar.Parser.BStarParser;
 import com.bstar.Quaternion.Quas.CAddressOf;
 import com.bstar.Quaternion.Quas.CAssign;
@@ -33,6 +34,15 @@ public class CQuaFactory {
 	private static TreeMap<QuaType, CQuaternion> qua_map = new TreeMap<>();
 	private static TreeMap<Integer, QuaType> token_to_qua = new TreeMap<>();
 	
+	private static void add_qua(QuaType in_type, CQuaternion in_qua){
+		if(qua_map.containsKey(in_type)){
+			CGlobalDef.info_box(in_type + " repeated!");
+		}
+		else{
+			qua_map.put(in_type, in_qua);
+		}
+	}
+	
 	public static void init_factory(){
 		token_to_qua.put(BStarParser.ADD, QuaType.MATH_ADD);
 		token_to_qua.put(BStarParser.SUB, QuaType.MATH_SUB);
@@ -45,31 +55,31 @@ public class CQuaFactory {
 		//防止乘法运算与指针取值的冲突
 		//token_to_qua.put(BStarParser.MUL, QuaType.CONTENT_OF);
 		
-		qua_map.put(QuaType.GLO_ATTR, 			new CGloAttr());
-		qua_map.put(QuaType.GLO_ATTR_END, 		new CGloAttrEnd());
-		qua_map.put(QuaType.FUNC_ATTR, 			new CFuncAttr());
-		qua_map.put(QuaType.FUNC_ATTR_END, 		new CFuncAttrEnd());
-		qua_map.put(QuaType.VAR_DEFINE, 		new CVarDef());
-		qua_map.put(QuaType.CST_DEFINE, 		new CCstDef());
-		qua_map.put(QuaType.FUNC_DEFINE, 		new CFuncDef());
-		qua_map.put(QuaType.FUNC_DEFINE_END, 	new CFuncDefEnd());
-		qua_map.put(QuaType.FUNC_PARA, 			new CFuncPara());
-		qua_map.put(QuaType.RETURN, 			new CReturn());
-		qua_map.put(QuaType.FUNC_CALL, 			new CFuncCall());
-		qua_map.put(QuaType.MATH_ADD, 			new CMathAdd());
-		qua_map.put(QuaType.MATH_SUB, 			new CMathSub());
-		qua_map.put(QuaType.MATH_MUL, 			new CMathMul());
-		qua_map.put(QuaType.MATH_DIV, 			new CMathDiv());
-		qua_map.put(QuaType.MATH_MOD, 			new CMathMod());
-		qua_map.put(QuaType.MATH_REV, 			new CMathRev());
-		qua_map.put(QuaType.BOOL_NOT, 			new CBoolNot());
-		qua_map.put(QuaType.ADDRESS_OF, 		new CAddressOf());
-		qua_map.put(QuaType.CONTENT_OF, 		new CContentOf());
-		qua_map.put(QuaType.GET_ADDR, 			new CGetAddr());
-		qua_map.put(QuaType.SET_ADDR, 			new CSetAddr());
-		qua_map.put(QuaType.ASSIGN, 			new CAssign());
-		qua_map.put(QuaType.CALL_PARA, 			new CCallPara());
-		qua_map.put(QuaType.GET_RETURN, 		new CGetReturn());
+		add_qua(QuaType.GLO_ATTR, 			new CGloAttr());
+		add_qua(QuaType.GLO_ATTR_END, 		new CGloAttrEnd());
+		add_qua(QuaType.FUNC_ATTR, 			new CFuncAttr());
+		add_qua(QuaType.FUNC_ATTR_END, 		new CFuncAttrEnd());
+		add_qua(QuaType.VAR_DEFINE, 		new CVarDef());
+		add_qua(QuaType.CST_DEFINE, 		new CCstDef());
+		add_qua(QuaType.FUNC_DEFINE, 		new CFuncDef());
+		add_qua(QuaType.FUNC_DEFINE_END, 	new CFuncDefEnd());
+		add_qua(QuaType.FUNC_PARA, 			new CFuncPara());
+		add_qua(QuaType.RETURN, 			new CReturn());
+		add_qua(QuaType.FUNC_CALL, 			new CFuncCall());
+		add_qua(QuaType.MATH_ADD, 			new CMathAdd());
+		add_qua(QuaType.MATH_SUB, 			new CMathSub());
+		add_qua(QuaType.MATH_MUL, 			new CMathMul());
+		add_qua(QuaType.MATH_DIV, 			new CMathDiv());
+		add_qua(QuaType.MATH_MOD, 			new CMathMod());
+		add_qua(QuaType.MATH_REV, 			new CMathRev());
+		add_qua(QuaType.BOOL_NOT, 			new CBoolNot());
+		add_qua(QuaType.ADDRESS_OF, 		new CAddressOf());
+		add_qua(QuaType.CONTENT_OF, 		new CContentOf());
+		add_qua(QuaType.GET_ADDR, 			new CGetAddr());
+		add_qua(QuaType.SET_ADDR, 			new CSetAddr());
+		add_qua(QuaType.ASSIGN, 			new CAssign());
+		add_qua(QuaType.CALL_PARA, 			new CCallPara());
+		add_qua(QuaType.GET_RETURN, 		new CGetReturn());
 	}
 	
 	public static CQuaternion create_qua(int in_type, CQuaData in_data_0, CQuaData in_data_1, CQuaData in_data_2){

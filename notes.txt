@@ -1,0 +1,6 @@
+1.single_var_define:
+point_id改为(MUL point_id | id)
+为了规避function call与var define的重复
+原BNF可以出现
+	int (id_name);
+这样的变量定义

@@ -34,10 +34,21 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 		quas.clear();
 	}
 	
+	public LinkedList<CQuaternion> get_quas(){
+		return quas;
+	}
+	
 	//Debug
 	public void print_quas(){
 		for(CQuaternion cur_qua: quas){
 			CGlobalDef.cout_end(cur_qua.to_table_str());
+		}
+	}
+	
+	public void scane_quas(){
+		for(int i = 0; i < quas.size(); ++i){
+			CQuaternion cur_qua = quas.get(i);
+			cur_qua.scane(i);
 		}
 	}
 	//Debug end
@@ -468,8 +479,17 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 		if(ctx.start.getType() != BStarParser.TYPEDEF){
 			CQuaData cur_type = visitType(ctx.type());
 			for(BStarParser.Single_var_defineContext cur_var_ctx: ctx.single_var_define()){
-				CQuaData cur_id = visitPoint_id(cur_var_ctx.point_id()),
+				CQuaData cur_id = null,
 						 temp_type = new CQuaData(cur_type);
+				if(cur_var_ctx.point_id() != null){
+					cur_id = visitPoint_id(cur_var_ctx.point_id());
+					++cur_id.value_data;
+				}
+				else if(cur_var_ctx.id() != null){
+					cur_id = new CQuaData();
+					cur_id.type = QuaDataType.ID;
+					cur_id.str_data_0 = cur_var_ctx.id().getText();
+				}				
 				temp_type.value_data = cur_id.value_data;
 				cur_id.value_data = 0.0;
 				CQuaData cur_element = null;
@@ -703,7 +723,7 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	@Override public CQuaData visitTerm(@NotNull BStarParser.TermContext ctx) { 
 		CQuaData term_former = new CQuaData();
 		if(ctx.nil() != null){
-			term_former.type = QuaDataType.INTEGER;
+			term_former.type = QuaDataType.INT;
 			term_former.value_data = 0.0;
 		}
 		else if(ctx.string() != null){
@@ -712,19 +732,19 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 			term_former.str_data_0 = temp_str.substring(1, temp_str.length() - 1);
 		}
 		else if(ctx.true_str() != null){
-			term_former.type = QuaDataType.INTEGER;
+			term_former.type = QuaDataType.INT;
 			term_former.value_data = 1.0;
 		}
 		else if(ctx.false_str() != null){
-			term_former.type = QuaDataType.INTEGER;
+			term_former.type = QuaDataType.INT;
 			term_former.value_data = 0.0;
 		}
 		else if(ctx.integer() != null){
-			term_former.type = QuaDataType.INTEGER;
+			term_former.type = QuaDataType.INT;
 			term_former.value_data = CMath.str_to_double(ctx.integer().getText());
 		}
 		else if(ctx.real() != null){
-			term_former.type = QuaDataType.REAL;
+			term_former.type = QuaDataType.DOUBLE;
 			term_former.value_data = CMath.str_to_double(ctx.real().getText());
 		}
 		else if(ctx.char_str() != null){

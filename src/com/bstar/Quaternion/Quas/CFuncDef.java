@@ -1,5 +1,8 @@
 package com.bstar.Quaternion.Quas;
 
+import com.bstar.Context.CLangVM;
+import com.bstar.Context.VMState;
+import com.bstar.Global.CGlobalDef;
 import com.bstar.Quaternion.CQuaData;
 import com.bstar.Quaternion.CQuaternion;
 import com.bstar.Quaternion.QuaType;
@@ -17,5 +20,16 @@ public class CFuncDef extends CQuaternion {
 	
 	public CQuaternion dup(){
 		return new CFuncDef();
+	}
+	
+	public int scane(int in_index){
+		CLangVM.set_state(VMState.LOCAL);
+		CLangVM.scane_add_func(data_0.str_data_0, data_1.str_data_0, in_index);
+		return CGlobalDef.NORMAL;
+	}
+	
+	@Override
+	public int run() {
+		return CGlobalDef.NORMAL;
 	}
 }

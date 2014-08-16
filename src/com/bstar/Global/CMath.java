@@ -12,4 +12,8 @@ public class CMath {
 	public static String double_to_str(double in_double){
 		return new Double(in_double).toString();
 	}
+	
+	public static String int_to_str(int in_int){
+		return new Integer(in_int).toString();
+	}
 }

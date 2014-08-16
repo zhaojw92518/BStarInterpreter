@@ -23,7 +23,12 @@ OPERATIONS
 		return return_result;
 	}
 	
+	void my_printf(double in_arg){
+		printf(in_arg);
+	}
+	
 	void main(){
+		//my_printf(123);
 		printf(deg_to_reg(3.14159));
 	}
 END

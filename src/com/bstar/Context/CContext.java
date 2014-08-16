@@ -2,6 +2,9 @@ package com.bstar.Context;
 
 import java.util.Stack;
 
+import com.bstar.Global.CGlobalDef;
+import com.bstar.Quaternion.CQuaternion;
+
 public class CContext {
 	private CSymbolTable global_area = new CSymbolTable();
 	private Stack<CSymbolTable> local_stack = new Stack<>();
@@ -14,8 +17,29 @@ public class CContext {
 		local_stack.push(new CSymbolTable(in_func_name));
 	}
 	
-	public void pop_func(){
+	public void push_func(String in_func_name, int in_index){
+		local_stack.lastElement().set_cur_index(in_index);
+		local_stack.push(new CSymbolTable(in_func_name));
+	}
+	
+	public int pop_func(){
+		int return_result = CGlobalDef.ERROR_INDEX;
 		local_stack.pop();
+		if(local_stack.isEmpty()){
+			return_result = CGlobalDef.END;
+		}
+		else{
+			return_result = local_stack.lastElement().get_cur_index();
+		}
+		return return_result;
+	}
+	
+	public boolean is_local_have(String in_id){
+		return local_stack.lastElement().is_have(in_id);
+	}
+	
+	public boolean is_global_have(String in_id){
+		return global_area.is_have(in_id);
 	}
 	
 	private CSymbolTable is_have(String in_id){
@@ -66,4 +90,22 @@ public class CContext {
 		}
 		return return_result;
 	}
+	
+	public int get_stack_level(){
+		return local_stack.size();
+	}
+	
+	public void save_func_index(int in_index){
+		local_stack.lastElement().set_cur_index(in_index);
+	}
+	
+	//debug
+	public void print_global(){
+		CGlobalDef.cout_dividing_line();
+		CGlobalDef.cout_end("Global Area");
+		CGlobalDef.cout_dividing_line();
+		global_area.print_all();
+		CGlobalDef.cout_dividing_line();
+	}
+	//debug end
 }

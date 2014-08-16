@@ -28,7 +28,7 @@ single_cv_define:
 	cst_define	SEMICOLON	;
 
 single_var_define:
-	point_id (ASSIGNMENT element)?		;
+	(MUL point_id | id) (ASSIGNMENT element)?		;
 
 var_define:		
 	type	single_var_define 
