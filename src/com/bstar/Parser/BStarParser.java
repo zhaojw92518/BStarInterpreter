@@ -96,8 +96,14 @@ public class BStarParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class AbmachineContext extends ParserRuleContext {
+		public TerminalNode MACHINE() { return getToken(BStarParser.MACHINE, 0); }
 		public IdContext id() {
 			return getRuleContext(IdContext.class,0);
+		}
+		public TerminalNode END() { return getToken(BStarParser.END, 0); }
+		public TerminalNode ATTRIBUTE() { return getToken(BStarParser.ATTRIBUTE, 0); }
+		public Code_textContext code_text() {
+			return getRuleContext(Code_textContext.class,0);
 		}
 		public DefinesContext defines() {
 			return getRuleContext(DefinesContext.class,0);
@@ -105,15 +111,9 @@ public class BStarParser extends Parser {
 		public IncludesContext includes() {
 			return getRuleContext(IncludesContext.class,0);
 		}
-		public TerminalNode ATTRIBUTE() { return getToken(BStarParser.ATTRIBUTE, 0); }
-		public TerminalNode MACHINE() { return getToken(BStarParser.MACHINE, 0); }
-		public Code_textContext code_text() {
-			return getRuleContext(Code_textContext.class,0);
-		}
 		public Cv_defineContext cv_define() {
 			return getRuleContext(Cv_defineContext.class,0);
 		}
-		public TerminalNode END() { return getToken(BStarParser.END, 0); }
 		public AbmachineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -185,11 +185,11 @@ public class BStarParser extends Parser {
 		public Cdeclare_operationsContext cdeclare_operations() {
 			return getRuleContext(Cdeclare_operationsContext.class,0);
 		}
-		public OperationsContext operations() {
-			return getRuleContext(OperationsContext.class,0);
-		}
 		public Declare_operationsContext declare_operations() {
 			return getRuleContext(Declare_operationsContext.class,0);
+		}
+		public OperationsContext operations() {
+			return getRuleContext(OperationsContext.class,0);
 		}
 		public Code_textContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -243,38 +243,38 @@ public class BStarParser extends Parser {
 
 	public static class IncludesContext extends ParserRuleContext {
 		public List<TerminalNode> SEMICOLON() { return getTokens(BStarParser.SEMICOLON); }
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
+		public TerminalNode SUF(int i) {
+			return getToken(BStarParser.SUF, i);
 		}
-		public TerminalNode SEMICOLON(int i) {
-			return getToken(BStarParser.SEMICOLON, i);
+		public StringContext string(int i) {
+			return getRuleContext(StringContext.class,i);
 		}
 		public List<StringContext> string() {
 			return getRuleContexts(StringContext.class);
 		}
-		public List<TerminalNode> L_ANGLE_BRACKET() { return getTokens(BStarParser.L_ANGLE_BRACKET); }
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
+		}
 		public TerminalNode R_ANGLE_BRACKET(int i) {
 			return getToken(BStarParser.R_ANGLE_BRACKET, i);
 		}
-		public IdContext id(int i) {
-			return getRuleContext(IdContext.class,i);
-		}
-		public IncludeContext include(int i) {
-			return getRuleContext(IncludeContext.class,i);
-		}
-		public List<TerminalNode> SUF() { return getTokens(BStarParser.SUF); }
+		public List<TerminalNode> L_ANGLE_BRACKET() { return getTokens(BStarParser.L_ANGLE_BRACKET); }
 		public TerminalNode L_ANGLE_BRACKET(int i) {
 			return getToken(BStarParser.L_ANGLE_BRACKET, i);
 		}
 		public List<IncludeContext> include() {
 			return getRuleContexts(IncludeContext.class);
 		}
+		public List<TerminalNode> SUF() { return getTokens(BStarParser.SUF); }
 		public List<TerminalNode> R_ANGLE_BRACKET() { return getTokens(BStarParser.R_ANGLE_BRACKET); }
-		public TerminalNode SUF(int i) {
-			return getToken(BStarParser.SUF, i);
+		public IdContext id(int i) {
+			return getRuleContext(IdContext.class,i);
 		}
-		public StringContext string(int i) {
-			return getRuleContext(StringContext.class,i);
+		public TerminalNode SEMICOLON(int i) {
+			return getToken(BStarParser.SEMICOLON, i);
+		}
+		public IncludeContext include(int i) {
+			return getRuleContext(IncludeContext.class,i);
 		}
 		public IncludesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -340,10 +340,10 @@ public class BStarParser extends Parser {
 	}
 
 	public static class AttributesContext extends ParserRuleContext {
+		public TerminalNode ATTRIBUTE() { return getToken(BStarParser.ATTRIBUTE, 0); }
 		public DefinesContext defines() {
 			return getRuleContext(DefinesContext.class,0);
 		}
-		public TerminalNode ATTRIBUTE() { return getToken(BStarParser.ATTRIBUTE, 0); }
 		public Cv_defineContext cv_define() {
 			return getRuleContext(Cv_defineContext.class,0);
 		}
@@ -389,11 +389,11 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Cv_defineContext extends ParserRuleContext {
-		public Single_cv_defineContext single_cv_define(int i) {
-			return getRuleContext(Single_cv_defineContext.class,i);
-		}
 		public List<Single_cv_defineContext> single_cv_define() {
 			return getRuleContexts(Single_cv_defineContext.class);
+		}
+		public Single_cv_defineContext single_cv_define(int i) {
+			return getRuleContext(Single_cv_defineContext.class,i);
 		}
 		public Cv_defineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -446,12 +446,12 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Single_cv_defineContext extends ParserRuleContext {
-		public Var_defineContext var_define() {
-			return getRuleContext(Var_defineContext.class,0);
-		}
-		public TerminalNode SEMICOLON() { return getToken(BStarParser.SEMICOLON, 0); }
 		public Cst_defineContext cst_define() {
 			return getRuleContext(Cst_defineContext.class,0);
+		}
+		public TerminalNode SEMICOLON() { return getToken(BStarParser.SEMICOLON, 0); }
+		public Var_defineContext var_define() {
+			return getRuleContext(Var_defineContext.class,0);
 		}
 		public Single_cv_defineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -515,14 +515,14 @@ public class BStarParser extends Parser {
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
-		public IdContext id() {
-			return getRuleContext(IdContext.class,0);
-		}
-		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
 		public Point_idContext point_id() {
 			return getRuleContext(Point_idContext.class,0);
 		}
+		public IdContext id() {
+			return getRuleContext(IdContext.class,0);
+		}
 		public TerminalNode ASSIGNMENT() { return getToken(BStarParser.ASSIGNMENT, 0); }
+		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
 		public Single_var_defineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -580,28 +580,28 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Var_defineContext extends ParserRuleContext {
-		public Struct_typeContext struct_type() {
-			return getRuleContext(Struct_typeContext.class,0);
-		}
-		public TerminalNode TYPEDEF() { return getToken(BStarParser.TYPEDEF, 0); }
-		public IdContext id() {
-			return getRuleContext(IdContext.class,0);
-		}
-		public Enum_typeContext enum_type() {
-			return getRuleContext(Enum_typeContext.class,0);
-		}
 		public List<Single_var_defineContext> single_var_define() {
 			return getRuleContexts(Single_var_defineContext.class);
 		}
+		public TerminalNode TYPEDEF() { return getToken(BStarParser.TYPEDEF, 0); }
 		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
-		public Single_var_defineContext single_var_define(int i) {
-			return getRuleContext(Single_var_defineContext.class,i);
+		public Enum_typeContext enum_type() {
+			return getRuleContext(Enum_typeContext.class,0);
+		}
+		public Point_idContext point_id() {
+			return getRuleContext(Point_idContext.class,0);
+		}
+		public IdContext id() {
+			return getRuleContext(IdContext.class,0);
+		}
+		public Struct_typeContext struct_type() {
+			return getRuleContext(Struct_typeContext.class,0);
 		}
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
-		public Point_idContext point_id() {
-			return getRuleContext(Point_idContext.class,0);
+		public Single_var_defineContext single_var_define(int i) {
+			return getRuleContext(Single_var_defineContext.class,i);
 		}
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
@@ -686,27 +686,27 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Cst_defineContext extends ParserRuleContext {
+		public TerminalNode CONST() { return getToken(BStarParser.CONST, 0); }
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
-		public ElementContext element(int i) {
-			return getRuleContext(ElementContext.class,i);
-		}
 		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
-		public TypeContext type() {
-			return getRuleContext(TypeContext.class,0);
-		}
-		public Point_idContext point_id(int i) {
-			return getRuleContext(Point_idContext.class,i);
-		}
 		public List<Point_idContext> point_id() {
 			return getRuleContexts(Point_idContext.class);
 		}
 		public TerminalNode ASSIGNMENT(int i) {
 			return getToken(BStarParser.ASSIGNMENT, i);
 		}
-		public TerminalNode CONST() { return getToken(BStarParser.CONST, 0); }
+		public ElementContext element(int i) {
+			return getRuleContext(ElementContext.class,i);
+		}
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
 		public List<TerminalNode> ASSIGNMENT() { return getTokens(BStarParser.ASSIGNMENT); }
+		public Point_idContext point_id(int i) {
+			return getRuleContext(Point_idContext.class,i);
+		}
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
 		}
@@ -763,12 +763,12 @@ public class BStarParser extends Parser {
 	}
 
 	public static class OperationsContext extends ParserRuleContext {
-		public List<Function_defineContext> function_define() {
-			return getRuleContexts(Function_defineContext.class);
-		}
 		public TerminalNode OPERATIONS() { return getToken(BStarParser.OPERATIONS, 0); }
 		public Function_defineContext function_define(int i) {
 			return getRuleContext(Function_defineContext.class,i);
+		}
+		public List<Function_defineContext> function_define() {
+			return getRuleContexts(Function_defineContext.class);
 		}
 		public OperationsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -816,22 +816,22 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Function_defineContext extends ParserRuleContext {
-		public Para_define_listContext para_define_list() {
-			return getRuleContext(Para_define_listContext.class,0);
-		}
+		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
+		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
 		public Com_statementContext com_statement() {
 			return getRuleContext(Com_statementContext.class,0);
 		}
-		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
-		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
-		public TypeContext type() {
-			return getRuleContext(TypeContext.class,0);
-		}
 		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
+		public Para_define_listContext para_define_list() {
+			return getRuleContext(Para_define_listContext.class,0);
+		}
 		public Point_idContext point_id() {
 			return getRuleContext(Point_idContext.class,0);
 		}
-		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
 		public Function_defineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -908,11 +908,11 @@ public class BStarParser extends Parser {
 	}
 
 	public static class DeclaresContext extends ParserRuleContext {
-		public List<Function_declareContext> function_declare() {
-			return getRuleContexts(Function_declareContext.class);
-		}
 		public Function_declareContext function_declare(int i) {
 			return getRuleContext(Function_declareContext.class,i);
+		}
+		public List<Function_declareContext> function_declare() {
+			return getRuleContexts(Function_declareContext.class);
 		}
 		public DeclaresContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -959,16 +959,16 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Function_declareContext extends ParserRuleContext {
+		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
+		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Para_define_listContext para_define_list() {
 			return getRuleContext(Para_define_listContext.class,0);
 		}
-		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
-		public TypeContext type() {
-			return getRuleContext(TypeContext.class,0);
-		}
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Point_idContext point_id() {
 			return getRuleContext(Point_idContext.class,0);
+		}
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
 		}
 		public Function_declareContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1006,12 +1006,12 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Cdeclare_operationsContext extends ParserRuleContext {
-		public List<Cfunction_declareContext> cfunction_declare() {
-			return getRuleContexts(Cfunction_declareContext.class);
-		}
 		public TerminalNode OPERATIONS() { return getToken(BStarParser.OPERATIONS, 0); }
 		public Cfunction_declareContext cfunction_declare(int i) {
 			return getRuleContext(Cfunction_declareContext.class,i);
+		}
+		public List<Cfunction_declareContext> cfunction_declare() {
+			return getRuleContexts(Cfunction_declareContext.class);
 		}
 		public Cdeclare_operationsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1059,14 +1059,14 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Cfunction_declareContext extends ParserRuleContext {
-		public FunctionContext function() {
-			return getRuleContext(FunctionContext.class,0);
-		}
 		public RobustContext robust() {
 			return getRuleContext(RobustContext.class,0);
 		}
 		public Function_declareContext function_declare() {
 			return getRuleContext(Function_declareContext.class,0);
+		}
+		public FunctionContext function() {
+			return getRuleContext(FunctionContext.class,0);
 		}
 		public Cfunction_declareContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1102,23 +1102,23 @@ public class BStarParser extends Parser {
 	}
 
 	public static class DefinesContext extends ParserRuleContext {
-		public List<ElementContext> element() {
-			return getRuleContexts(ElementContext.class);
-		}
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
-		}
-		public ElementContext element(int i) {
-			return getRuleContext(ElementContext.class,i);
-		}
 		public DefineContext define(int i) {
 			return getRuleContext(DefineContext.class,i);
+		}
+		public List<ElementContext> element() {
+			return getRuleContexts(ElementContext.class);
 		}
 		public List<DefineContext> define() {
 			return getRuleContexts(DefineContext.class);
 		}
 		public IdContext id(int i) {
 			return getRuleContext(IdContext.class,i);
+		}
+		public ElementContext element(int i) {
+			return getRuleContext(ElementContext.class,i);
+		}
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
 		}
 		public DefinesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1167,20 +1167,20 @@ public class BStarParser extends Parser {
 	}
 
 	public static class TypeContext extends ParserRuleContext {
+		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
 		public IdContext id() {
 			return getRuleContext(IdContext.class,0);
+		}
+		public Normal_typeContext normal_type() {
+			return getRuleContext(Normal_typeContext.class,0);
+		}
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
 		}
 		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
 		public Set_typeContext set_type() {
 			return getRuleContext(Set_typeContext.class,0);
 		}
-		public TypeContext type() {
-			return getRuleContext(TypeContext.class,0);
-		}
-		public Normal_typeContext normal_type() {
-			return getRuleContext(Normal_typeContext.class,0);
-		}
-		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
 		public TypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1252,18 +1252,18 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Normal_typeContext extends ParserRuleContext {
-		public TerminalNode INT_TYPE() { return getToken(BStarParser.INT_TYPE, 0); }
-		public TerminalNode DOUBLE_TYPE() { return getToken(BStarParser.DOUBLE_TYPE, 0); }
-		public TerminalNode CHAR_TYPE() { return getToken(BStarParser.CHAR_TYPE, 0); }
-		public TerminalNode FLOAT_TYPE() { return getToken(BStarParser.FLOAT_TYPE, 0); }
 		public TerminalNode PROPOSITION_TYPE() { return getToken(BStarParser.PROPOSITION_TYPE, 0); }
+		public TerminalNode INT_TYPE() { return getToken(BStarParser.INT_TYPE, 0); }
 		public List<TerminalNode> LONG_TYPE() { return getTokens(BStarParser.LONG_TYPE); }
-		public TerminalNode STRING_TYPE() { return getToken(BStarParser.STRING_TYPE, 0); }
-		public TerminalNode VOID() { return getToken(BStarParser.VOID, 0); }
+		public TerminalNode FLOAT_TYPE() { return getToken(BStarParser.FLOAT_TYPE, 0); }
 		public TerminalNode LONG_TYPE(int i) {
 			return getToken(BStarParser.LONG_TYPE, i);
 		}
+		public TerminalNode CHAR_TYPE() { return getToken(BStarParser.CHAR_TYPE, 0); }
+		public TerminalNode DOUBLE_TYPE() { return getToken(BStarParser.DOUBLE_TYPE, 0); }
+		public TerminalNode VOID() { return getToken(BStarParser.VOID, 0); }
 		public TerminalNode UNSIGNED() { return getToken(BStarParser.UNSIGNED, 0); }
+		public TerminalNode STRING_TYPE() { return getToken(BStarParser.STRING_TYPE, 0); }
 		public TerminalNode SHORT_TYPE() { return getToken(BStarParser.SHORT_TYPE, 0); }
 		public Normal_typeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1423,15 +1423,15 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Set_typeContext extends ParserRuleContext {
-		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
+		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
+		public TerminalNode SET_TYPE() { return getToken(BStarParser.SET_TYPE, 0); }
 		public At_strContext at_str() {
 			return getRuleContext(At_strContext.class,0);
 		}
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
-		public TerminalNode SET_TYPE() { return getToken(BStarParser.SET_TYPE, 0); }
-		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
+		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
 		public Set_typeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1476,13 +1476,17 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Struct_typeContext extends ParserRuleContext {
-		public TerminalNode STRUCT() { return getToken(BStarParser.STRUCT, 0); }
+		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
 		public List<TerminalNode> SEMICOLON() { return getTokens(BStarParser.SEMICOLON); }
-		public TerminalNode SEMICOLON(int i) {
-			return getToken(BStarParser.SEMICOLON, i);
-		}
+		public TerminalNode STRUCT() { return getToken(BStarParser.STRUCT, 0); }
 		public TypeContext type(int i) {
 			return getRuleContext(TypeContext.class,i);
+		}
+		public List<Point_idContext> point_id() {
+			return getRuleContexts(Point_idContext.class);
+		}
+		public TerminalNode SEMICOLON(int i) {
+			return getToken(BStarParser.SEMICOLON, i);
 		}
 		public List<TypeContext> type() {
 			return getRuleContexts(TypeContext.class);
@@ -1491,10 +1495,6 @@ public class BStarParser extends Parser {
 		public Point_idContext point_id(int i) {
 			return getRuleContext(Point_idContext.class,i);
 		}
-		public List<Point_idContext> point_id() {
-			return getRuleContexts(Point_idContext.class);
-		}
-		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
 		public Struct_typeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1545,26 +1545,26 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Enum_typeContext extends ParserRuleContext {
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
-		}
+		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
 		public List<Unary_eContext> unary_e() {
 			return getRuleContexts(Unary_eContext.class);
+		}
+		public IdContext id(int i) {
+			return getRuleContext(IdContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
+		public TerminalNode ASSIGNMENT(int i) {
+			return getToken(BStarParser.ASSIGNMENT, i);
+		}
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
 		}
 		public Unary_eContext unary_e(int i) {
 			return getRuleContext(Unary_eContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
-		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
-		public IdContext id(int i) {
-			return getRuleContext(IdContext.class,i);
-		}
-		public TerminalNode ASSIGNMENT(int i) {
-			return getToken(BStarParser.ASSIGNMENT, i);
-		}
-		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
-		public TerminalNode ENUM_TYPE() { return getToken(BStarParser.ENUM_TYPE, 0); }
 		public List<TerminalNode> ASSIGNMENT() { return getTokens(BStarParser.ASSIGNMENT); }
+		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
+		public TerminalNode ENUM_TYPE() { return getToken(BStarParser.ENUM_TYPE, 0); }
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
 		}
@@ -1648,15 +1648,15 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Point_idContext extends ParserRuleContext {
-		public IdContext id() {
-			return getRuleContext(IdContext.class,0);
-		}
-		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
 		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
 		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Point_idContext point_id() {
 			return getRuleContext(Point_idContext.class,0);
 		}
+		public IdContext id() {
+			return getRuleContext(IdContext.class,0);
+		}
+		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
 		public Point_idContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1711,15 +1711,15 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Addr_idContext extends ParserRuleContext {
-		public TerminalNode ADDR() { return getToken(BStarParser.ADDR, 0); }
+		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
+		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public IdContext id() {
 			return getRuleContext(IdContext.class,0);
 		}
-		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
+		public TerminalNode ADDR() { return getToken(BStarParser.ADDR, 0); }
 		public Addr_idContext addr_id() {
 			return getRuleContext(Addr_idContext.class,0);
 		}
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Addr_idContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1774,21 +1774,21 @@ public class BStarParser extends Parser {
 	}
 
 	public static class RobustContext extends ParserRuleContext {
+		public TerminalNode PRECONDITION(int i) {
+			return getToken(BStarParser.PRECONDITION, i);
+		}
+		public TerminalNode ROBUST() { return getToken(BStarParser.ROBUST, 0); }
+		public List<Pro_eContext> pro_e() {
+			return getRuleContexts(Pro_eContext.class);
+		}
+		public List<TerminalNode> PRECONDITION() { return getTokens(BStarParser.PRECONDITION); }
+		public TerminalNode POSTCONDITION(int i) {
+			return getToken(BStarParser.POSTCONDITION, i);
+		}
 		public List<TerminalNode> POSTCONDITION() { return getTokens(BStarParser.POSTCONDITION); }
 		public Pro_eContext pro_e(int i) {
 			return getRuleContext(Pro_eContext.class,i);
 		}
-		public List<TerminalNode> PRECONDITION() { return getTokens(BStarParser.PRECONDITION); }
-		public List<Pro_eContext> pro_e() {
-			return getRuleContexts(Pro_eContext.class);
-		}
-		public TerminalNode PRECONDITION(int i) {
-			return getToken(BStarParser.PRECONDITION, i);
-		}
-		public TerminalNode POSTCONDITION(int i) {
-			return getToken(BStarParser.POSTCONDITION, i);
-		}
-		public TerminalNode ROBUST() { return getToken(BStarParser.ROBUST, 0); }
 		public RobustContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1838,20 +1838,20 @@ public class BStarParser extends Parser {
 	}
 
 	public static class FunctionContext extends ParserRuleContext {
-		public List<TerminalNode> POSTCONDITION() { return getTokens(BStarParser.POSTCONDITION); }
-		public Pro_eContext pro_e(int i) {
-			return getRuleContext(Pro_eContext.class,i);
-		}
-		public List<TerminalNode> PRECONDITION() { return getTokens(BStarParser.PRECONDITION); }
-		public List<Pro_eContext> pro_e() {
-			return getRuleContexts(Pro_eContext.class);
-		}
+		public TerminalNode FUNCTION() { return getToken(BStarParser.FUNCTION, 0); }
 		public TerminalNode PRECONDITION(int i) {
 			return getToken(BStarParser.PRECONDITION, i);
 		}
-		public TerminalNode FUNCTION() { return getToken(BStarParser.FUNCTION, 0); }
+		public List<Pro_eContext> pro_e() {
+			return getRuleContexts(Pro_eContext.class);
+		}
+		public List<TerminalNode> PRECONDITION() { return getTokens(BStarParser.PRECONDITION); }
 		public TerminalNode POSTCONDITION(int i) {
 			return getToken(BStarParser.POSTCONDITION, i);
+		}
+		public List<TerminalNode> POSTCONDITION() { return getTokens(BStarParser.POSTCONDITION); }
+		public Pro_eContext pro_e(int i) {
+			return getRuleContext(Pro_eContext.class,i);
 		}
 		public FunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1902,18 +1902,18 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Para_define_listContext extends ParserRuleContext {
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public TypeContext type(int i) {
 			return getRuleContext(TypeContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
+		public List<Point_idContext> point_id() {
+			return getRuleContexts(Point_idContext.class);
 		}
 		public List<TypeContext> type() {
 			return getRuleContexts(TypeContext.class);
 		}
 		public Point_idContext point_id(int i) {
 			return getRuleContext(Point_idContext.class,i);
-		}
-		public List<Point_idContext> point_id() {
-			return getRuleContexts(Point_idContext.class);
 		}
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
@@ -1974,14 +1974,14 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Function_callContext extends ParserRuleContext {
+		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
+		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Para_value_listContext para_value_list() {
 			return getRuleContext(Para_value_listContext.class,0);
 		}
 		public IdContext id() {
 			return getRuleContext(IdContext.class,0);
 		}
-		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Append_parasContext append_paras() {
 			return getRuleContext(Append_parasContext.class,0);
 		}
@@ -2032,10 +2032,10 @@ public class BStarParser extends Parser {
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
 		}
@@ -2093,17 +2093,17 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Append_parasContext extends ParserRuleContext {
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
-		}
+		public List<TerminalNode> AT() { return getTokens(BStarParser.AT); }
 		public TerminalNode AT(int i) {
 			return getToken(BStarParser.AT, i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public IdContext id(int i) {
 			return getRuleContext(IdContext.class,i);
 		}
-		public List<TerminalNode> AT() { return getTokens(BStarParser.AT); }
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
+		}
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
 		}
@@ -2191,9 +2191,6 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Com_statementContext extends ParserRuleContext {
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
 		public Attributes_2Context attributes_2() {
 			return getRuleContext(Attributes_2Context.class,0);
 		}
@@ -2202,6 +2199,9 @@ public class BStarParser extends Parser {
 		}
 		public StatementContext statement(int i) {
 			return getRuleContext(StatementContext.class,i);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
 		}
 		public Com_statementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2264,11 +2264,11 @@ public class BStarParser extends Parser {
 	}
 
 	public static class InvariantContext extends ParserRuleContext {
-		public TerminalNode INVARIANT() { return getToken(BStarParser.INVARIANT, 0); }
 		public TerminalNode SEMICOLON() { return getToken(BStarParser.SEMICOLON, 0); }
 		public Pro_eContext pro_e() {
 			return getRuleContext(Pro_eContext.class,0);
 		}
+		public TerminalNode INVARIANT() { return getToken(BStarParser.INVARIANT, 0); }
 		public InvariantContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2303,36 +2303,36 @@ public class BStarParser extends Parser {
 	}
 
 	public static class StatementContext extends ParserRuleContext {
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
+		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
 		public TerminalNode SEMICOLON() { return getToken(BStarParser.SEMICOLON, 0); }
-		public Statement_atContext statement_at() {
-			return getRuleContext(Statement_atContext.class,0);
-		}
 		public Function_callContext function_call() {
 			return getRuleContext(Function_callContext.class,0);
 		}
-		public Return_statContext return_stat() {
-			return getRuleContext(Return_statContext.class,0);
+		public While_statContext while_stat() {
+			return getRuleContext(While_statContext.class,0);
 		}
-		public Element_takeContext element_take() {
-			return getRuleContext(Element_takeContext.class,0);
+		public If_statContext if_stat() {
+			return getRuleContext(If_statContext.class,0);
+		}
+		public Statement_atContext statement_at() {
+			return getRuleContext(Statement_atContext.class,0);
 		}
 		public Assign_statContext assign_stat() {
 			return getRuleContext(Assign_statContext.class,0);
 		}
-		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
-		public If_statContext if_stat() {
-			return getRuleContext(If_statContext.class,0);
+		public Element_takeContext element_take() {
+			return getRuleContext(Element_takeContext.class,0);
 		}
 		public StatementContext statement(int i) {
 			return getRuleContext(StatementContext.class,i);
 		}
-		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
-		public While_statContext while_stat() {
-			return getRuleContext(While_statContext.class,0);
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
 		}
+		public Return_statContext return_stat() {
+			return getRuleContext(Return_statContext.class,0);
+		}
+		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
 		public StatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2445,43 +2445,43 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Element_takeContext extends ParserRuleContext {
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
-		}
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
-		}
-		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
-		public IdContext id(int i) {
-			return getRuleContext(IdContext.class,i);
-		}
-		public TerminalNode POINT(int i) {
-			return getToken(BStarParser.POINT, i);
-		}
-		public TerminalNode COMMA(int i) {
-			return getToken(BStarParser.COMMA, i);
-		}
-		public BelongContext belong(int i) {
-			return getRuleContext(BelongContext.class,i);
 		}
 		public List<BelongContext> belong() {
 			return getRuleContexts(BelongContext.class);
 		}
-		public IntegerContext integer(int i) {
-			return getRuleContext(IntegerContext.class,i);
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
 		}
+		public TerminalNode POINT(int i) {
+			return getToken(BStarParser.POINT, i);
+		}
+		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
 		public PointContext point() {
 			return getRuleContext(PointContext.class,0);
 		}
-		public ElementContext element(int i) {
-			return getRuleContext(ElementContext.class,i);
+		public TerminalNode COMMA(int i) {
+			return getToken(BStarParser.COMMA, i);
 		}
+		public List<TerminalNode> POINT() { return getTokens(BStarParser.POINT); }
 		public List<IntegerContext> integer() {
 			return getRuleContexts(IntegerContext.class);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
-		public List<TerminalNode> POINT() { return getTokens(BStarParser.POINT); }
+		public IntegerContext integer(int i) {
+			return getRuleContext(IntegerContext.class,i);
+		}
+		public IdContext id(int i) {
+			return getRuleContext(IdContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
+		public ElementContext element(int i) {
+			return getRuleContext(ElementContext.class,i);
+		}
+		public BelongContext belong(int i) {
+			return getRuleContext(BelongContext.class,i);
+		}
 		public Element_takeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2592,24 +2592,24 @@ public class BStarParser extends Parser {
 		public TerminalNode ADDRGET(int i) {
 			return getToken(BStarParser.ADDRGET, i);
 		}
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
-		}
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
+		public List<TerminalNode> POINT() { return getTokens(BStarParser.POINT); }
 		public IdContext id(int i) {
 			return getRuleContext(IdContext.class,i);
-		}
-		public TerminalNode POINT(int i) {
-			return getToken(BStarParser.POINT, i);
 		}
 		public Point_idContext point_id() {
 			return getRuleContext(Point_idContext.class,0);
 		}
-		public List<TerminalNode> ADDRGET() { return getTokens(BStarParser.ADDRGET); }
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
+		}
+		public TerminalNode POINT(int i) {
+			return getToken(BStarParser.POINT, i);
+		}
 		public TerminalNode ASSIGNMENT() { return getToken(BStarParser.ASSIGNMENT, 0); }
-		public List<TerminalNode> POINT() { return getTokens(BStarParser.POINT); }
+		public List<TerminalNode> ADDRGET() { return getTokens(BStarParser.ADDRGET); }
 		public Assign_statContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2686,10 +2686,10 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Return_statContext extends ParserRuleContext {
+		public TerminalNode RETURN() { return getToken(BStarParser.RETURN, 0); }
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
-		public TerminalNode RETURN() { return getToken(BStarParser.RETURN, 0); }
 		public Return_statContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2730,15 +2730,15 @@ public class BStarParser extends Parser {
 	}
 
 	public static class While_statContext extends ParserRuleContext {
+		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
+		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
+		public Pro_eContext pro_e() {
+			return getRuleContext(Pro_eContext.class,0);
+		}
 		public StatementContext statement() {
 			return getRuleContext(StatementContext.class,0);
 		}
 		public TerminalNode WHILE() { return getToken(BStarParser.WHILE, 0); }
-		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
-		public Pro_eContext pro_e() {
-			return getRuleContext(Pro_eContext.class,0);
-		}
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public While_statContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2775,18 +2775,18 @@ public class BStarParser extends Parser {
 	}
 
 	public static class If_statContext extends ParserRuleContext {
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
-		public TerminalNode IF() { return getToken(BStarParser.IF, 0); }
-		public TerminalNode ELSE() { return getToken(BStarParser.ELSE, 0); }
 		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
+		public TerminalNode ELSE() { return getToken(BStarParser.ELSE, 0); }
+		public TerminalNode IF() { return getToken(BStarParser.IF, 0); }
+		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Pro_eContext pro_e() {
 			return getRuleContext(Pro_eContext.class,0);
 		}
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public StatementContext statement(int i) {
 			return getRuleContext(StatementContext.class,i);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
 		}
 		public If_statContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3328,38 +3328,38 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Term_latterContext extends ParserRuleContext {
-		public BelongContext belong(int i) {
-			return getRuleContext(BelongContext.class,i);
-		}
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
-		}
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
 		public List<BelongContext> belong() {
 			return getRuleContexts(BelongContext.class);
 		}
-		public IntegerContext integer(int i) {
-			return getRuleContext(IntegerContext.class,i);
-		}
-		public ElementContext element(int i) {
-			return getRuleContext(ElementContext.class,i);
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
 		}
 		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
-		public List<IntegerContext> integer() {
-			return getRuleContexts(IntegerContext.class);
-		}
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
-		public IdContext id(int i) {
-			return getRuleContext(IdContext.class,i);
-		}
-		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
-		public TerminalNode ADDRGET() { return getToken(BStarParser.ADDRGET, 0); }
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
 		}
 		public TerminalNode POINT() { return getToken(BStarParser.POINT, 0); }
+		public List<IntegerContext> integer() {
+			return getRuleContexts(IntegerContext.class);
+		}
+		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
+		public IntegerContext integer(int i) {
+			return getRuleContext(IntegerContext.class,i);
+		}
+		public IdContext id(int i) {
+			return getRuleContext(IdContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
+		public ElementContext element(int i) {
+			return getRuleContext(ElementContext.class,i);
+		}
+		public BelongContext belong(int i) {
+			return getRuleContext(BelongContext.class,i);
+		}
+		public TerminalNode ADDRGET() { return getToken(BStarParser.ADDRGET, 0); }
 		public Term_latterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3500,15 +3500,15 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Term_setContext extends ParserRuleContext {
+		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public TerminalNode L_BRACE() { return getToken(BStarParser.L_BRACE, 0); }
-		public TerminalNode R_BRACE() { return getToken(BStarParser.R_BRACE, 0); }
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
 		}
@@ -3564,12 +3564,12 @@ public class BStarParser extends Parser {
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
+		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
 		}
 		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
-		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
 		}
@@ -3622,49 +3622,49 @@ public class BStarParser extends Parser {
 	}
 
 	public static class TermContext extends ParserRuleContext {
-		public List<Term_latterContext> term_latter() {
-			return getRuleContexts(Term_latterContext.class);
+		public Term_latterContext term_latter(int i) {
+			return getRuleContext(Term_latterContext.class,i);
+		}
+		public Function_callContext function_call() {
+			return getRuleContext(Function_callContext.class,0);
 		}
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
-		public IdContext id() {
-			return getRuleContext(IdContext.class,0);
-		}
-		public StringContext string() {
-			return getRuleContext(StringContext.class,0);
-		}
-		public False_strContext false_str() {
-			return getRuleContext(False_strContext.class,0);
-		}
-		public Char_strContext char_str() {
-			return getRuleContext(Char_strContext.class,0);
+		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
+		public True_strContext true_str() {
+			return getRuleContext(True_strContext.class,0);
 		}
 		public Term_setContext term_set() {
 			return getRuleContext(Term_setContext.class,0);
 		}
-		public Term_tupleContext term_tuple() {
-			return getRuleContext(Term_tupleContext.class,0);
+		public StringContext string() {
+			return getRuleContext(StringContext.class,0);
 		}
-		public RealContext real() {
-			return getRuleContext(RealContext.class,0);
+		public Char_strContext char_str() {
+			return getRuleContext(Char_strContext.class,0);
+		}
+		public False_strContext false_str() {
+			return getRuleContext(False_strContext.class,0);
+		}
+		public IdContext id() {
+			return getRuleContext(IdContext.class,0);
+		}
+		public NilContext nil() {
+			return getRuleContext(NilContext.class,0);
+		}
+		public List<Term_latterContext> term_latter() {
+			return getRuleContexts(Term_latterContext.class);
 		}
 		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
 		public IntegerContext integer() {
 			return getRuleContext(IntegerContext.class,0);
 		}
-		public Function_callContext function_call() {
-			return getRuleContext(Function_callContext.class,0);
+		public RealContext real() {
+			return getRuleContext(RealContext.class,0);
 		}
-		public Term_latterContext term_latter(int i) {
-			return getRuleContext(Term_latterContext.class,i);
-		}
-		public NilContext nil() {
-			return getRuleContext(NilContext.class,0);
-		}
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
-		public True_strContext true_str() {
-			return getRuleContext(True_strContext.class,0);
+		public Term_tupleContext term_tuple() {
+			return getRuleContext(Term_tupleContext.class,0);
 		}
 		public TermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3792,15 +3792,15 @@ public class BStarParser extends Parser {
 	}
 
 	public static class One_eContext extends ParserRuleContext {
+		public TerminalNode NOT() { return getToken(BStarParser.NOT, 0); }
 		public TermContext term() {
 			return getRuleContext(TermContext.class,0);
 		}
-		public TerminalNode ADDR() { return getToken(BStarParser.ADDR, 0); }
-		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
 		public One_eContext one_e() {
 			return getRuleContext(One_eContext.class,0);
 		}
-		public TerminalNode NOT() { return getToken(BStarParser.NOT, 0); }
+		public TerminalNode ADDR() { return getToken(BStarParser.ADDR, 0); }
+		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
 		public One_eContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3960,10 +3960,10 @@ public class BStarParser extends Parser {
 		public Mse_0Context mse_0() {
 			return getRuleContext(Mse_0Context.class,0);
 		}
-		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
-		public TerminalNode DIV() { return getToken(BStarParser.DIV, 0); }
 		public TerminalNode INTER() { return getToken(BStarParser.INTER, 0); }
 		public TerminalNode MOD() { return getToken(BStarParser.MOD, 0); }
+		public TerminalNode DIV() { return getToken(BStarParser.DIV, 0); }
+		public TerminalNode MUL() { return getToken(BStarParser.MUL, 0); }
 		public Mse_1_latterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -4032,14 +4032,14 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Mse_1Context extends ParserRuleContext {
-		public Mse_0Context mse_0() {
-			return getRuleContext(Mse_0Context.class,0);
+		public List<Mse_1_latterContext> mse_1_latter() {
+			return getRuleContexts(Mse_1_latterContext.class);
 		}
 		public Mse_1_latterContext mse_1_latter(int i) {
 			return getRuleContext(Mse_1_latterContext.class,i);
 		}
-		public List<Mse_1_latterContext> mse_1_latter() {
-			return getRuleContexts(Mse_1_latterContext.class);
+		public Mse_0Context mse_0() {
+			return getRuleContext(Mse_0Context.class,0);
 		}
 		public Mse_1Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4087,12 +4087,12 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Mse_latterContext extends ParserRuleContext {
+		public TerminalNode SUB() { return getToken(BStarParser.SUB, 0); }
+		public TerminalNode ADD() { return getToken(BStarParser.ADD, 0); }
+		public TerminalNode DIFFER() { return getToken(BStarParser.DIFFER, 0); }
 		public Mse_1Context mse_1() {
 			return getRuleContext(Mse_1Context.class,0);
 		}
-		public TerminalNode DIFFER() { return getToken(BStarParser.DIFFER, 0); }
-		public TerminalNode SUB() { return getToken(BStarParser.SUB, 0); }
-		public TerminalNode ADD() { return getToken(BStarParser.ADD, 0); }
 		public Mse_latterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -4147,14 +4147,14 @@ public class BStarParser extends Parser {
 	}
 
 	public static class MseContext extends ParserRuleContext {
-		public Mse_1Context mse_1() {
-			return getRuleContext(Mse_1Context.class,0);
-		}
 		public List<Mse_latterContext> mse_latter() {
 			return getRuleContexts(Mse_latterContext.class);
 		}
 		public Mse_latterContext mse_latter(int i) {
 			return getRuleContext(Mse_latterContext.class,i);
+		}
+		public Mse_1Context mse_1() {
+			return getRuleContext(Mse_1Context.class,0);
 		}
 		public MseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4248,16 +4248,16 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Condition_term_latterContext extends ParserRuleContext {
-		public TerminalNode EGRE() { return getToken(BStarParser.EGRE, 0); }
-		public TerminalNode ELES() { return getToken(BStarParser.ELES, 0); }
-		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
-		public TerminalNode EQU() { return getToken(BStarParser.EQU, 0); }
 		public MseContext mse() {
 			return getRuleContext(MseContext.class,0);
 		}
+		public TerminalNode EGRE() { return getToken(BStarParser.EGRE, 0); }
+		public TerminalNode UEQU() { return getToken(BStarParser.UEQU, 0); }
 		public TerminalNode NOTBELONG() { return getToken(BStarParser.NOTBELONG, 0); }
 		public TerminalNode R_ANGLE_BRACKET() { return getToken(BStarParser.R_ANGLE_BRACKET, 0); }
-		public TerminalNode UEQU() { return getToken(BStarParser.UEQU, 0); }
+		public TerminalNode ELES() { return getToken(BStarParser.ELES, 0); }
+		public TerminalNode EQU() { return getToken(BStarParser.EQU, 0); }
+		public TerminalNode L_ANGLE_BRACKET() { return getToken(BStarParser.L_ANGLE_BRACKET, 0); }
 		public TerminalNode BELONG() { return getToken(BStarParser.BELONG, 0); }
 		public Condition_term_latterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4348,14 +4348,14 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Id_listContext extends ParserRuleContext {
-		public List<IdContext> id() {
-			return getRuleContexts(IdContext.class);
-		}
 		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
 		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public IdContext id(int i) {
 			return getRuleContext(IdContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(BStarParser.COMMA); }
+		public List<IdContext> id() {
+			return getRuleContexts(IdContext.class);
 		}
 		public TerminalNode COMMA(int i) {
 			return getToken(BStarParser.COMMA, i);
@@ -4436,19 +4436,19 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Quan_eContext extends ParserRuleContext {
-		public Imp_pro_eContext imp_pro_e() {
-			return getRuleContext(Imp_pro_eContext.class,0);
-		}
 		public TerminalNode R_BRACKET() { return getToken(BStarParser.R_BRACKET, 0); }
+		public Id_listContext id_list() {
+			return getRuleContext(Id_listContext.class,0);
+		}
+		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
 		public Pro_eContext pro_e() {
 			return getRuleContext(Pro_eContext.class,0);
 		}
 		public TerminalNode EXIST() { return getToken(BStarParser.EXIST, 0); }
-		public TerminalNode L_BRACKET() { return getToken(BStarParser.L_BRACKET, 0); }
-		public Id_listContext id_list() {
-			return getRuleContext(Id_listContext.class,0);
-		}
 		public TerminalNode FORALL() { return getToken(BStarParser.FORALL, 0); }
+		public Imp_pro_eContext imp_pro_e() {
+			return getRuleContext(Imp_pro_eContext.class,0);
+		}
 		public Quan_eContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -4502,11 +4502,11 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Pro_term_eContext extends ParserRuleContext {
-		public Quan_eContext quan_e() {
-			return getRuleContext(Quan_eContext.class,0);
-		}
 		public Condition_termContext condition_term() {
 			return getRuleContext(Condition_termContext.class,0);
+		}
+		public Quan_eContext quan_e() {
+			return getRuleContext(Quan_eContext.class,0);
 		}
 		public Pro_term_eContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4612,10 +4612,10 @@ public class BStarParser extends Parser {
 		public Pro_term_eContext pro_term_e(int i) {
 			return getRuleContext(Pro_term_eContext.class,i);
 		}
-		public List<TerminalNode> CONJUNCTION() { return getTokens(BStarParser.CONJUNCTION); }
 		public TerminalNode CONJUNCTION(int i) {
 			return getToken(BStarParser.CONJUNCTION, i);
 		}
+		public List<TerminalNode> CONJUNCTION() { return getTokens(BStarParser.CONJUNCTION); }
 		public List<Pro_term_eContext> pro_term_e() {
 			return getRuleContexts(Pro_term_eContext.class);
 		}
@@ -4666,13 +4666,13 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Or_pro_eContext extends ParserRuleContext {
+		public List<TerminalNode> DISJUNCTION() { return getTokens(BStarParser.DISJUNCTION); }
 		public List<And_pro_eContext> and_pro_e() {
 			return getRuleContexts(And_pro_eContext.class);
 		}
 		public TerminalNode DISJUNCTION(int i) {
 			return getToken(BStarParser.DISJUNCTION, i);
 		}
-		public List<TerminalNode> DISJUNCTION() { return getTokens(BStarParser.DISJUNCTION); }
 		public And_pro_eContext and_pro_e(int i) {
 			return getRuleContext(And_pro_eContext.class,i);
 		}
@@ -4723,10 +4723,10 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Imp_pro_eContext extends ParserRuleContext {
+		public TerminalNode IMPLICATION() { return getToken(BStarParser.IMPLICATION, 0); }
 		public Or_pro_eContext or_pro_e(int i) {
 			return getRuleContext(Or_pro_eContext.class,i);
 		}
-		public TerminalNode IMPLICATION() { return getToken(BStarParser.IMPLICATION, 0); }
 		public List<Or_pro_eContext> or_pro_e() {
 			return getRuleContexts(Or_pro_eContext.class);
 		}
@@ -4764,12 +4764,12 @@ public class BStarParser extends Parser {
 	}
 
 	public static class Pro_eContext extends ParserRuleContext {
-		public Or_pro_eContext or_pro_e(int i) {
-			return getRuleContext(Or_pro_eContext.class,i);
-		}
-		public List<TerminalNode> IMPLICATION() { return getTokens(BStarParser.IMPLICATION); }
 		public TerminalNode IMPLICATION(int i) {
 			return getToken(BStarParser.IMPLICATION, i);
+		}
+		public List<TerminalNode> IMPLICATION() { return getTokens(BStarParser.IMPLICATION); }
+		public Or_pro_eContext or_pro_e(int i) {
+			return getRuleContext(Or_pro_eContext.class,i);
 		}
 		public List<Or_pro_eContext> or_pro_e() {
 			return getRuleContexts(Or_pro_eContext.class);

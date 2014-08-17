@@ -76,4 +76,8 @@ public class CQuaData {
 		}
 		return return_result;
 	}
+	
+	public boolean is_temp(){
+		return type == QuaDataType.ID && str_data_0.charAt(0) == '@';
+	}
 }

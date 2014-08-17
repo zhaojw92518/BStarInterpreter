@@ -45,7 +45,7 @@ public class CGlobalDef {
 	}
 	
 	public static void cout_dividing_line(){
-		cout_end("=========================================");
+		cout_end("=====================================================================================");
 	}
 
 	public static void info_box(String in_str){

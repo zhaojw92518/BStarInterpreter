@@ -29,6 +29,6 @@ OPERATIONS
 	
 	void main(){
 		//my_printf(123);
-		printf(deg_to_reg(3.14159));
+		printf(deg_to_reg(180));
 	}
 END

@@ -1,5 +1,7 @@
 package com.bstar.Quaternion.Quas;
 
+import com.bstar.Context.CDataEntity;
+import com.bstar.Context.CLangVM;
 import com.bstar.Global.CGlobalDef;
 import com.bstar.Quaternion.CQuaData;
 import com.bstar.Quaternion.CQuaternion;
@@ -26,6 +28,15 @@ public class CReturn extends CQuaternion {
 	
 	@Override
 	public int run() {
-		return CGlobalDef.NORMAL;
+		int return_result = CGlobalDef.ERROR;
+		CDataEntity ret_data = data_0.to_data_entity();
+		if(ret_data == null){
+			//TODO 错误处理
+		}
+		else{
+			CLangVM.set_return_result(ret_data);
+			return_result = CGlobalDef.NORMAL;
+		}
+		return return_result;
 	}
 }
