@@ -4,11 +4,23 @@ import java.util.TreeMap;
 
 import com.bstar.Global.CGlobalDef;
 import com.bstar.Parser.BStarParser;
+import com.bstar.Quaternion.Quas.CAddSearch;
 import com.bstar.Quaternion.Quas.CAddressOf;
-import com.bstar.Quaternion.Quas.CAssign;
+import com.bstar.Quaternion.Quas.CAssignAddr;
+import com.bstar.Quaternion.Quas.CAssignValue;
+import com.bstar.Quaternion.Quas.CBaseAddress;
 import com.bstar.Quaternion.Quas.CBoolNot;
 import com.bstar.Quaternion.Quas.CCallPara;
+import com.bstar.Quaternion.Quas.CCdtBelong;
+import com.bstar.Quaternion.Quas.CCdtEgre;
+import com.bstar.Quaternion.Quas.CCdtEles;
+import com.bstar.Quaternion.Quas.CCdtEqu;
+import com.bstar.Quaternion.Quas.CCdtGre;
+import com.bstar.Quaternion.Quas.CCdtLes;
+import com.bstar.Quaternion.Quas.CCdtNotBelong;
+import com.bstar.Quaternion.Quas.CCdtUequ;
 import com.bstar.Quaternion.Quas.CContentOf;
+import com.bstar.Quaternion.Quas.CDefSearchCDT;
 import com.bstar.Quaternion.Quas.CFuncAttr;
 import com.bstar.Quaternion.Quas.CFuncAttrEnd;
 import com.bstar.Quaternion.Quas.CFuncCall;
@@ -20,11 +32,17 @@ import com.bstar.Quaternion.Quas.CGetAddr;
 import com.bstar.Quaternion.Quas.CGetReturn;
 import com.bstar.Quaternion.Quas.CGloAttr;
 import com.bstar.Quaternion.Quas.CGloAttrEnd;
+import com.bstar.Quaternion.Quas.CGoto;
+import com.bstar.Quaternion.Quas.CIfNot;
+import com.bstar.Quaternion.Quas.CLabel;
 import com.bstar.Quaternion.Quas.CMathAdd;
 import com.bstar.Quaternion.Quas.CMathMod;
 import com.bstar.Quaternion.Quas.CMathRev;
 import com.bstar.Quaternion.Quas.CMathSub;
 import com.bstar.Quaternion.Quas.CSetAddr;
+import com.bstar.Quaternion.Quas.CSetInter;
+import com.bstar.Quaternion.Quas.CSetSearch;
+import com.bstar.Quaternion.Quas.CSetUnion;
 import com.bstar.Quaternion.Quas.CVarDef;
 import com.bstar.Quaternion.Quas.CMathDiv;
 import com.bstar.Quaternion.Quas.CMathMul;
@@ -50,10 +68,20 @@ public class CQuaFactory {
 		token_to_qua.put(BStarParser.DIV, QuaType.MATH_DIV);
 		token_to_qua.put(BStarParser.MOD, QuaType.MATH_MOD);
 		
-		token_to_qua.put(BStarParser.NOT, QuaType.BOOL_NOT);
-		token_to_qua.put(BStarParser.ADDR, QuaType.ADDRESS_OF);
-		//防止乘法运算与指针取值的冲突
-		//token_to_qua.put(BStarParser.MUL, QuaType.CONTENT_OF);
+		token_to_qua.put(BStarParser.NOT, 	QuaType.BOOL_NOT);
+		token_to_qua.put(BStarParser.ADDR,	QuaType.ADDRESS_OF);
+		
+		token_to_qua.put(BStarParser.UNION, QuaType.SET_UNION);
+		token_to_qua.put(BStarParser.INTER, QuaType.SET_INTER);
+		
+		token_to_qua.put(BStarParser.L_ANGLE_BRACKET, 	QuaType.CDT_LES);
+		token_to_qua.put(BStarParser.ELES, 				QuaType.CDT_ELES);
+		token_to_qua.put(BStarParser.R_ANGLE_BRACKET, 	QuaType.CDT_GRE);
+		token_to_qua.put(BStarParser.EGRE, 				QuaType.CDT_EGRE);
+		token_to_qua.put(BStarParser.NOTBELONG, 		QuaType.CDT_NOT_BELONG);
+		token_to_qua.put(BStarParser.BELONG, 			QuaType.CDT_BELONG);
+		token_to_qua.put(BStarParser.EQU, 				QuaType.CDT_EQU);
+		token_to_qua.put(BStarParser.UEQU, 				QuaType.CDT_UEQU);
 		
 		add_qua(QuaType.GLO_ATTR, 			new CGloAttr());
 		add_qua(QuaType.GLO_ATTR_END, 		new CGloAttrEnd());
@@ -63,6 +91,9 @@ public class CQuaFactory {
 		add_qua(QuaType.CST_DEFINE, 		new CCstDef());
 		add_qua(QuaType.FUNC_DEFINE, 		new CFuncDef());
 		add_qua(QuaType.FUNC_DEFINE_END, 	new CFuncDefEnd());
+		add_qua(QuaType.LABEL, 				new CLabel());
+		add_qua(QuaType.GOTO, 				new CGoto());
+		add_qua(QuaType.IF_NOT, 			new CIfNot());
 		add_qua(QuaType.FUNC_PARA, 			new CFuncPara());
 		add_qua(QuaType.RETURN, 			new CReturn());
 		add_qua(QuaType.FUNC_CALL, 			new CFuncCall());
@@ -77,9 +108,24 @@ public class CQuaFactory {
 		add_qua(QuaType.CONTENT_OF, 		new CContentOf());
 		add_qua(QuaType.GET_ADDR, 			new CGetAddr());
 		add_qua(QuaType.SET_ADDR, 			new CSetAddr());
-		add_qua(QuaType.ASSIGN, 			new CAssign());
+		add_qua(QuaType.ASSIGN_VALUE, 		new CAssignValue());
+		add_qua(QuaType.ASSIGN_ADDR, 		new CAssignAddr());
+		add_qua(QuaType.BASE_ADDRESS, 		new CBaseAddress());
+		add_qua(QuaType.DEF_SEARCH_CDT, 	new CDefSearchCDT());
+		add_qua(QuaType.ADD_SEARCH, 		new CAddSearch());
+		add_qua(QuaType.SET_SEARCH, 		new CSetSearch());
 		add_qua(QuaType.CALL_PARA, 			new CCallPara());
 		add_qua(QuaType.GET_RETURN, 		new CGetReturn());
+		add_qua(QuaType.SET_UNION, 			new CSetUnion());
+		add_qua(QuaType.SET_INTER, 			new CSetInter());
+		add_qua(QuaType.CDT_LES, 			new CCdtLes());
+		add_qua(QuaType.CDT_ELES, 			new CCdtEles());
+		add_qua(QuaType.CDT_GRE, 			new CCdtGre());
+		add_qua(QuaType.CDT_EGRE, 			new CCdtEgre());
+		add_qua(QuaType.CDT_NOT_BELONG, 	new CCdtNotBelong());
+		add_qua(QuaType.CDT_BELONG, 		new CCdtBelong());
+		add_qua(QuaType.CDT_EQU, 			new CCdtEqu());
+		add_qua(QuaType.CDT_UEQU, 			new CCdtUequ());
 	}
 	
 	public static CQuaternion create_qua(int in_type, CQuaData in_data_0, CQuaData in_data_1, CQuaData in_data_2){

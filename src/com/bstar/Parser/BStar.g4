@@ -123,7 +123,11 @@ statement:		SEMICOLON							|
 				while_stat							|
 				if_stat								|
 				L_BRACE (statement)* R_BRACE		|
+				element								|
+				break_stat							|
+				continue_stat						|
 				statement_at						;
+
 
 element_take:	id (POINT id)*	
 				(
@@ -133,13 +137,21 @@ element_take:	id (POINT id)*
 						(COMMA (id | integer) belong element)*
 					R_ANGLE_BRACKET
 				)?									;
+
+break_stat:
+	BREAK SEMICOLON;
+continue_stat:
+	CONTINUE SEMICOLON;
+
 assign_stat:	point_id ASSIGNMENT element			|
 				point_id (POINT id | ADDRGET id)+
 					ASSIGNMENT element				;
 return_stat:	RETURN (element)?					;
 while_stat:		WHILE L_BRACKET pro_e R_BRACKET statement	;
 if_stat:		IF	  L_BRACKET pro_e R_BRACKET statement 
-					(ELSE statement)?						;
+					(else_stat)?						;
+else_stat:
+	ELSE statement;
 
 define:			DEFINE	;
 include:		INCLUDE	;
@@ -157,10 +169,13 @@ real: 			REAL 	;
 char_str: 		CHAR 	;
 statement_at:	AT_STR	;
 
+belong_pair:
+	(id | integer) belong element ;		   
+
 term_latter:
 	POINT	L_ANGLE_BRACKET 
-			(id | integer) belong element 
-			(COMMA (id | integer) belong element)* 
+			belong_pair
+			(COMMA belong_pair)* 
 			R_ANGLE_BRACKET										|
 	POINT id													|
 	ADDRGET id													;
@@ -173,6 +188,7 @@ term_set:
 
 term_tuple:
 	L_ANGLE_BRACKET element (COMMA element)* R_ANGLE_BRACKET	;
+
 
 term:
 (			
@@ -187,7 +203,7 @@ term:
 	term_tuple						| 
 	function_call					| 
 	id								| 
-	L_BRACKET element R_BRACKET		| 
+	L_BRACKET element R_BRACKET		 
 )
 (
 	term_latter
@@ -285,6 +301,8 @@ RETURN:				'return'		;
 IF:					'if'			;
 ELSE:				'else'			;
 WHILE:				'while'			;
+BREAK:				'break'			;
+CONTINUE:			'continue'		;
 TYPEDEF:			'typedef'		;
 SUF:				'.bs'			;				
 DEFINE:				'#define'		;

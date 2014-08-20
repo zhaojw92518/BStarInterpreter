@@ -9,26 +9,50 @@ ATTRIBUTES
 	int global_int;
 	
 	typedef struct {
-		int id;
-		double value; 
-	}data_pair;
+		int id_0;
+		int id_1; 
+	}u_tuple;
 	
 	const int pi = HALF_CIR;
 OPERATIONS
-	double deg_to_reg(double in_value)
+	/*double deg_to_reg(double in_value)
 	{
 		double return_result;
 		return_result = in_value / DEG_PI;
-		return_result = return_result * HALF_CIR;
+		return_result = return_result* HALF_CIR;
 		return return_result;
-	}
+	}*/
 	
-	void my_printf(double in_arg){
-		printf(in_arg);
+	void print_all(set<u_tuple> *in_array){
+		u_tuple* cur_tuple;
+		cur_tuple = (*in_array).<id_0:nil>;
+		while(true){
+			if(cur_tuple->id_1 == nil){
+				break;
+			}
+			else{
+				printf(cur_tuple->id_1);
+				cur_tuple = (*in_array).<id_0:cur_tuple->id_1>;
+			}
+		}
 	}
 	
 	void main(){
-		//my_printf(123);
-		printf(deg_to_reg(180));
+		set<u_tuple> int_array;
+		u_tuple t1,t2,t3,t4;
+		t1.id_0 = nil;
+		t1.id_1 = 1;
+		t2.id_0 = 1;
+		t2.id_1 = 2;
+		t3.id_0 = 2;
+		t3.id_1 = 3;
+		t4.id_0 = 4;
+		t4.id_1 = nil;
+		int_array \-/ {&t1};
+		int_array \-/ {&t2};
+		int_array \-/ {&t3};
+		int_array \-/ {&t4};
+		print_all(&int_array);
+		//printf(deg_to_reg(180));
 	}
 END

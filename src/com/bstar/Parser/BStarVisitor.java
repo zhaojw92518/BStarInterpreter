@@ -152,6 +152,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAssign_stat(@NotNull BStarParser.Assign_statContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#break_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBreak_stat(@NotNull BStarParser.Break_statContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#false_str}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -199,6 +206,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitInvariant(@NotNull BStarParser.InvariantContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#else_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElse_stat(@NotNull BStarParser.Else_statContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#unary_e}.
@@ -509,6 +523,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	T visitTerm_element_comma(@NotNull BStarParser.Term_element_commaContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BStarParser#continue_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContinue_stat(@NotNull BStarParser.Continue_statContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BStarParser#attributes}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -521,6 +542,13 @@ public interface BStarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNormal_type(@NotNull BStarParser.Normal_typeContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BStarParser#belong_pair}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBelong_pair(@NotNull BStarParser.Belong_pairContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BStarParser#cfunction_declare}.

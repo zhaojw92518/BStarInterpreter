@@ -52,12 +52,29 @@ public class CQuaData {
 			if(templet_type != null){
 				return_result += "<" + templet_type.toString() + ">";
 			}
+			for(int i = 0; i < this.value_data; ++i){
+				return_result += "*";
+			}
 		}
 		else if(type == QuaDataType.ID){
 			return_result = str_data_0;
 		}
 		else if(type == QuaDataType.DOUBLE || type == QuaDataType.INT){
 			return_result = CMath.double_to_str(value_data);
+		}
+		else if(type == QuaDataType.NIL){
+			return_result = "nil";
+		}
+		else if(type == QuaDataType.SET){
+			return_result = "{";
+			if(list_data != null && !list_data.isEmpty()){
+				return_result += list_data.getFirst().toString();
+				for(int i = 1; i < list_data.size(); ++i){
+					return_result += "," + list_data.get(i).toString();
+				}
+			}
+			return_result += "}";
+			
 		}
 		else{
 			return_result = new String();

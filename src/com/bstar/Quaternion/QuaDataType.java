@@ -5,6 +5,8 @@ public enum QuaDataType {
 	INIT,
 	TYPE,
 	ID,
+	//Special type
+	NIL,
 	//value type
 	INT,
 	DOUBLE,

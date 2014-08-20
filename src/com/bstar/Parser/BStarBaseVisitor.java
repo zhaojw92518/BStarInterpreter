@@ -178,6 +178,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitBreak_stat(@NotNull BStarParser.Break_statContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitFalse_str(@NotNull BStarParser.False_strContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -227,6 +235,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitInvariant(@NotNull BStarParser.InvariantContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitElse_stat(@NotNull BStarParser.Else_statContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -586,6 +602,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitContinue_stat(@NotNull BStarParser.Continue_statContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitAttributes(@NotNull BStarParser.AttributesContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -595,6 +619,14 @@ public class BStarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitNormal_type(@NotNull BStarParser.Normal_typeContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitBelong_pair(@NotNull BStarParser.Belong_pairContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
