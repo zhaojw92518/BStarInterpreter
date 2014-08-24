@@ -105,12 +105,6 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	 */
 	@Override public CQuaData visitBelong(@NotNull BStarParser.BelongContext ctx) { return visitChildren(ctx); }
 
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public CQuaData visitCode_text(@NotNull BStarParser.Code_textContext ctx) { 
 		if(ctx.operations() != null){
 			visitOperations(ctx.operations());
@@ -612,7 +606,19 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 				
 			}
 			else if(ctx.struct_type() != null){
-				
+				BStarParser.Struct_typeContext cur_struct = ctx.struct_type();
+				CQuaData id_list = new CQuaData(), type_list = new CQuaData();
+				id_list.type = QuaDataType.ID_LIST;
+				type_list.type = QuaDataType.TYPE_LIST;
+				for(int i = 0; i < cur_struct.point_id().size(); ++i){
+					CQuaData cur_id = visitPoint_id(cur_struct.point_id(i)),
+							cur_type = visitType(cur_struct.type(i));
+					cur_type.value_data = cur_id.value_data;
+					cur_id.value_data = 0.0;
+					id_list.add_list_data(cur_id);
+					type_list.add_list_data(cur_type);
+				}
+				add_qua(CQuaFactory.create_qua(QuaType.VAR_TYPEDEF, id_list, type_list, visitPoint_id(ctx.point_id())));
 			}
 		}
 		return null; 

@@ -76,6 +76,16 @@ public class CQuaData {
 			return_result += "}";
 			
 		}
+		else if(type == QuaDataType.TYPE_LIST || type == QuaDataType.ID_LIST){
+			return_result = "[";
+			if(list_data != null && !list_data.isEmpty()){
+				return_result += list_data.getFirst().toString();
+				for(int i = 1; i < list_data.size(); ++i){
+					return_result += "," + list_data.get(i).toString();
+				}
+			}
+			return_result += "]";
+		}
 		else{
 			return_result = new String();
 		}
@@ -84,12 +94,39 @@ public class CQuaData {
 	
 	public CDataEntity to_data_entity(){
 		CDataEntity return_result = null;
-		if(type.is_value_type()){
-			return_result = new CDataEntity(type.type_to_str());
-			return_result.value_data = value_data;
-		}
-		else if(type == QuaDataType.ID){
+		if(type == QuaDataType.ID){
 			return_result = CLangVM.get_data(str_data_0);
+		}
+		else if(type == QuaDataType.SET){
+			return_result = new CDataEntity();
+			return_result.type = "set";
+			if(list_data.isEmpty()){
+				//TODO 空集合
+				CGlobalDef.info_box(toString() + " is a empty set");
+			}
+			else{
+				return_result.set_init(list_data.getFirst().to_data_entity().type);
+			}
+			for(int i = 1; i < list_data.size(); ++i){
+				if(!return_result.set_add_data(list_data.get(i).to_data_entity())){
+					//集合类型不匹配
+				}
+			}
+		}
+		else if(type == QuaDataType.NIL){
+			return_result = new CDataEntity();
+			return_result.is_nil = true;
+		}
+		else{
+			return_result = CLangVM.get_type_init_value(type.type_to_str());
+			if(return_result == null){
+				CGlobalDef.info_box("Type " + type.type_to_str() + " not found!");
+			}
+			else{
+				if(type.is_value_type()){
+					return_result.value_data = value_data;
+				}
+			}
 		}
 		return return_result;
 	}

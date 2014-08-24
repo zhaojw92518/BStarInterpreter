@@ -37,7 +37,7 @@ public class CVarDef extends CQuaternion{
 				else{
 					CLangVM.add_global_id(
 							data_0.str_data_0, 
-							CLangVM.get_type_init_value(data_1.str_data_0));
+							CLangVM.get_type_init_value(data_1));
 				}
 				return_result = CGlobalDef.NORMAL;
 			}
@@ -55,9 +55,10 @@ public class CVarDef extends CQuaternion{
 				CLangVM.add_local_id(data_0.str_data_0, cur_data);
 			}
 			else{
+				CDataEntity cur_init_value = CLangVM.get_type_init_value(data_1);
 				CLangVM.add_local_id(
 						data_0.str_data_0, 
-						CLangVM.get_type_init_value(data_1.str_data_0));
+						cur_init_value);
 			}
 			return_result = CGlobalDef.NORMAL;
 		}

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.bstar.Context.CFuncTable.CFuncData;
 import com.bstar.Global.CGlobalDef;
+import com.bstar.Quaternion.CQuaData;
 import com.bstar.Quaternion.CQuaternion;
 
 public class CLangVM {
@@ -41,6 +42,7 @@ public class CLangVM {
 			push_func("main");
 			program_counter = main_index;
 			while(true){
+				CGlobalDef.cout_end(quas.get(program_counter).to_table_str());
 				int run_result = quas.get(program_counter).run();
 				
 				if(run_result == CGlobalDef.ERROR){
@@ -52,7 +54,6 @@ public class CLangVM {
 					break;
 				}
 				program_counter++;
-				CGlobalDef.cout_end(quas.get(program_counter).to_table_str());
 			}
 		}
 		else{
@@ -170,7 +171,15 @@ public class CLangVM {
 		return para_list.pollFirst();
 	}
 	
+	public static CDataEntity get_type_init_value(CQuaData in_type){
+		return init_value_table.get_type_init_value(in_type);
+	}
+	
 	public static CDataEntity get_type_init_value(String in_type){
 		return init_value_table.get_type_init_value(in_type);
+	}
+	
+	public static void add_type_init_value(CDataEntity in_data){
+		init_value_table.add_map(in_data);
 	}
 }

@@ -48,10 +48,11 @@ OPERATIONS
 		t3.id_1 = 3;
 		t4.id_0 = 4;
 		t4.id_1 = nil;
-		int_array \-/ {&t1};
-		int_array \-/ {&t2};
-		int_array \-/ {&t3};
-		int_array \-/ {&t4};
+		printf(t4.id_0);
+		int_array = int_array \-/ {&t1};
+		int_array = int_array \-/ {&t2};
+		int_array = int_array \-/ {&t3};
+		int_array = int_array \-/ {&t4};
 		print_all(&int_array);
 		//printf(deg_to_reg(180));
 	}
