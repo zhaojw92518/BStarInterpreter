@@ -4,12 +4,16 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.antlr.v4.parse.ANTLRParser.lexerAlt_return;
+
 public class CSetStruct {
 	private TreeSet<CDataEntity> set_data = new TreeSet<>();
 	private String type = null;
+	private int pointer_level = 0;
 	
-	public CSetStruct(String in_type){
+	public CSetStruct(String in_type, int in_level){
 		type = in_type;
+		pointer_level = in_level;
 	}
 	
 	public CSetStruct(CSetStruct in_set){
@@ -25,6 +29,10 @@ public class CSetStruct {
 	
 	public String get_type(){
 		return type;
+	}
+	
+	public int get_level(){
+		return pointer_level;
 	}
 	
 	/**
@@ -63,7 +71,7 @@ public class CSetStruct {
 	
 	public boolean add_data(CDataEntity in_data){
 		boolean return_result = false;
-		if(in_data.type == this.type){
+		if(in_data.type.equals(this.type) && in_data.type_pointer - pointer_level == 1){
 			set_data.add(in_data);
 			return_result = true;
 		}
@@ -77,5 +85,21 @@ public class CSetStruct {
 			return_result.set_data.addAll(in_set.set_data);
 		}
 		return return_result;
+	}
+	
+	public String toString(){
+		String return_result = "{";
+		for(CDataEntity cur_data: set_data){
+			return_result += cur_data.toString() + ",";
+		}
+		if(return_result.length() != 1){
+			return_result = return_result.substring(0, return_result.length() - 1);
+		}
+		return_result += "}";
+		return return_result;
+	}
+	
+	public boolean is_type_equal(CSetStruct in_set){
+		return type.equals(in_set.type) && pointer_level == in_set.pointer_level;
 	}
 }

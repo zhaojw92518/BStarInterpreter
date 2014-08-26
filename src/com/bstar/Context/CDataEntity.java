@@ -5,9 +5,10 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.bstar.Global.CGlobalDef;
+import com.bstar.Global.CMath;
 import com.sun.corba.se.impl.util.IdentityHashtable;
 
-public class CDataEntity {
+public class CDataEntity implements Comparable<CDataEntity> {
 	public boolean is_const = false, is_nil = false;
 	public String type = null, str_data = "";
 	public int type_pointer = 0;
@@ -134,8 +135,12 @@ public class CDataEntity {
 	//Struct operation end
 	
 	//Set operation
-	public void set_init(String in_type){
-		set_data = new CSetStruct(in_type);
+	public boolean is_set_data(){
+		return set_data != null;
+	}
+	
+	public void set_init(String in_type, int in_level){
+		set_data = new CSetStruct(in_type, in_level);
 	}
 	
 	public CDataEntity set_search(CDataEntity in_search_cdt){
@@ -162,7 +167,7 @@ public class CDataEntity {
 	private CDataEntity set_clone(){
 		CDataEntity return_result = new CDataEntity();
 		return_result.type = this.type;
-		return_result.set_init(set_data.get_type());
+		return_result.set_init(set_data.get_type(), set_data.get_level());
 		return return_result;
 	}
 	
@@ -178,6 +183,10 @@ public class CDataEntity {
 	//Set operation end
 	
 	//Pointer operation
+	public boolean is_pointer_data(){
+		return type_pointer > 0;
+	}
+	
 	public CDataEntity get_address(){
 		CDataEntity return_result = new CDataEntity();
 		return_result.type = this.type;
@@ -194,4 +203,55 @@ public class CDataEntity {
 		return return_result;
 	}
 	//Pointer operation end
+	
+	public String toString(){
+		String return_result = null;
+		if(is_set_data()){
+			return_result = set_data.toString();
+		}
+		else if(is_value_data()){
+			return_result = CMath.double_to_str(value_data);
+		}
+		else if(is_struct_data()){
+			return_result = "[";
+			for(Map.Entry<String, CDataEntity> cur_data: struct_data.entrySet()){
+				return_result += cur_data.getKey() + "=";
+				return_result += cur_data.getValue().toString();
+				return_result += ",";
+			}
+			if(return_result.length() != 1){
+				return_result = return_result.substring(0, return_result.length() - 1);
+			}
+			return_result += "]";
+		}
+		else if(is_pointer_data()){
+			return_result = pointer_data.toString();
+		}
+		return return_result;
+	}
+
+	@Override
+	public int compareTo(CDataEntity o) {
+		int return_result = 0;
+		int left_id = System.identityHashCode(this),
+			right_id = System.identityHashCode(o);
+		if(left_id < right_id){
+			return_result = -1;
+		}
+		else if(left_id > right_id){
+			return_result = 1;
+		}
+		return return_result;
+	}
+	
+	public boolean type_equal_to(CDataEntity in_data){
+		boolean return_result = false;
+		if(is_set_data() && in_data.is_set_data()){
+			return_result = set_data.is_type_equal(in_data.set_data);
+		}
+		else if(type.equals(in_data.type) && type_pointer == in_data.type_pointer){
+			return_result = true;
+		}
+		return return_result;
+	}
 }

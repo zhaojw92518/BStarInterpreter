@@ -105,7 +105,9 @@ public class CQuaData {
 				CGlobalDef.info_box(toString() + " is a empty set");
 			}
 			else{
-				return_result.set_init(list_data.getFirst().to_data_entity().type);
+				CDataEntity first_data = list_data.getFirst().to_data_entity();
+				return_result.set_init(first_data.type, first_data.type_pointer - 1);
+				return_result.set_add_data(first_data);
 			}
 			for(int i = 1; i < list_data.size(); ++i){
 				if(!return_result.set_add_data(list_data.get(i).to_data_entity())){

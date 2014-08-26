@@ -45,10 +45,12 @@ public class CInitValueTable {
 		CDataEntity return_result = null;
 		if(in_type.type == QuaDataType.TYPE && in_type.str_data_0.equals("set")){
 			return_result = new CDataEntity();
-			return_result.set_init(in_type.templet_type.str_data_0);
+			return_result.type = "set";
+			return_result.set_init(in_type.templet_type.str_data_0, (int)in_type.value_data);
 		}
 		else{
 			return_result = get_type_init_value(in_type.str_data_0);
+			return_result.type_pointer = (int)in_type.value_data;
 		}
 		return return_result;
 	}

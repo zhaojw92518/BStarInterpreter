@@ -33,6 +33,7 @@ public class CAddressOf extends CQuaternion {
 				CDataEntity dst_data = data_1.to_data_entity();
 				if(dst_data.type != null && dst_data.type.equals(dst_data.type)){
 					dst_data.assign(addr_data);
+					return_result = CGlobalDef.NORMAL;
 				}
 			}
 		}
