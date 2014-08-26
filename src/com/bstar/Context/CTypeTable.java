@@ -5,38 +5,44 @@ import java.util.TreeMap;
 import com.bstar.Quaternion.CQuaData;
 import com.bstar.Quaternion.QuaDataType;
 
-public class CInitValueTable {
+public class CTypeTable {
+	public static final String cdt_search = "@cdt_search",
+			type_int = "int",
+			type_double = "double",
+			type_char = "char",
+			type_nil = "nil";
+	
 	private TreeMap<String, CDataEntity> init_value_map = new TreeMap<>();
 	
 	public void add_map(CDataEntity in_entity){
 		init_value_map.put(in_entity.type, in_entity);
 	}
 	
-	public CInitValueTable(){
+	public CTypeTable(){
 		CDataEntity data_entity;
 		
 		data_entity = new CDataEntity();
-		data_entity.type = "int";
+		data_entity.type = type_int;
 		data_entity.value_data = 0.0;
 		add_map(data_entity);
 		
 		data_entity = new CDataEntity();
-		data_entity.type = "double";
+		data_entity.type = type_double;
 		data_entity.value_data = 0.0;
 		add_map(data_entity);
 		
 		data_entity = new CDataEntity();
-		data_entity.type = "char";
+		data_entity.type = type_char;
 		data_entity.value_data = 0.0;
 		add_map(data_entity);
 		
 		data_entity = new CDataEntity();
-		data_entity.type = "nil";
+		data_entity.type = type_nil;
 		data_entity.value_data = 0.0;
 		add_map(data_entity);
 		
 		data_entity = new CDataEntity();
-		data_entity.type = "@cdt_search";
+		data_entity.type = cdt_search;
 		data_entity.struct_init();
 		add_map(data_entity);
 	}

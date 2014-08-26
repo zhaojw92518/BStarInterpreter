@@ -1,5 +1,8 @@
 package com.bstar.Quaternion.Quas;
 
+import com.bstar.Context.CDataEntity;
+import com.bstar.Context.CLangVM;
+import com.bstar.Context.CTypeTable;
 import com.bstar.Global.CGlobalDef;
 import com.bstar.Quaternion.CQuaternion;
 import com.bstar.Quaternion.QuaType;
@@ -25,7 +28,16 @@ public class CDefSearchCDT extends CQuaternion {
 
 	@Override
 	public int run() {
-		return CGlobalDef.NORMAL;
+		int return_result = CGlobalDef.ERROR;
+		if(CLangVM.get_data(data_0.str_data_0) == null){
+			CDataEntity cdt_search = CLangVM.get_type_init_value(CTypeTable.cdt_search);
+			CLangVM.add_local_id(data_0.str_data_0, cdt_search);
+			return_result = CGlobalDef.NORMAL;
+		}
+		else{
+			//错误处理
+		}
+		return return_result;
 	}
 
 }

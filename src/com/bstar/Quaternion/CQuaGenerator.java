@@ -926,7 +926,8 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 				add_qua(CQuaFactory.create_qua(
 						QuaType.ADD_SEARCH, 
 						condition_former, 
-						visitElement(cur_pair.element())
+						visitElement(cur_pair.element()),
+						search_condition
 							)
 						);
 			}

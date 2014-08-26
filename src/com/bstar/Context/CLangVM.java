@@ -18,7 +18,7 @@ public class CLangVM {
 	private static LinkedList<CQuaternion> quas = null;
 	private static int program_counter = 0;
 	private static ArrayList<CSystemFunc> system_funcs = new ArrayList<>();
-	private static CInitValueTable init_value_table = new CInitValueTable();
+	private static CTypeTable init_value_table = new CTypeTable();
 	
 	public static void init(){
 		func_table.add_func("printf", "void", -1);

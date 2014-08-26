@@ -10,7 +10,7 @@ import com.sun.corba.se.impl.util.IdentityHashtable;
 
 public class CDataEntity implements Comparable<CDataEntity> {
 	public boolean is_const = false, is_nil = false;
-	public String type = null, str_data = "";
+	public String type = "", str_data = "";
 	public int type_pointer = 0;
 	public CDataEntity pointer_data = null;
 	public double value_data = 0.0;
@@ -118,6 +118,9 @@ public class CDataEntity implements Comparable<CDataEntity> {
 		boolean return_result = false;
 		if(is_value_data()&& in_data.is_value_data()){
 			return_result = (value_data == in_data.value_data);
+		}
+		else if(is_nil && in_data.is_nil){
+			return_result = true;
 		}
 		else{
 			return_result = (System.identityHashCode(this) == System.identityHashCode(in_data));

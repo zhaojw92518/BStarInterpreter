@@ -21,6 +21,7 @@ public class CIfNot extends CQuaternion {
 
 	@Override
 	public int run() {
+		int return_result = CGlobalDef.ERROR;
 		return CGlobalDef.NORMAL;
 	}
 
