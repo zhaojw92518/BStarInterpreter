@@ -84,8 +84,8 @@ public class CQuaGenerator extends BStarBaseVisitor<CQuaData>{
 	
 	//Debug
 	public void print_quas(){
-		for(CQuaternion cur_qua: quas){
-			CGlobalDef.cout_end(cur_qua.to_table_str());
+		for(Integer i = 0; i < quas.size(); ++i){
+			CGlobalDef.cout_end(i.toString() + "\t" + quas.get(i).to_table_str());
 		}
 	}
 	

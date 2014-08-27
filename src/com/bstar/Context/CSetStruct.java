@@ -43,14 +43,14 @@ public class CSetStruct {
 	public CDataEntity search_struct_data(TreeMap<String, CDataEntity> search_cdt){
 		CDataEntity return_result = null;
 		for(CDataEntity cur_data: set_data){
-			cur_data = cur_data.get_content();
-			if(cur_data != null){
+			CDataEntity cur_data_content = cur_data.get_content();
+			if(cur_data_content != null){
 				boolean is_equal = true, is_error = false;
 				for(Map.Entry<String, CDataEntity> cur_entry: search_cdt.entrySet()){
 					String cur_id = cur_entry.getKey();
 					CDataEntity cur_cdt_value = cur_entry.getValue();
-					if(cur_data.is_struct_data() && cur_data.is_struct_have(cur_id)){
-						if(!cur_data.struct_get_data(cur_id).is_equal_to(cur_cdt_value)){
+					if(cur_data_content.is_struct_data() && cur_data_content.is_struct_have(cur_id)){
+						if(!cur_data_content.struct_get_data(cur_id).is_equal_to(cur_cdt_value)){
 							is_equal = false;
 							break;
 						}

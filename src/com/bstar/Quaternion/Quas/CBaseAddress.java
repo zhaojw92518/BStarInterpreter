@@ -38,15 +38,7 @@ public class CBaseAddress extends CQuaternion {
 					//TODO 错误处理
 				}
 				else{
-					if(data_2.is_temp()){
-						CLangVM.add_local_id(data_2.str_data_0, address_result);
-						return_result = CGlobalDef.NORMAL;
-					}
-					else{
-						CGlobalDef.info_box("一般基址寻址指令目标变量都是临时变量" + 
-								CGlobalDef.endl + 
-								data_2.str_data_0);
-					}
+					return_result = assign_to_local_id(address_result, data_2);
 				}
 			}
 		}

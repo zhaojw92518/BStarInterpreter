@@ -37,7 +37,7 @@ public class CDebugConsole extends JFrame {
 	public void add_str(String in_str){
 		debug_context.setText(debug_context.getText() + in_str);
 		Point p = new Point();
-		p.setLocation(0, debug_context.getLineCount() * CGlobalDef.global_font_size);
+		p.setLocation(0, (debug_context.getLineCount() + 100) * CGlobalDef.global_font_size);
 		scroll_pane.getViewport().setViewPosition(p);
 	}
 }

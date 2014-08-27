@@ -56,7 +56,9 @@ public class CTypeTable {
 		}
 		else{
 			return_result = get_type_init_value(in_type.str_data_0);
-			return_result.type_pointer = (int)in_type.value_data;
+			for(int i = 1; i <= (int)in_type.value_data; ++i){
+				return_result = return_result.get_address();
+			}
 		}
 		return return_result;
 	}

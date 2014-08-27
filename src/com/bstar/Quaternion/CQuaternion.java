@@ -73,7 +73,8 @@ public abstract class CQuaternion implements IDup, IScane, IRun{
 				return_result = CGlobalDef.NORMAL;
 			}
 			else{
-				//TODO 错误处理
+				CLangVM.set_data(dst_qua_data.str_data_0, src_data);
+				return_result = CGlobalDef.NORMAL;
 			}
 		}
 		else{

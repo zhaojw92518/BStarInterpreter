@@ -33,10 +33,7 @@ public class CAssignValue extends CQuaternion {
 			//TODO 错误处理
 		}
 		//TODO 错误处理
-		if((src_data.is_nil ||
-				dst_data.is_value_data() && src_data.is_value_data()) ||
-				dst_data.type.equals(src_data.type) 
-				){
+		if(src_data.type_equal_to(dst_data) || src_data.is_nil){
 			dst_data.assign(src_data);
 			return_result = CGlobalDef.NORMAL;
 		}

@@ -39,20 +39,23 @@ OPERATIONS
 	
 	void main(){
 		set<u_tuple> int_array;
-		u_tuple t1,t2,t3,t4;
+		u_tuple t1,t2,t3,t4,t5;
 		t1.id_0 = nil;
 		t1.id_1 = 1;
 		t2.id_0 = 1;
 		t2.id_1 = 2;
 		t3.id_0 = 2;
 		t3.id_1 = 3;
-		t4.id_0 = 4;
-		t4.id_1 = nil;
+		t4.id_0 = 3;
+		t4.id_1 = 4;
+		t5.id_0 = 4;
+		t5.id_1 = nil;
 		//printf(t4.id_0);
 		int_array = int_array \-/ {&t1};
 		int_array = int_array \-/ {&t2};
 		int_array = int_array \-/ {&t3};
 		int_array = int_array \-/ {&t4};
+		int_array = int_array \-/ {&t5};
 		print_all(&int_array);
 		//printf(deg_to_reg(180));
 	}

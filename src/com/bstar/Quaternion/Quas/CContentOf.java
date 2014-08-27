@@ -29,17 +29,7 @@ public class CContentOf extends CQuaternion {
 		if(src_data != null){
 			CDataEntity content_data = src_data.get_content();
 			if(content_data != null){
-				if(data_1.is_temp()){
-					CLangVM.add_local_id(data_1.str_data_0, content_data);
-					return_result = CGlobalDef.NORMAL;
-				}
-				else{
-					CDataEntity dst_data = data_1.to_data_entity();
-					if(dst_data != null && dst_data.type_equal_to(content_data)){
-						dst_data.assign(content_data);
-						return_result = CGlobalDef.NORMAL;
-					}
-				}
+				return_result = assign_to_local_id(content_data, data_1);
 			}
 			else{
 				//TODO 错误处理

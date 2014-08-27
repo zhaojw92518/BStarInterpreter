@@ -3,6 +3,7 @@ package com.bstar.Context;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.bstar.Context.CFuncTable.CFuncData;
 import com.bstar.Global.CGlobalDef;
@@ -19,6 +20,7 @@ public class CLangVM {
 	private static int program_counter = 0;
 	private static ArrayList<CSystemFunc> system_funcs = new ArrayList<>();
 	private static CTypeTable init_value_table = new CTypeTable();
+	private static TreeMap<Integer, Integer> label_map = new TreeMap<>();
 	
 	public static void init(){
 		func_table.add_func("printf", "void", -1);
@@ -43,7 +45,8 @@ public class CLangVM {
 			program_counter = main_index;
 			while(true){
 				CGlobalDef.cout_end(quas.get(program_counter).to_table_str());
-				int run_result = quas.get(program_counter).run();
+				CQuaternion cur_qua = quas.get(program_counter);
+				int run_result = cur_qua.run();
 				
 				if(run_result == CGlobalDef.ERROR){
 					CGlobalDef.cout_end("ERROR");
@@ -181,5 +184,13 @@ public class CLangVM {
 	
 	public static void add_type_init_value(CDataEntity in_data){
 		init_value_table.add_map(in_data);
+	}
+	
+	public static void add_label(int label_id, int label_location){
+		label_map.put(label_id, label_location);
+	}
+	
+	public static void go_to(int label_id){
+		jump_to(label_map.get(label_id));
 	}
 }

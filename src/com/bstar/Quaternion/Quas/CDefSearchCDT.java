@@ -35,7 +35,9 @@ public class CDefSearchCDT extends CQuaternion {
 			return_result = CGlobalDef.NORMAL;
 		}
 		else{
-			//错误处理
+			CDataEntity cdt_search = CLangVM.get_type_init_value(CTypeTable.cdt_search);
+			CLangVM.set_data(data_0.str_data_0, cdt_search);
+			return_result = CGlobalDef.NORMAL;
 		}
 		return return_result;
 	}

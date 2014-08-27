@@ -85,9 +85,10 @@ public class CDataEntity implements Comparable<CDataEntity> {
 	}
 	
 	public boolean is_value_data(){
-		return type.equals("double") || 
+		return (type.equals("double") || 
 				type.equals("int") ||
-				type.equals("char") ;
+				type.equals("char") ) && 
+				type_pointer == 0;
 	}
 	
 	//Struct operation

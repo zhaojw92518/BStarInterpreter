@@ -1,5 +1,7 @@
 package com.bstar.Quaternion.Quas;
 
+import com.bstar.Context.CDataEntity;
+import com.bstar.Context.CLangVM;
 import com.bstar.Global.CGlobalDef;
 import com.bstar.Quaternion.CQuaternion;
 import com.bstar.Quaternion.QuaType;
@@ -22,7 +24,17 @@ public class CIfNot extends CQuaternion {
 	@Override
 	public int run() {
 		int return_result = CGlobalDef.ERROR;
-		return CGlobalDef.NORMAL;
+		CDataEntity cdt_result = data_0.to_data_entity();
+		if(cdt_result.is_value_data()){
+			return_result = CGlobalDef.NORMAL;
+			if(cdt_result.value_data == 0){
+				CLangVM.go_to((int)data_1.value_data);
+			}
+		}
+		else{
+			//TODO 错误处理
+		}
+		return return_result;
 	}
 
 }
