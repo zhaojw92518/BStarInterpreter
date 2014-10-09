@@ -86,7 +86,6 @@ public class BStarInterpreter {
 				output_stream.close();
 				System.out.println("Over");
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (IOException e) {
@@ -102,9 +101,9 @@ public class BStarInterpreter {
 			CGlobalDef.start_debug_console();
 			CQuaFactory.init_factory();
 			CPreProcessor preprocessor = new CPreProcessor();
-			File file = new File("./Test01.bs");
+			File file = new File("./bs/Type.bs");
 			CFileMgr.set_base_dic(file);
-			preprocessor.test_run("./Test01.bs");
+			preprocessor.test_run("./bs/Type.bs");
 			CQuaGenerator qua_generator = new CQuaGenerator();
 			for(Map.Entry<String, CPreProcResult> cur_entry: preprocessor.get_results().entrySet()){
 				ANTLRInputStream input = new ANTLRInputStream(cur_entry.getValue().cv_define_str);
@@ -124,13 +123,13 @@ public class BStarInterpreter {
 			    //CGlobalDef.cout_end(code_text_tree.toStringTree(parser));
 			    qua_generator.visit(code_text_tree);
 			    qua_generator.print_quas();
-			    qua_generator.scane_quas();
+			    /*qua_generator.scane_quas();
 			    CLangVM.init();
 			    CLangVM.print_func_table();
 			    CLangVM.print_global_symbol();
 			    CLangVM.set_quas(qua_generator.get_quas());
 			    CLangVM.run();
-			    qua_generator.init();
+			    qua_generator.init();*/
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
