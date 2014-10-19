@@ -1,9 +1,9 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 import java.util.TreeMap;
 
-import cn.edu.buaa.act.bstar.Quaternion.CQuaData;
-import cn.edu.buaa.act.bstar.Quaternion.QuaDataType;
+import cn.edu.buaa.act.bstar.quaternion.CQuaData;
+import cn.edu.buaa.act.bstar.quaternion.QuaDataType;
 
 public class CTypeTable {
 	public static final String cdt_search = "@cdt_search",

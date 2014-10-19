@@ -1,4 +1,4 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 import java.util.Map;
 import java.util.TreeMap;

@@ -1,14 +1,14 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import cn.edu.buaa.act.bstar.Context.CFuncTable.CFuncData;
-import cn.edu.buaa.act.bstar.Global.CGlobalDef;
-import cn.edu.buaa.act.bstar.Quaternion.CQuaData;
-import cn.edu.buaa.act.bstar.Quaternion.CQuaternion;
+import cn.edu.buaa.act.bstar.global.CGlobalDef;
+import cn.edu.buaa.act.bstar.quaternion.CQuaData;
+import cn.edu.buaa.act.bstar.quaternion.CQuaternion;
+import cn.edu.buaa.act.bstar.context.CFuncTable.CFuncData;
 
 public class CLangVM {
 	private static CContext context = new CContext();

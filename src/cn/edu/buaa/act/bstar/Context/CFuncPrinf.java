@@ -1,4 +1,4 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 public class CFuncPrinf implements CSystemFunc {
 

@@ -1,13 +1,13 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
-import cn.edu.buaa.act.bstar.Global.CGlobalDef;
-import cn.edu.buaa.act.bstar.Global.CMath;
+import cn.edu.buaa.act.bstar.global.CGlobalDef;
+import cn.edu.buaa.act.bstar.global.CMath;
+import cn.edu.buaa.act.bstar.quaternion.CQuaData;
+import cn.edu.buaa.act.bstar.quaternion.QuaDataType;
 
-import com.sun.corba.se.impl.util.IdentityHashtable;
 
 public class CDataEntity implements Comparable<CDataEntity> {
 	public boolean is_const = false, is_nil = false;
@@ -256,6 +256,49 @@ public class CDataEntity implements Comparable<CDataEntity> {
 		}
 		else if(type.equals(in_data.type) && type_pointer == in_data.type_pointer){
 			return_result = true;
+		}
+		return return_result;
+	}
+	
+	public static CDataEntity create_entity(CQuaData in_data){
+		CDataEntity return_result = null;
+		if(in_data.type == QuaDataType.ID){
+			return_result = CLangVM.get_data(in_data.str_data_0);
+		}
+		else if(in_data.type == QuaDataType.SET){
+			return_result = new CDataEntity();
+			return_result.type = "set";
+			if(in_data.list_data.isEmpty()){
+				//TODO 空集合
+				CGlobalDef.info_box(in_data.toString() + " is a empty set");
+			}
+			else{
+				CDataEntity first_data = create_entity(in_data.list_data.getFirst());
+				return_result.set_init(first_data.type, first_data.type_pointer - 1);
+				return_result.set_add_data(first_data);
+			}
+			for(int i = 1; i < in_data.list_data.size(); ++i){
+				if(!return_result.set_add_data(
+						create_entity(in_data.list_data.get(i))
+						)){
+					//集合类型不匹配
+				}
+			}
+		}
+		else if(in_data.type == QuaDataType.NIL){
+			return_result = new CDataEntity();
+			return_result.is_nil = true;
+		}
+		else{
+			return_result = CLangVM.get_type_init_value(in_data.type.type_to_str());
+			if(return_result == null){
+				CGlobalDef.info_box("Type " + in_data.type.type_to_str() + " not found!");
+			}
+			else{
+				if(in_data.type.is_value_type()){
+					return_result.value_data = in_data.value_data;
+				}
+			}
 		}
 		return return_result;
 	}

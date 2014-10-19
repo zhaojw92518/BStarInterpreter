@@ -1,9 +1,9 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 import java.util.Stack;
 
-import cn.edu.buaa.act.bstar.Global.CGlobalDef;
-import cn.edu.buaa.act.bstar.Quaternion.CQuaternion;
+import cn.edu.buaa.act.bstar.global.CGlobalDef;
+import cn.edu.buaa.act.bstar.quaternion.CQuaternion;
 
 public class CContext {
 	private CSymbolTable global_area = new CSymbolTable();

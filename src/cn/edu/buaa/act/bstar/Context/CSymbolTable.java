@@ -1,9 +1,9 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-import cn.edu.buaa.act.bstar.Global.CGlobalDef;
+import cn.edu.buaa.act.bstar.global.CGlobalDef;
 
 public class CSymbolTable {
 	private String func_name = null;

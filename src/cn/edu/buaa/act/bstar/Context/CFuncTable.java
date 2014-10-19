@@ -1,10 +1,10 @@
-package cn.edu.buaa.act.bstar.Context;
+package cn.edu.buaa.act.bstar.context;
 
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import cn.edu.buaa.act.bstar.Global.CGlobalDef;
+import cn.edu.buaa.act.bstar.global.CGlobalDef;
 
 public class CFuncTable {
 	private TreeMap<String, CFuncData> func_datas = new TreeMap<>();
