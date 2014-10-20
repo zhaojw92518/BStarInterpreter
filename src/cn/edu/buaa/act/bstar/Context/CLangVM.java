@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import cn.edu.buaa.act.bstar.exception.InterpreterError;
 import cn.edu.buaa.act.bstar.global.CGlobalDef;
 import cn.edu.buaa.act.bstar.quaternion.CQuaData;
 import cn.edu.buaa.act.bstar.quaternion.CQuaternion;
@@ -38,8 +39,12 @@ public class CLangVM {
 	}
 	//debug end
 	
+	public static void run(CCodeNodeMgr in_code_node_mgr) throws InterpreterError{
+		CGlobalDef.cout_end("LangVM Run");
+	}
+	
 	public static void run(){
-		int main_index = func_table.get_func_index("main");
+		/*int main_index = func_table.get_func_index("main");
 		if(main_index != CGlobalDef.ERROR_INDEX){
 			push_func("main");
 			program_counter = main_index;
@@ -61,7 +66,7 @@ public class CLangVM {
 		}
 		else{
 			//TODO 错误处理，为定义main函数
-		}
+		}*/
 		
 	}
 	

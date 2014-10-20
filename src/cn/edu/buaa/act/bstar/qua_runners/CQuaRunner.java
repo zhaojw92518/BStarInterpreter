@@ -9,25 +9,7 @@ import cn.edu.buaa.act.bstar.qua_runners.interfaces.IScane;
 import cn.edu.buaa.act.bstar.quaternion.CQuaData;
 import cn.edu.buaa.act.bstar.quaternion.CQuaternion;
 
-public class CQuaRunner extends CQuaternion implements IRun, IDup, IScane{
-	@Override
-	public int scane(int in_index) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public CQuaternion dup() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int run() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
+public abstract class CQuaRunner extends CQuaternion implements IRun, IDup, IScane{
 	/**
 	 * 
 	 * @param src_data 运算结果
