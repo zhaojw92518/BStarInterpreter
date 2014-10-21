@@ -1,11 +1,6 @@
 MACHINE ModularManagement
 
 ATTRIBUTES
-	#define XX 3
-	#define YY 5
-	#define XXXX 6
-	#define YYYY XX + YY
-
 	#define SYSTEM_LIMIT_NUMBER_OF_PARTITIONS 		32 
 	#define SYSTEM_LIMIT_NUMBER_OF_MESSAGES 		512 
 	#define SYSTEM_LIMIT_MESSAGE_SIZE 				8192 
