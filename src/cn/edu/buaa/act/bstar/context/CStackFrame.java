@@ -1,20 +1,23 @@
 package cn.edu.buaa.act.bstar.context;
 
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
 import cn.edu.buaa.act.bstar.global.CGlobalDef;
 
-public class CSymbolTable {
+public class CStackFrame {
 	private String func_name = null;
 	private TreeMap<String, CDataEntity> symbol_map = new TreeMap<>();
-	private int cur_index = CGlobalDef.ERROR_INDEX;
+	private CFuncLocation func_location = null;
 	
-	public CSymbolTable(){
+	private LinkedList<CDataEntity> para_list = new LinkedList<>();
+	
+	public CStackFrame(){
 		
 	}
 	
-	public CSymbolTable(String in_func_name){
+	public CStackFrame(String in_func_name){
 		func_name = in_func_name;
 	}
 	
@@ -38,12 +41,16 @@ public class CSymbolTable {
 		func_name = in_name;
 	}
 	
-	public void set_cur_index(int in_index){
-		cur_index = in_index;
+	public LinkedList<CDataEntity> get_para_list(){
+		return get_para_list();
 	}
 	
-	public int get_cur_index(){
-		return cur_index;
+	public void set_func_location(CFuncLocation in_func_location){
+		func_location = in_func_location;
+	}
+	
+	public CFuncLocation get_func_location(){
+		return func_location;
 	}
 	
 	//debug

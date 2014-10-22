@@ -28,6 +28,7 @@ public class BStarInterpreter {
 	}
 	
 	public static void main(String[] args) {
-		run_bstar("./ProcessManagement.bs");
+		run_bstar("bs/Test01.bs");
+		//run_bstar("./ProcessManagement.bs");
 	}
 }

@@ -3,6 +3,7 @@ package cn.edu.buaa.act.bstar.qua_runners;
 import cn.edu.buaa.act.bstar.global.CGlobalDef;
 import cn.edu.buaa.act.bstar.quaternion.CQuaternion;
 import cn.edu.buaa.act.bstar.quaternion.QuaType;
+import cn.edu.buaa.act.bstar.context.CFuncLocation;
 import cn.edu.buaa.act.bstar.context.CLangVM;
 import cn.edu.buaa.act.bstar.context.VMState;
 
@@ -17,12 +18,13 @@ public class CFuncDefEnd extends CQuaRunner {
 	
 	public int run(){
 		int return_result = CGlobalDef.ERROR;
-		int pop_result = CLangVM.pop_func();
-		if(pop_result == CGlobalDef.END){
+		CFuncLocation pop_result = CLangVM.pop_func();
+		if(pop_result == null){
 			return_result = CGlobalDef.END;
 		}
 		else{
-			CLangVM.jump_to(pop_result + 1);
+			pop_result.qua_index++;
+			CLangVM.jump_to_far(pop_result);
 			return_result = CGlobalDef.NORMAL;
 		}
 		return return_result;

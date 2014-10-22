@@ -1,5 +1,6 @@
 package cn.edu.buaa.act.bstar.qua_runners;
 
+import cn.edu.buaa.act.bstar.exception.InterpreterError;
 import cn.edu.buaa.act.bstar.global.CGlobalDef;
 import cn.edu.buaa.act.bstar.quaternion.CQuaData;
 import cn.edu.buaa.act.bstar.quaternion.CQuaternion;
@@ -21,7 +22,7 @@ public class CFuncCall extends CQuaRunner {
 		return new CFuncCall();
 	}
 	
-	public int run(){
+	public int run() throws InterpreterError{
 		int return_result = CGlobalDef.ERROR;
 		if(CLangVM.func_call(data_0.str_data_0)){
 			return_result = CGlobalDef.NORMAL;
