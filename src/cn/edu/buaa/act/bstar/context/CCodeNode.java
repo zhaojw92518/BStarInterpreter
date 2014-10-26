@@ -85,4 +85,8 @@ public class CCodeNode {
 		}
 		return return_result;
 	}
+	
+	public CQuaRunner get_qua_runner(int in_index){
+		return qua_list.get(in_index);
+	}
 }

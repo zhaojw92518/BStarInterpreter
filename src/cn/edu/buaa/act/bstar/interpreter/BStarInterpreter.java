@@ -24,7 +24,6 @@ public class BStarInterpreter {
 		catch(InterpreterError e){
 			e.print_error();
 		}
-		
 	}
 	
 	public static void main(String[] args) {

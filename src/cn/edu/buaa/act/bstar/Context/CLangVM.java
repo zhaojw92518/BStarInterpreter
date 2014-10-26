@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 import cn.edu.buaa.act.bstar.exception.InterpreterError;
 import cn.edu.buaa.act.bstar.global.CGlobalDef;
+import cn.edu.buaa.act.bstar.qua_runners.CQuaRunner;
 import cn.edu.buaa.act.bstar.quaternion.CQuaData;
 import cn.edu.buaa.act.bstar.quaternion.CQuaternion;
 
@@ -31,6 +32,12 @@ public class CLangVM {
 	public static void print_global_symbol(){
 		context.print_global();
 	}
+	
+	private static void run_to(int index, CQuaRunner cur_runner){
+		if(cur_runner.line_num == index){
+			CGlobalDef.cout_end("Stop");
+		}
+	}
 	//debug end
 	
 	public static void run(CCodeNodeMgr in_code_node_mgr) throws InterpreterError{
@@ -38,6 +45,7 @@ public class CLangVM {
 		code_node_mgr = in_code_node_mgr;
 		init();
 		scane();
+		start_vm();
 	}
 	
 	public static void scane() throws InterpreterError {
@@ -54,13 +62,31 @@ public class CLangVM {
 		}
 	}
 	
+	private static CQuaRunner get_cur_runner(){
+		return program_counter.code_node.get_qua_runner(program_counter.qua_index);
+	}
+	
 	public static void start_vm() throws InterpreterError{
 		CFuncLocation main_func_location = code_node_mgr.get_main_func();
 		if(main_func_location != null){
 			push_func("main");
 			jump_to_far(main_func_location);
 			while(true){
+				CQuaRunner cur_runner = get_cur_runner();
+				run_to(18, cur_runner);
+				CGlobalDef.cout(cur_runner.to_table_str());
+				int run_result = cur_runner.run();
 				
+				if(run_result == CGlobalDef.ERROR){
+					CGlobalDef.cout_end("ERROR");
+					break;
+				}
+				else if(run_result == CGlobalDef.END){
+					CGlobalDef.cout_end("NORMAL END");
+					break;
+				}
+				
+				program_counter.qua_index++;
 			}
 		}
 		else{

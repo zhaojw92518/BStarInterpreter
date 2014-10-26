@@ -12,6 +12,7 @@ import cn.edu.buaa.act.bstar.qua_runners.CAddressOf;
 import cn.edu.buaa.act.bstar.qua_runners.CAssignAddr;
 import cn.edu.buaa.act.bstar.qua_runners.CAssignValue;
 import cn.edu.buaa.act.bstar.qua_runners.CBaseAddress;
+import cn.edu.buaa.act.bstar.qua_runners.CBeginCall;
 import cn.edu.buaa.act.bstar.qua_runners.CBoolNot;
 import cn.edu.buaa.act.bstar.qua_runners.CCallPara;
 import cn.edu.buaa.act.bstar.qua_runners.CCdtBelong;
@@ -112,11 +113,11 @@ public class CPreRunner {
 	}
 	
 	public CCodeNode get_root_node(){
-		return null;
+		return code_root_node;
 	}
 	
 	public TreeMap<String, CCodeNode> get_node_map(){
-		return null;
+		return code_node_map;
 	}
 	
 	public void run() throws InterpreterError{
@@ -283,6 +284,9 @@ public class CPreRunner {
 		case ASSIGN_ADDR:
 			return_result = new CAssignAddr();
 			break;
+		case BEGIN_CALL:
+			return_result = new CBeginCall();
+			break;
 		case CALL_PARA:
 			return_result = new CCallPara();
 			break;
@@ -297,6 +301,7 @@ public class CPreRunner {
 			return_result.data_0 = in_qua.data_0;
 			return_result.data_1 = in_qua.data_1;
 			return_result.data_2 = in_qua.data_2;
+			return_result.line_num = in_qua.line_num;
 		}
 		return return_result;
 	}

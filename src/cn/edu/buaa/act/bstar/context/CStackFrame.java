@@ -42,7 +42,7 @@ public class CStackFrame {
 	}
 	
 	public LinkedList<CDataEntity> get_para_list(){
-		return get_para_list();
+		return para_list;
 	}
 	
 	public void set_func_location(CFuncLocation in_func_location){

@@ -30,7 +30,11 @@ public class CCodeNodeMgr {
 	}
 	
 	public CCodeNode get_cur_node(){
-		return cur_entry.getValue();
+		CCodeNode return_result = null;
+		if(cur_entry != null){
+			return_result = cur_entry.getValue();
+		}
+		return return_result;
 	}
 	
 	public void next_node(){
