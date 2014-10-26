@@ -10,9 +10,7 @@ public class CStackFrame {
 	private String func_name = null;
 	private TreeMap<String, CDataEntity> symbol_map = new TreeMap<>();
 	private CFuncLocation func_location = null;
-	
-	private LinkedList<CDataEntity> para_list = new LinkedList<>();
-	
+		
 	public CStackFrame(){
 		
 	}
@@ -41,10 +39,6 @@ public class CStackFrame {
 		func_name = in_name;
 	}
 	
-	public LinkedList<CDataEntity> get_para_list(){
-		return para_list;
-	}
-	
 	public void set_func_location(CFuncLocation in_func_location){
 		func_location = in_func_location;
 	}
@@ -53,10 +47,14 @@ public class CStackFrame {
 		return func_location;
 	}
 	
+	public String get_func_name(){
+		return func_name;
+	}
+	
 	//debug
 	public void print_all(){
 		for(Map.Entry<String, CDataEntity> cur_entry: symbol_map.entrySet()){
-			CGlobalDef.cout_end(cur_entry.getKey() + "   " + cur_entry.getValue().type);
+			CGlobalDef.cout_end(cur_entry.getKey() + "   " + cur_entry.getValue().toString());
 		}
 	}
 	//debug end

@@ -25,6 +25,7 @@ public class CFuncDefEnd extends CQuaRunner {
 		else{
 			pop_result.qua_index++;
 			CLangVM.jump_to_far(pop_result);
+			CLangVM.end_call();
 			return_result = CGlobalDef.NORMAL;
 		}
 		return return_result;

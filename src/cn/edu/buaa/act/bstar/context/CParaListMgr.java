@@ -7,7 +7,7 @@ public class CParaListMgr {
 	private Stack<LinkedList<CDataEntity>> para_list_stack = new Stack<>();
 	
 	public CParaListMgr(){
-		
+		push_para_list();
 	}
 	
 	public void push_para_list(){

@@ -32,7 +32,9 @@ public class CSetSearch extends CQuaRunner {
 					return_result = assign_to_local_id(search_result, data_2);
 				}
 				else{
-					//TODO 错误处理以及查询为空
+					search_result = new CDataEntity("nil");
+					search_result.is_nil = true;
+					return_result = assign_to_local_id(search_result, data_2);
 				}
 			}
 			else{

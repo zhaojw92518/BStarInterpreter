@@ -93,20 +93,33 @@ public class CContext {
 		local_stack.lastElement().set_func_location(in_func_location);
 	}
 	
-	public LinkedList<CDataEntity> get_cur_para_list(){
-		LinkedList<CDataEntity> return_result = null;
-		if(!local_stack.isEmpty()){
-			return_result = local_stack.lastElement().get_para_list();
-		}
-		return return_result;
-	}
-	
 	//debug
 	public void print_global(){
 		CGlobalDef.cout_dividing_line();
 		CGlobalDef.cout_end("Global Area");
 		CGlobalDef.cout_dividing_line();
 		global_area.print_all();
+		CGlobalDef.cout_dividing_line();
+	}
+	
+	public void print_local(){
+		CGlobalDef.cout_dividing_line();
+		CGlobalDef.cout_end("Local Area");
+		CGlobalDef.cout_dividing_line();
+		for(CStackFrame cur_frame: local_stack){
+			CGlobalDef.cout_end(cur_frame.get_func_name());
+			cur_frame.print_all();
+			CGlobalDef.cout_dividing_line();
+		}
+		
+	}
+	
+	public void print_cur_local(){
+		CGlobalDef.cout_dividing_line();
+		CGlobalDef.cout_end("Local Area");
+		CGlobalDef.cout_dividing_line();
+		CGlobalDef.cout_end(local_stack.lastElement().get_func_name());
+		local_stack.lastElement().print_all();
 		CGlobalDef.cout_dividing_line();
 	}
 	//debug end

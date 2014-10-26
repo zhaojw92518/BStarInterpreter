@@ -23,20 +23,27 @@ public class CGetReturn extends CQuaRunner {
 	@Override
 	public int run() {
 		int return_result = CGlobalDef.ERROR;
-		CDataEntity dst_data = CDataEntity.create_entity(data_0);
-		if(dst_data == null){
-			if(data_0.is_temp()){
-				dst_data = new CDataEntity();
-				dst_data.type = "double";
-				CLangVM.add_local_id(data_0.str_data_0, dst_data);
+		if(CLangVM.get_return_result() != null){
+			CDataEntity dst_data = CDataEntity.create_entity(data_0);
+			if(dst_data == null){
+				if(data_0.is_temp()){
+					dst_data = new CDataEntity();
+					dst_data.type = "double";
+					CLangVM.add_local_id(data_0.str_data_0, dst_data);
+				}
+				else{
+					//TODO 错误处理
+				}
 			}
-			else{
-				//TODO 错误处理
-			}
+			//TODO 类型匹配
+			dst_data.value_data = CLangVM.get_return_result().value_data;
+			return_result = CGlobalDef.NORMAL;
 		}
-		//TODO 类型匹配
-		dst_data.value_data = CLangVM.get_return_result().value_data;
-		return_result = CGlobalDef.NORMAL;
+		else{
+			return_result = CGlobalDef.NORMAL;
+		}
+		
+		
 		return return_result;
 	}
 }

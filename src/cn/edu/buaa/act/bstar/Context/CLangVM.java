@@ -19,6 +19,7 @@ public class CLangVM {
 	private static CFuncLocation program_counter = new CFuncLocation();
 	private static ArrayList<CSystemFunc> system_funcs = new ArrayList<>();
 	private static CTypeTable init_value_table = new CTypeTable();
+	private static CParaListMgr para_list_mgr = new CParaListMgr();
 	
 	private static CCodeNodeMgr code_node_mgr = null;
 	
@@ -35,8 +36,16 @@ public class CLangVM {
 	
 	private static void run_to(int index, CQuaRunner cur_runner){
 		if(cur_runner.line_num == index){
-			CGlobalDef.cout_end("Stop");
+			int i = 0;
 		}
+	}
+	
+	public static void print_local(){
+		context.print_local();
+	}
+	
+	public static void print_cur_local(){
+		context.print_cur_local();
 	}
 	//debug end
 	
@@ -73,7 +82,7 @@ public class CLangVM {
 			jump_to_far(main_func_location);
 			while(true){
 				CQuaRunner cur_runner = get_cur_runner();
-				run_to(18, cur_runner);
+				run_to(26, cur_runner);
 				CGlobalDef.cout(cur_runner.to_table_str());
 				int run_result = cur_runner.run();
 				
@@ -133,7 +142,7 @@ public class CLangVM {
 		boolean return_result = false;
 		CFuncLocation call_location = get_func_location(in_func_name);
 		if(call_location != null){
-			if(call_location.func_data.is_para_right(context.get_cur_para_list())){
+			if(call_location.func_data.is_para_right(para_list_mgr.get_cur_para_list())){
 				if(call_location.qua_index < 0){
 					system_funcs.get(-call_location.qua_index - 1).run();
 				}
@@ -152,15 +161,15 @@ public class CLangVM {
 	}
 	
 	public static void add_para(CDataEntity in_data){
-		context.get_cur_para_list().add(in_data);
+		para_list_mgr.get_cur_para_list().add(in_data);
 	}
 	
 	public static void clear_para_list(){
-		context.get_cur_para_list().clear();
+		para_list_mgr.get_cur_para_list().clear();
 	}
 	
 	public static CDataEntity pop_front_para_list(){
-		return context.get_cur_para_list().pollFirst();
+		return para_list_mgr.get_cur_para_list().pollFirst();
 	}
 	
 	public static void push_func(String in_func_name){
@@ -218,13 +227,14 @@ public class CLangVM {
 	public static CFuncLocation get_func_location(String in_name) throws InterpreterError{
 		CFuncLocation return_result = code_node_mgr.search_func(in_name);
 		if(return_result == null){
-			int system_func_index = system_func_table.get_func_data(in_name).func_index;
-			if(system_func_index == CGlobalDef.ERROR_INDEX){
+			CFuncData system_func_data = system_func_table.get_func_data(in_name);
+			if(system_func_data == null){
 				throw new InterpreterError("function " + in_name + " not found");
 			}
 			else{
 				return_result = new CFuncLocation();
-				return_result.qua_index = system_func_index;
+				return_result.qua_index = system_func_data.func_index;
+				return_result.func_data = system_func_data;
 			}
 		}
 		return return_result;
@@ -239,7 +249,15 @@ public class CLangVM {
 	}
 	
 	public static CDataEntity get_front_para(){
-		return context.get_cur_para_list().pollFirst();
+		return para_list_mgr.get_cur_para_list().pollFirst();
+	}
+	
+	public static void begin_call(){
+		para_list_mgr.push_para_list();
+	}
+	
+	public static void end_call(){
+		para_list_mgr.pop_para_list();
 	}
 	
 	public static CDataEntity get_type_init_value(CQuaData in_type){
@@ -259,6 +277,6 @@ public class CLangVM {
 	}
 	
 	public static void go_to(int label_id){
-		jump_to_near(code_node_mgr.get_cur_node().get_label_location(label_id));
+		jump_to_near(program_counter.code_node.get_label_location(label_id));
 	}
 }
