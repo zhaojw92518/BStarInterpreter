@@ -1,6 +1,8 @@
 package cn.edu.buaa.act.bstar.interpreter;
 
 import org.umbrella.MapWatcher.MapWatcher;
+import org.umbrella.MapWatcher.TypeDealer;
+import org.umbrella.MapWatcher.SwingUI.WatcherUI;
 
 import cn.edu.buaa.act.bstar.context.CCodeNodeMgr;
 import cn.edu.buaa.act.bstar.context.CLangVM;
@@ -21,6 +23,11 @@ public class BStarInterpreter {
 					pre_runner.get_root_node(), 
 					pre_runner.get_node_map());
 			code_node_mgr.run();
+			TypeDealer.init_types();
+			MapWatcher watcher = new MapWatcher(code_node_mgr, "code_node_mgr");
+			watcher.std_print_watcher();
+			watcher.swing_ui_watcher();
+			WatcherUI.set_data_width();
 			CLangVM.run(code_node_mgr);
 		}
 		catch(InterpreterError e){
