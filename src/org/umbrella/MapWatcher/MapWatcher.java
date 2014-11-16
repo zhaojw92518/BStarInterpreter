@@ -48,7 +48,7 @@ public class MapWatcher {
 	
 	public void swing_ui_watcher(){
 		TreeVisitor tree_visitor = new TreeVisitor();
-		new WatcherUI(300, 400, 
+		new WatcherUI(600, 400, 
 				(DefaultMutableTreeNode) local_value_watcher.run_visitor(tree_visitor));
 	}
 }

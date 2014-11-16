@@ -25,9 +25,7 @@ public class BStarInterpreter {
 			code_node_mgr.run();
 			TypeDealer.init_types();
 			MapWatcher watcher = new MapWatcher(code_node_mgr, "code_node_mgr");
-			watcher.std_print_watcher();
 			watcher.swing_ui_watcher();
-			WatcherUI.set_data_width();
 			CLangVM.run(code_node_mgr);
 		}
 		catch(InterpreterError e){

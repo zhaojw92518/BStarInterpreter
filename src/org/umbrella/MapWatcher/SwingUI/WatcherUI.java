@@ -3,32 +3,43 @@ package org.umbrella.MapWatcher.SwingUI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Enumeration;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 
+import org.antlr.v4.codegen.model.chunk.ThisRulePropertyRef_ctx;
 import org.umbrella.MapWatcher.ValueWatcher;
 
 public class WatcherUI extends JFrame{
 	private static LinkedList<JTable> tables = new LinkedList<>();
+	private static int data_width = 400;
 	
-	public static void set_data_width(){
-		for(JTable cur_table : tables){
-			cur_table.getColumnModel().getColumn(2).setPreferredWidth(400);
-		}
+	public static void set_data_width(int in_width){
+		data_width = in_width;
 	}
+
+	private JButton test_button = new JButton("test");
+	private JTextField test_input = new JTextField();
+	private JTable show_table = new JTable();
+	
+	private JTree watch_tree;
 	
 	public WatcherUI(int width, int height, DefaultMutableTreeNode in_node){
 		super("WatcherUI");
@@ -37,52 +48,33 @@ public class WatcherUI extends JFrame{
 		watch_tree = new JTree(in_node);
 		watch_tree.setCellRenderer(new WatcherTreeCellRenderer());
 		watch_tree.setShowsRootHandles(true);
+		watch_tree.addTreeSelectionListener(new ShowTableListner(show_table, watch_tree));
 		JScrollPane scroll_pane = new JScrollPane();
 		scroll_pane.setViewportView(watch_tree);
 		scroll_pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll_pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(scroll_pane);
+		
+		JSplitPane split_pane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		show_table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane bottom_panel = new JScrollPane(show_table);
+		bottom_panel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		bottom_panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		split_pane.setTopComponent(scroll_pane);
+		split_pane.setBottomComponent(bottom_panel);
+		split_pane.setDividerLocation(0.1);
+		this.add(split_pane);
 		this.setSize(width, height);
 		this.setVisible(true);
 	}
+	
+	public void set_table_model(TableModel in_model){
+		show_table.setModel(in_model);
+		show_table.setPreferredSize(new Dimension(600, 50));
+		this.repaint();
+	}
+	
 
-	private DefaultMutableTreeNode create_tree_node(Integer in_index){
-		DefaultMutableTreeNode return_result = null;
-		if(cur_level < tree_level){
-			return_result = new DefaultMutableTreeNode(cur_level.toString() + in_index.toString());
-			cur_level++;
-			for(Integer i = 0; i < tree_width; i++){
-				DefaultMutableTreeNode cur_node = create_tree_node(i);
-				if(cur_node != null){
-					return_result.add(cur_node);
-				}
-			}
-			cur_level--;
-		}
-		return return_result;
-	}
-	private int i_size = 1, j_size = 3;
-	private Integer tree_level = 3, tree_width = 3, cur_level = 0;
-	
-	private JTree watch_tree = new JTree(create_tree_node(0));
-	
-	
-	private Object[][] create_test_table(String in_title){
-		Object[][] return_result = new Object[i_size][j_size];
-		for(Integer i = 0; i.intValue() < i_size; i++){
-			for(Integer j = 0; j.intValue() < j_size; j++){
-				return_result[i][j] = in_title + " " + i.toString() + " " + j.toString();
-			}
-		}
-		return return_result;
-	}
-	private Object[] create_column_names(String in_title){
-		Object[] return_result = new Object[j_size];
-		for(Integer i = 0; i.intValue() < j_size; i++){
-			return_result[i] = in_title + " column" + i.toString();
-		}
-		return return_result;
-	}
 	
 	class WatcherTreeCellRenderer extends JScrollPane implements TreeCellRenderer {
 
@@ -93,7 +85,6 @@ public class WatcherUI extends JFrame{
             super();
             table = new JTable();
             this.setViewportView(table);
-            //this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         }
 
         public Component getTreeCellRendererComponent(JTree tree, Object value,
@@ -104,9 +95,9 @@ public class WatcherUI extends JFrame{
             table.getTableHeader().setResizingAllowed(true);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             table.setPreferredSize(new Dimension(400, 20));
-            table.getColumnModel().getColumn(0).setPreferredWidth(100);
-            table.getColumnModel().getColumn(1).setPreferredWidth(100);
-            table.getColumnModel().getColumn(2).setPreferredWidth(200);
+            table.getColumnModel().getColumn(0).setPreferredWidth(250);
+            table.getColumnModel().getColumn(1).setPreferredWidth(250);
+            table.getColumnModel().getColumn(2).setPreferredWidth(data_width);
             table.getTableHeader().setVisible(false);
             DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
             renderer.setPreferredSize(new Dimension(0, 0));
